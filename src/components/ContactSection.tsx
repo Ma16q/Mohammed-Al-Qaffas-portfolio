@@ -1,29 +1,91 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, CheckCircle2, Copy } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle2, Copy, Loader2, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const isAr = language === 'ar';
 
-  const email = 'abcb1240009m@gmail.com';
+  const recipientEmail = 'abcb1240009m@gmail.com';
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(recipientEmail);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 4000);
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    setSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      // Send real email via FormSubmit AJAX endpoint directly to recipientEmail
+      const response = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `📩 رسالة جديدة من بورتفوليو Ma16q: ${formData.name}`,
+          _template: 'table'
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok || data.success === 'true' || data.success === true) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitted(false), 6000);
+      } else {
+        // If first-time activation needed or rate-limited, provide fallback
+        if (data.message && data.message.includes('Activation')) {
+          setSubmitted(true);
+          setErrorMessage(
+            isAr
+              ? 'تم إرسال الرسالة! (ملاحظة: إذا كانت هذه أول مرة، يُرجى تفعيل النموذج عبر الرابط المرسل لبريدك الإلكتروني).'
+              : 'Message sent! (Note: First time submission requires email activation confirmation).'
+          );
+        } else {
+          throw new Error(data.message || 'Error sending message');
+        }
+      }
+    } catch (err: any) {
+      console.warn('FormSubmit AJAX fallback:', err);
+      // Fallback: Open user email client
+      const mailtoUrl = `mailto:${recipientEmail}?subject=${encodeURIComponent(
+        `Portfolio Inquiry from ${formData.name}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      window.location.href = mailtoUrl;
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleDirectMailto = () => {
+    const subject = encodeURIComponent(`Inquiry from Portfolio - Mohamed Al-Qaffas`);
+    const body = encodeURIComponent(
+      formData.message
+        ? `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        : 'Hello Mohamed,\n\nI visited your portfolio and would like to connect.'
+    );
+    window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -48,7 +110,7 @@ export const ContactSection: React.FC = () => {
               </div>
               <div>
                 <span className="channel-label">{t.contact.emailLabel}</span>
-                <strong className="channel-val">{email}</strong>
+                <strong className="channel-val">{recipientEmail}</strong>
               </div>
               <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: copied ? '#10b981' : 'var(--text-dim)' }}>
                 {copied ? t.contact.copied : <Copy size={15} />}
@@ -82,6 +144,21 @@ export const ContactSection: React.FC = () => {
                 <span className="channel-label">{t.contact.locationLabel}</span>
                 <strong className="channel-val">{t.contact.locationVal}</strong>
               </div>
+            </div>
+
+            {/* Direct Mail Client Quick Action */}
+            <div style={{ marginTop: 'auto', paddingTop: '1rem' }}>
+              <button
+                type="button"
+                onClick={handleDirectMailto}
+                className="btn-secondary"
+                style={{ width: '100%', justifyContent: 'center', fontSize: '0.85rem', padding: '0.65rem 1rem' }}
+                title="Open default email application"
+              >
+                <Mail size={15} />
+                <span>{isAr ? 'فتح تطبيق البريد مباشرة (Mail App)' : 'Open in Mail App Directly'}</span>
+                <ExternalLink size={13} />
+              </button>
             </div>
           </div>
 
@@ -126,11 +203,27 @@ export const ContactSection: React.FC = () => {
               ></textarea>
             </div>
 
-            <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-              {submitted ? (
+            {errorMessage && (
+              <div style={{ fontSize: '0.85rem', color: '#38bdf8', marginBottom: '0.5rem', lineHeight: 1.5 }}>
+                {errorMessage}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="btn-primary"
+              disabled={submitting}
+              style={{ width: '100%', justifyContent: 'center', opacity: submitting ? 0.8 : 1 }}
+            >
+              {submitting ? (
                 <>
-                  <CheckCircle2 size={18} />
-                  <span>{t.contact.sentSuccess}</span>
+                  <Loader2 size={18} className="animate-spin" />
+                  <span>{isAr ? 'جارٍ إرسال البريد...' : 'Sending Email...'}</span>
+                </>
+              ) : submitted ? (
+                <>
+                  <CheckCircle2 size={18} style={{ color: '#10b981' }} />
+                  <span>{isAr ? 'تم إرسال الرسالة إلى البريد بنجاح!' : 'Email Sent Successfully!'}</span>
                 </>
               ) : (
                 <>

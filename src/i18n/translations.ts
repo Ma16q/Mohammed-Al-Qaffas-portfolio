@@ -222,9 +222,9 @@ export const translations: Record<Language, Translations> = {
     nav: {
       home: 'الرئيسية',
       projects: 'المشاريع',
-      about: 'عن المطور والمهارات',
-      contact: 'تواصل معي',
-      github: 'حساب GitHub',
+      about: 'عن المطور',
+      contact: 'تواصل',
+      github: 'GitHub',
       cli: 'الطرفية CLI',
       contactBtn: 'تواصل الآن',
       langToggle: 'English',
