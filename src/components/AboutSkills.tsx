@@ -103,33 +103,93 @@ export const AboutSkills: React.FC = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
             {experienceData.map((exp) => (
-              <div key={exp.id} className="mini-glass-card" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ padding: '0.45rem', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '8px', display: 'flex' }}>
-                      {getExpIcon(exp.id)}
-                    </div>
-                    <div>
-                      <h4 style={{ margin: 0, fontSize: '1rem', color: '#f8fafc' }}>
-                        {isAr ? exp.roleAr : exp.role}
-                      </h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>
-                        {isAr ? exp.organizationAr : exp.organization}
-                      </p>
-                    </div>
+              <div
+                key={exp.id}
+                className="mini-glass-card"
+                style={{
+                  padding: '1.35rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.65rem',
+                  borderRadius: '14px',
+                  background: 'rgba(15, 23, 42, 0.6)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)'
+                }}
+              >
+                {/* Top Row: Icon + Status Pill Badge */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
+                  <div style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '10px',
+                    background: 'rgba(56, 189, 248, 0.08)',
+                    border: '1px solid rgba(56, 189, 248, 0.18)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    {getExpIcon(exp.id)}
                   </div>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                  <span style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                    padding: '0.2rem 0.65rem',
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '12px',
+                    color: 'var(--text-muted)'
+                  }}>
                     {isAr ? exp.periodAr : exp.period}
                   </span>
                 </div>
 
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: '0.25rem 0' }}>
+                {/* Main Titles: Full Card Width, No Squishing */}
+                <div>
+                  <h4 style={{
+                    margin: '0 0 0.35rem 0',
+                    fontSize: '1.05rem',
+                    fontWeight: 700,
+                    color: '#f8fafc',
+                    lineHeight: 1.45
+                  }}>
+                    {isAr ? exp.roleAr : exp.role}
+                  </h4>
+                  <p style={{
+                    margin: 0,
+                    fontSize: '0.86rem',
+                    fontWeight: 500,
+                    color: 'var(--accent-cyan)',
+                    lineHeight: 1.45
+                  }}>
+                    {isAr ? exp.organizationAr : exp.organization}
+                  </p>
+                </div>
+
+                {/* Description */}
+                <p style={{
+                  fontSize: '0.88rem',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.6,
+                  margin: '0.15rem 0 0 0'
+                }}>
                   {isAr ? exp.descriptionAr : exp.description}
                 </p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: 'auto' }}>
+                {/* Skill / Technology Tags */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: 'auto', paddingTop: '0.35rem' }}>
                   {exp.tags.map((tag, tIdx) => (
-                    <span key={tIdx} style={{ fontSize: '0.75rem', padding: '0.15rem 0.5rem', background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.2)', borderRadius: '4px', color: '#93c5fd' }}>
+                    <span
+                      key={tIdx}
+                      style={{
+                        fontSize: '0.75rem',
+                        padding: '0.15rem 0.5rem',
+                        background: 'rgba(56, 189, 248, 0.08)',
+                        border: '1px solid rgba(56, 189, 248, 0.2)',
+                        borderRadius: '4px',
+                        color: '#93c5fd'
+                      }}
+                    >
                       {tag}
                     </span>
                   ))}
