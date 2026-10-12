@@ -16,8 +16,8 @@ export interface ExperienceItem {
 export const projectsData: Project[] = [
   {
     id: 'motrilog',
-    title: 'MotriLog Telemetry',
-    titleAr: 'موتري لوج (MotriLog)',
+    title: 'MotriLog',
+    titleAr: 'MotriLog',
     category: 'web-3d',
     is3dInteractive: true,
     tags: [
@@ -48,8 +48,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'ghos',
-    title: 'ghos (GameHub Store)',
-    titleAr: 'متجر غوس للألعاب (ghos.shop)',
+    title: 'ghos',
+    titleAr: 'ghos',
     category: 'web-3d',
     tags: [
       { text: 'E-Commerce', textAr: 'تجارة إلكترونية', color: 'pink' },
@@ -110,8 +110,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'musbihati',
-    title: 'Musbihati (Digital Tasbih)',
-    titleAr: 'مسبحتي (خاتم التسبيح الذكي)',
+    title: 'Musbihati',
+    titleAr: 'مسبحتي',
     category: 'mobile',
     isGooglePlay: true,
     appIcon: '/assets/images/icon_musbihati.png',
@@ -143,8 +143,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'numbers-game',
-    title: 'Numbers Game Engine',
-    titleAr: 'محرك لعبة الأرقام (Numbers-Game)',
+    title: 'Numbers-Game',
+    titleAr: 'Numbers-Game',
     category: 'games',
     tags: [
       { text: 'Java', textAr: 'جافا', color: 'default' },
@@ -171,8 +171,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'my-first-react',
-    title: 'Modern React Architecture',
-    titleAr: 'تطبيق رياكت الحديث (My-First-React)',
+    title: 'My-First-React',
+    titleAr: 'My-First-React',
     category: 'web-3d',
     tags: [
       { text: 'React', textAr: 'رياكت', color: 'pink' },
