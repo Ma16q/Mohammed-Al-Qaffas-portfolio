@@ -1349,6 +1349,8 @@ body {
 }
 
 .channel-label {
+  display: block;
+  margin-bottom: 0.2rem;
   font-size: 0.8rem;
   color: var(--text-muted);
   text-transform: uppercase;

@@ -79,11 +79,17 @@ export const ContactSection: React.FC = () => {
   };
 
   const handleDirectMailto = () => {
-    const subject = encodeURIComponent(`Inquiry from Portfolio - Mohamed Al-Qaffas`);
+    const subject = encodeURIComponent(
+      isAr
+        ? 'فرصة مهنية ومقابلة عمل - محمد القفاص'
+        : 'Career Opportunity & Professional Inquiry - Mohamed Al-Qaffas'
+    );
     const body = encodeURIComponent(
       formData.message
         ? `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-        : 'Hello Mohamed,\n\nI visited your portfolio and would like to connect.'
+        : isAr
+        ? 'مرحباً محمد،\n\nاطلعت على معرض أعمالك وخبراتك الهندسية ومشاريعك المنشورة، ويسعدني التواصل معك لبحث فرصة مهنية ومناقشة مقابلة عمل أو تعاون مشترك.\n\nمع أطيب التحيات،'
+        : 'Hello Mohamed,\n\nI reviewed your portfolio, engineering projects, and published mobile applications, and I would like to connect regarding a career opportunity, interview, or collaborative project.\n\nBest regards,'
     );
     window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
   };
@@ -108,7 +114,7 @@ export const ContactSection: React.FC = () => {
               <div className="channel-icon">
                 <Mail size={18} />
               </div>
-              <div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
                 <span className="channel-label">{t.contact.emailLabel}</span>
                 <strong className="channel-val">{recipientEmail}</strong>
               </div>
@@ -130,7 +136,7 @@ export const ContactSection: React.FC = () => {
                   <path d="M9 18c-4.51 2-5-2-7-2" />
                 </svg>
               </div>
-              <div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
                 <span className="channel-label">{t.contact.githubLabel}</span>
                 <strong className="channel-val">github.com/Ma16q</strong>
               </div>
@@ -140,7 +146,7 @@ export const ContactSection: React.FC = () => {
               <div className="channel-icon">
                 <MapPin size={18} />
               </div>
-              <div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
                 <span className="channel-label">{t.contact.locationLabel}</span>
                 <strong className="channel-val">{t.contact.locationVal}</strong>
               </div>
