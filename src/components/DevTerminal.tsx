@@ -28,12 +28,30 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
   const initialBanner: CommandLog = {
     command: 'welcome',
     output: (
-      <div style={{ lineHeight: 1.6 }}>
-        <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
-          {t.terminal.welcomeMsg}
+      <div style={{ lineHeight: 1.7 }}>
+        <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold', fontSize: '0.98rem' }}>
+          {isAr
+            ? '🚀 الطرفية الهندسية والمساعد الذكي لمحمد القفاص [v2.4.0]'
+            : '🚀 Mohamed Al-Qaffas (Ma16q) Developer Terminal & AI [v2.4.0]'}
         </p>
-        <p style={{ color: 'var(--text-muted)' }}>
-          {t.terminal.typeHelp}
+        <p style={{ color: 'var(--text-muted)', marginTop: '0.35rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.35rem' }}>
+          {isAr ? (
+            <>
+              <span>اكتب</span>
+              <span className="terminal-highlight-chip">help</span>
+              <span>أو</span>
+              <span className="terminal-highlight-chip">مساعدة</span>
+              <span>لعرض الأوامر، أو انقر على الاختصارات السريعة بالأسفل!</span>
+            </>
+          ) : (
+            <>
+              <span>Type</span>
+              <span className="terminal-highlight-chip">help</span>
+              <span>or</span>
+              <span className="terminal-highlight-chip">مساعدة</span>
+              <span>to view available system commands, or click the quick action chips below!</span>
+            </>
+          )}
         </p>
       </div>
     )

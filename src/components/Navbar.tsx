@@ -9,7 +9,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerminal }) => {
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <header className="navbar-wrapper">
@@ -32,17 +32,31 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
         </ul>
 
         <div className="nav-actions-group">
-          {/* Professional Language Switcher */}
-          <button
-            type="button"
-            className="lang-switcher-btn"
-            onClick={toggleLanguage}
-            title={language === 'ar' ? 'Switch to English' : 'التحويل إلى اللغة العربية'}
-            aria-label="Toggle language between English and Arabic"
-          >
-            <Globe size={15} className="lang-icon" />
-            <span className="lang-current">{language === 'ar' ? 'English' : 'العربية'}</span>
-          </button>
+          {/* Luxury Segmented Language Switcher */}
+          <div className="premium-lang-switch" role="group" aria-label="Select Language">
+            <div className="lang-globe-icon-wrap" title="Language Selector">
+              <Globe size={13} className="lang-globe-icon" />
+            </div>
+            <button
+              type="button"
+              className={`lang-segment-btn ${language === 'en' ? 'active' : ''}`}
+              onClick={() => setLanguage('en')}
+              title="Switch to English"
+              aria-pressed={language === 'en'}
+            >
+              EN
+            </button>
+            <span className="lang-segment-divider" aria-hidden="true"></span>
+            <button
+              type="button"
+              className={`lang-segment-btn ${language === 'ar' ? 'active' : ''}`}
+              onClick={() => setLanguage('ar')}
+              title="التحويل للغة العربية"
+              aria-pressed={language === 'ar'}
+            >
+              عربي
+            </button>
+          </div>
 
           {/* Interactive Developer CLI */}
           {onOpenTerminal && (
