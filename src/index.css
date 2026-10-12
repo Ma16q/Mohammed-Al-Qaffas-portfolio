@@ -2588,23 +2588,22 @@ body.light-mode .modal-highlights-list li {
   display: inline-block;
   direction: ltr;
   unicode-bidi: isolate;
-  color: #fbbf24;
-  background: rgba(245, 158, 11, 0.16);
-  border: 1px solid rgba(245, 158, 11, 0.42);
-  padding: 0.12rem 0.48rem;
-  border-radius: 5px;
-  font-weight: 700;
-  font-family: monospace;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 0.15rem !important;
+  margin: 0 0.1rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.65), 0 0 18px rgba(245, 158, 11, 0.35);
+  box-shadow: none !important;
   transition: all 0.2s ease;
-  vertical-align: middle;
+  vertical-align: baseline;
 }
 
 .terminal-highlight-chip:hover {
-  background: rgba(245, 158, 11, 0.28);
-  border-color: #f59e0b;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
-  transform: translateY(-1px);
+  color: #fbbf24;
+  text-shadow: 0 0 14px rgba(245, 158, 11, 0.9), 0 0 25px rgba(245, 158, 11, 0.55);
 }
 
 /* ==========================================================================
@@ -2697,4 +2696,200 @@ body.light-mode .lang-segment-btn.active {
 
 body.light-mode .lang-segment-divider {
   background: rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==========================================================================
+   Clean & Organized Navbar Layout
+   ========================================================================== */
+.navbar-wrapper {
+  position: fixed;
+  top: 1.15rem;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 1.25rem;
+  pointer-events: none; /* Allows clicks through outer padding */
+}
+
+.navbar {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1220px;
+  padding: 0.65rem 1.35rem;
+  background: rgba(11, 17, 32, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-full);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), 0 0 25px rgba(56, 189, 248, 0.08);
+  gap: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.brand-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.terminal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--accent-cyan);
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.terminal-nav-btn:hover {
+  background: var(--accent-cyan);
+  color: #0b1120;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  color: #fff;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+}
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--text-main);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transform: rotate(15deg);
+}
+
+/* ==========================================================================
+   State-of-the-Art Arabic Typography (IBM Plex Sans Arabic)
+   ========================================================================== */
+[dir="rtl"],
+[dir="rtl"] body {
+  font-family: 'IBM Plex Sans Arabic', 'Readex Pro', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  letter-spacing: 0 !important;
+  line-height: 1.65;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] .hero-title,
+[dir="rtl"] .section-title,
+[dir="rtl"] .project-title,
+[dir="rtl"] .modal-title,
+[dir="rtl"] .brand-logo {
+  font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
+  letter-spacing: 0 !important;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+[dir="rtl"] .nav-link,
+[dir="rtl"] .nav-cta,
+[dir="rtl"] .terminal-nav-btn,
+[dir="rtl"] .btn-primary,
+[dir="rtl"] .btn-secondary,
+[dir="rtl"] .btn-card,
+[dir="rtl"] .filter-btn,
+[dir="rtl"] .terminal-chip,
+[dir="rtl"] .lang-segment-btn {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+[dir="rtl"] .hero-subtitle,
+[dir="rtl"] .section-desc,
+[dir="rtl"] .project-summary,
+[dir="rtl"] .modal-summary-text,
+[dir="rtl"] .about-text p {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+/* Responsive adjustments for navbar */
+@media (max-width: 992px) {
+  .nav-links {
+    display: none; /* Mobile view prioritizes action buttons */
+  }
 }
