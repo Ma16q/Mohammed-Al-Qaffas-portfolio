@@ -89,15 +89,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                   </div>
                 </div>
 
-                {/* Back Face: Real Industr-iathon Photo */}
+                {/* Back Face: محمد أحمد (صورة شخصية) */}
                 <div className="card-face face-real">
                   <img
                     src="/assets/images/mohammed_real.jpg"
-                    alt="Mohamed Real Photo at Industr-iathon event"
+                    alt="Mohamed Ahmed - Real Photo"
                   />
                   <div className="floating-glass-tag real-tag">
                     <UserCheck size={13} />
-                    <span>Real Industr-iathon Photo</span>
+                    <span>محمد أحمد (صورة شخصية)</span>
                   </div>
                 </div>
               </div>

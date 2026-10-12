@@ -18,7 +18,7 @@ export const AboutSkills: React.FC = () => {
               Student at <strong>Imam Abdulrahman Bin Faisal University (IAU)</strong>, Eastern Province, Saudi Arabia.
             </p>
             <p>
-              Participant in <strong>Industr-iathon</strong> (Advanced Technology Track with the ISE Club). I enjoy building software tools, web platforms, and responsive interfaces with clean code and modern Glassmorphism aesthetics.
+              Participant in <strong>هاكاثون الصناعة (Industrial Hackathon)</strong> (Advanced Technology Track with the ISE Club). I enjoy building software tools, web platforms, and responsive interfaces with clean code and modern Glassmorphism aesthetics.
             </p>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
