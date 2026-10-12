@@ -279,10 +279,13 @@ body {
 }
 
 /* --- 7. HERO SECTION --- */
-.hero {
-  padding: 9.5rem 0 5rem;
-  display: flex;
-  align-items: center;
+.hero,
+.hero-section {
+  padding-top: 10.5rem !important; /* Generous breathing room on Desktop so fixed navbar never covers badge or title */
+  padding-bottom: 5rem;
+  display: block;
+  position: relative;
+  width: 100%;
 }
 
 .hero-grid {
