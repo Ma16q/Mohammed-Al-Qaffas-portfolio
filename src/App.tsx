@@ -5,12 +5,18 @@ import { ProjectsSection } from './components/ProjectsSection';
 import { AboutSkills } from './components/AboutSkills';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { ProjectModal } from './components/ProjectModal';
+import { DevTerminal } from './components/DevTerminal';
+import type { Project } from './types/portfolio';
 
 export const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem('portfolio-theme');
     return (saved === 'light' || saved === 'dark') ? saved : 'dark';
   });
+
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   useEffect(() => {
     if (theme === 'light') {
@@ -21,8 +27,12 @@ export const App: React.FC = () => {
     localStorage.setItem('portfolio-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  const handleToggleTheme = (mode?: 'dark' | 'light') => {
+    if (mode) {
+      setTheme(mode);
+    } else {
+      setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    }
   };
 
   return (
@@ -34,14 +44,36 @@ export const App: React.FC = () => {
         <div className="glow-orb orb-3"></div>
       </div>
 
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <Navbar
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+        onOpenTerminal={() => setIsTerminalOpen(true)}
+      />
+
       <main>
-        <Hero />
-        <ProjectsSection theme={theme} />
+        <Hero onOpenTerminal={() => setIsTerminalOpen(true)} />
+        <ProjectsSection
+          theme={theme}
+          onInspect={(proj) => setSelectedProject(proj)}
+        />
         <AboutSkills />
         <ContactSection />
       </main>
+
       <Footer />
+
+      {/* Interactive Project Deep-Dive Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
+      {/* Interactive Developer CLI Terminal */}
+      <DevTerminal
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+        onToggleTheme={handleToggleTheme}
+      />
     </div>
   );
 };

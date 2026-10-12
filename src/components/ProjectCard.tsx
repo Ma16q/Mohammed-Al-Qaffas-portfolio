@@ -1,13 +1,15 @@
 ﻿import React, { useState } from 'react';
 import type { Project } from '../types/portfolio';
 import { Car3DViewer } from './Car3DViewer';
+import { Info } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
   theme?: 'dark' | 'light';
+  onInspect?: (project: Project) => void;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInspect }) => {
   const [motriView, setMotriView] = useState<'3d' | 'hologram'>('3d');
 
   if (project.is3dInteractive) {
@@ -90,6 +92,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme }) => {
               <span>{link.label}</span>
             </a>
           ))}
+          {onInspect && (
+            <button
+              type="button"
+              className="btn-card outline"
+              onClick={() => onInspect(project)}
+              title="Inspect project details"
+              style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
+            >
+              <Info size={16} />
+            </button>
+          )}
         </div>
       </article>
     );
@@ -133,6 +146,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme }) => {
               <span>{link.label}</span>
             </a>
           ))}
+          {onInspect && (
+            <button
+              type="button"
+              className="btn-card outline"
+              onClick={() => onInspect(project)}
+              title="Inspect details"
+              style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
+            >
+              <Info size={16} />
+            </button>
+          )}
         </div>
       </article>
     );
@@ -169,6 +193,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme }) => {
             <span>{link.label}</span>
           </a>
         ))}
+        {onInspect && (
+          <button
+            type="button"
+            className="btn-card outline"
+            onClick={() => onInspect(project)}
+            title="Inspect details"
+            style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
+          >
+            <Info size={16} />
+          </button>
+        )}
       </div>
     </article>
   );

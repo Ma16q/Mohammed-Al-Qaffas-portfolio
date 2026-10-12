@@ -16,6 +16,13 @@ export const projectsData: Project[] = [
     image: '/assets/images/project_motrilog_3d.jpg',
     links: [
       { label: 'View on GitHub ↗', url: 'https://github.com/Ma16q/MotriLog', type: 'launch' }
+    ],
+    techStack: ['Python', 'Three.js', 'WebGL', 'GLTF/DRACO', 'CSS Glassmorphism', 'Telemetry Analytics'],
+    highlights: [
+      'Interactive 360° car orbit drag & real-time WebGL render loop',
+      'Diagnostic wireframe telemetry inspection mode for engine and chassis',
+      'Smart service prediction algorithm estimating oil and tire wear cycles',
+      'Dynamic cyber neon paint customization with physical material shaders'
     ]
   },
   {
@@ -27,11 +34,17 @@ export const projectsData: Project[] = [
       { text: 'Live Store', color: 'pink' },
       { text: 'Gaming', color: 'default' }
     ],
-    summary: 'Live online gaming storefront and digital products hub for gaming enthusiasts.',
+    summary: 'Live online gaming storefront and digital products hub for gaming enthusiasts with instant checkout and gaming deals.',
     image: '/assets/images/project_ghos.jpg',
     links: [
       { label: 'Live Website (ghos.shop) ↗', url: 'https://ghos.shop', type: 'launch' },
       { label: 'Repo ↗', url: 'https://github.com/Ma16q/ghos', type: 'outline' }
+    ],
+    techStack: ['E-Commerce Engine', 'JavaScript', 'CSS3', 'Payment Gateways', 'Digital Storefront'],
+    highlights: [
+      'Production deployment serving digital gaming titles and gear',
+      'High-conversion cyber-aesthetic storefront with responsive catalog',
+      'Streamlined digital delivery and cart management system'
     ]
   },
   {
@@ -49,6 +62,13 @@ export const projectsData: Project[] = [
     summary: 'Published Android app on Google Play — Islamic Sunnah habits & manners tracker with modern UI and custom reading themes. Built with Android Studio & Java.',
     links: [
       { label: 'View on Google Play ↗', url: 'https://play.google.com/store/apps/details?id=com.mustahabbat.sunan', type: 'google-play' }
+    ],
+    techStack: ['Android Studio', 'Java', 'Android SDK', 'Material Design', 'Google Play Store'],
+    highlights: [
+      'Published on Google Play Store with active users and 5-star ratings',
+      'Comprehensive Islamic Sunnah habits catalog categorized by daily routines',
+      'Custom reading modes, text zoom, and high-contrast night theme',
+      'Native Android performance with zero latency and lightweight APK size'
     ]
   },
   {
@@ -66,6 +86,13 @@ export const projectsData: Project[] = [
     summary: 'Published Android app on Google Play — Smart digital tasbih & dhikr counter simulated as a portable tally ring device. Built with Android Studio & Java.',
     links: [
       { label: 'View on Google Play ↗', url: 'https://play.google.com/store/apps/details?id=com.musbihati', type: 'google-play' }
+    ],
+    techStack: ['Android Studio', 'Java', 'Android SDK', 'Haptic Feedback', 'Google Play Store'],
+    highlights: [
+      'Published on Google Play Store with realistic tally ring physical simulation',
+      'Haptic vibration feedback upon every count for screenless tasbih',
+      'Persistent counter state saving across app reboots via Android SharedPreferences',
+      'Multiple custom counter targets and Islamic dhikr presets'
     ]
   },
   {
@@ -81,6 +108,12 @@ export const projectsData: Project[] = [
     image: '/assets/images/project_numbers.jpg',
     links: [
       { label: 'View on GitHub ↗', url: 'https://github.com/Ma16q/Numbers-Game', type: 'launch' }
+    ],
+    techStack: ['Java', 'OOP Patterns', 'Algorithms', 'Score State Engine'],
+    highlights: [
+      'Object-oriented architecture separating game state, rules, and UI',
+      'Dynamic numeric pattern challenge with progressive difficulty',
+      'Score tracking and session analytics'
     ]
   },
   {
@@ -92,10 +125,16 @@ export const projectsData: Project[] = [
       { text: 'JavaScript', color: 'default' },
       { text: 'Frontend', color: 'default' }
     ],
-    summary: 'Interactive React playground exploring modern component hierarchy and state management.',
+    summary: 'Interactive React playground exploring modern component hierarchy, hook state, and reactive UI patterns.',
     image: '/assets/images/project_react.jpg',
     links: [
       { label: 'View on GitHub ↗', url: 'https://github.com/Ma16q/My-First-React', type: 'launch' }
+    ],
+    techStack: ['React', 'JavaScript (ES6+)', 'CSS Modules', 'React Hooks'],
+    highlights: [
+      'Exploration of functional React components and custom hooks',
+      'Dynamic state management and re-rendering optimizations',
+      'Component-driven UI development foundation'
     ]
   },
   {
@@ -110,6 +149,11 @@ export const projectsData: Project[] = [
     image: '/assets/images/ga.png',
     links: [
       { label: 'Open Project ↗', url: '/assets/Game Ranking Project.html', type: 'launch' }
+    ],
+    techStack: ['HTML5', 'Semantic Web', 'Game Reviews'],
+    highlights: [
+      'Curated review of open-world and RPG gaming masterpieces',
+      'Clean HTML5 semantic hierarchy and visual media presentation'
     ]
   },
   {
@@ -124,6 +168,11 @@ export const projectsData: Project[] = [
     image: '/assets/images/br.png',
     links: [
       { label: 'Open Project ↗', url: '/assets/Birthday Invite Project.html', type: 'launch' }
+    ],
+    techStack: ['HTML5', 'Google Maps API', 'Event Planning'],
+    highlights: [
+      'Location coordinates linked directly to IAU University campus in Dammam',
+      'Creative responsive event invite card design'
     ]
   }
 ];

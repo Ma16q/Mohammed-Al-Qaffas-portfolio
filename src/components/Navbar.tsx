@@ -1,12 +1,13 @@
 ﻿import React from 'react';
-import { Sun, Moon, Sparkles } from 'lucide-react';
+import { Sun, Moon, Sparkles, Terminal } from 'lucide-react';
 
 interface NavbarProps {
   theme: 'dark' | 'light';
-  onToggleTheme: () => void;
+  onToggleTheme: (mode?: 'dark' | 'light') => void;
+  onOpenTerminal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
+export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerminal }) => {
   return (
     <header className="navbar-wrapper">
       <nav className="navbar" aria-label="Main Navigation">
@@ -27,16 +28,29 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
           </li>
         </ul>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          {onOpenTerminal && (
+            <button
+              type="button"
+              className="terminal-nav-btn"
+              onClick={onOpenTerminal}
+              title="Open Interactive Dev Terminal (CLI)"
+              aria-label="Open Dev Terminal"
+            >
+              <Terminal size={16} />
+              <span className="terminal-nav-text">CLI</span>
+            </button>
+          )}
+
           <a href="#contact" className="nav-cta">
             <span>Say Hello</span>
-            <Sparkles size={16} />
+            <Sparkles size={15} />
           </a>
 
           <button
             type="button"
             className="theme-toggle"
-            onClick={onToggleTheme}
+            onClick={() => onToggleTheme()}
             aria-label="Toggle Light and Dark Mode"
             title="Toggle Light / Dark Mode"
           >

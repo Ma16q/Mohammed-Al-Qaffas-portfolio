@@ -16,6 +16,8 @@ export interface Project {
     type: 'launch' | 'outline' | 'google-play';
   }[];
   badge?: string;
+  highlights?: string[];
+  techStack?: string[];
 }
 
 export interface Skill {
