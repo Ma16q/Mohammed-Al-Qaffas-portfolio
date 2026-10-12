@@ -3046,3 +3046,201 @@ body.light-mode .lang-segment-divider {
     padding: 0.45rem 0.85rem !important;
   }
 }
+
+/* ==========================================================================
+   ✨ LUXURY NAVBAR INTERACTIVITY & GITHUB BADGE
+   ========================================================================== */
+.navbar-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-main);
+  padding: 0.42rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.navbar-github-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
+}
+
+.navbar-github-btn .github-octo-icon {
+  transition: transform 0.25s ease;
+}
+
+.navbar-github-btn:hover .github-octo-icon {
+  transform: rotate(-10deg) scale(1.15);
+  fill: var(--accent-cyan);
+}
+
+.navbar-github-btn .github-ext-icon {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-github-btn:hover .github-ext-icon {
+  opacity: 1;
+}
+
+body.light-mode .navbar-github-btn {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #0f172a;
+}
+
+body.light-mode .navbar-github-btn:hover {
+  background: rgba(15, 23, 42, 0.09);
+  border-color: #2563eb;
+  color: #1e40af;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+}
+
+/* Nav Link Click Feedback & Active Glowing Pill */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-link.active {
+  color: #fff !important;
+  background: rgba(56, 189, 248, 0.12) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.nav-active-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px var(--accent-cyan);
+  display: inline-block;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.nav-link.just-clicked {
+  transform: scale(0.92);
+  background: rgba(56, 189, 248, 0.25) !important;
+}
+
+body.light-mode .nav-link {
+  color: #475569;
+}
+
+body.light-mode .nav-link:hover {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.05);
+}
+
+body.light-mode .nav-link.active {
+  color: #1e40af !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+/* Light mode overrides for training milestone cards & headers */
+body.light-mode .mini-glass-card {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(226, 232, 240, 0.95) !important;
+  box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.08) !important;
+}
+
+body.light-mode .mini-glass-card h4 {
+  color: #0f172a !important;
+}
+
+body.light-mode .mini-glass-card p {
+  color: #475569 !important;
+}
+
+/* ==========================================================================
+   📊 STATS STRIP GLASSMORPHISM COMPONENT
+   ========================================================================== */
+.stats-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 0.85rem 1.85rem;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin-top: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-number {
+  font-size: 1.45rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.light-mode .stats-strip {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(226, 232, 240, 0.95);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.1);
+}
+
+body.light-mode .stat-divider {
+  background: rgba(203, 213, 225, 0.8);
+}
+
+body.light-mode .stat-label {
+  color: #475569;
+}

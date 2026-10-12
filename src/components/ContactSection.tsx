@@ -11,7 +11,7 @@ export const ContactSection: React.FC = () => {
   const { language, t } = useLanguage();
   const isAr = language === 'ar';
 
-  const recipientEmail = 'abcb1240009m@gmail.com';
+  const recipientEmail = 'mohammed.alqaffas1@gmail.com';
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(recipientEmail);

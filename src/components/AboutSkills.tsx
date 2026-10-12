@@ -96,7 +96,7 @@ export const AboutSkills: React.FC = () => {
         <div style={{ marginTop: '2.5rem' }}>
           <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Briefcase size={18} style={{ color: 'var(--accent-cyan)' }} />
-            <h3 style={{ fontSize: '1.35rem', margin: 0, color: '#f8fafc' }}>
+            <h3 style={{ fontSize: '1.35rem', margin: 0, color: 'var(--text-main)' }}>
               {isAr ? 'التدريب المهني والمسيرة الأكاديمية' : 'Professional Training & Academic Milestones'}
             </h3>
           </div>
@@ -112,8 +112,8 @@ export const AboutSkills: React.FC = () => {
                   flexDirection: 'column',
                   gap: '0.65rem',
                   borderRadius: '14px',
-                  background: 'rgba(15, 23, 42, 0.6)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)'
+                  background: 'var(--glass-bg)',
+                  border: '1px solid var(--glass-border)'
                 }}
               >
                 {/* Top Row: Icon + Status Pill Badge */}
@@ -136,7 +136,7 @@ export const AboutSkills: React.FC = () => {
                     fontWeight: 500,
                     padding: '0.2rem 0.65rem',
                     background: 'rgba(255, 255, 255, 0.04)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    border: '1px solid var(--glass-border)',
                     borderRadius: '12px',
                     color: 'var(--text-muted)'
                   }}>
@@ -150,7 +150,7 @@ export const AboutSkills: React.FC = () => {
                     margin: '0 0 0.35rem 0',
                     fontSize: '1.05rem',
                     fontWeight: 700,
-                    color: '#f8fafc',
+                    color: 'var(--text-main)',
                     lineHeight: 1.45
                   }}>
                     {isAr ? exp.roleAr : exp.role}

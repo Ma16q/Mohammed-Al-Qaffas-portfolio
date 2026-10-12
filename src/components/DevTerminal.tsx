@@ -256,7 +256,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
           <p>• LinkedIn: <a href="https://www.linkedin.com/in/ma16q/" target="_blank" rel="noreferrer" style={{ color: '#38bdf8', textDecoration: 'underline' }}>linkedin.com/in/ma16q</a></p>
           <p>• GitHub: <a href="https://github.com/Ma16q" target="_blank" rel="noreferrer" style={{ color: '#38bdf8', textDecoration: 'underline' }}>github.com/Ma16q</a></p>
           <p>• Google Play: <a href="https://play.google.com/store/apps/developer?id=Ma16q" target="_blank" rel="noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>Ma16q Developer Profile</a></p>
-          <p>• Email: abcb1240009m@gmail.com</p>
+          <p>• Email: mohammed.alqaffas1@gmail.com</p>
         </div>
       );
     }
