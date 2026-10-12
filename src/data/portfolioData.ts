@@ -142,34 +142,6 @@ export const projectsData: Project[] = [
     ]
   },
   {
-    id: 'animator',
-    title: 'Lottie Web Animator Studio',
-    titleAr: 'استوديو محاكي اللوتي (Lottie Animator)',
-    category: 'web-3d',
-    tags: [
-      { text: 'TypeScript', textAr: 'تايب سكريبت', color: 'cyan' },
-      { text: 'Lottie Vector', textAr: 'رسوم لوتي المتجهة', color: 'default' },
-      { text: 'Web Components', textAr: 'مكونات الويب', color: 'cyan' }
-    ],
-    summary: 'Vector animation engineering tool and runtime studio for building interactive Lottie keyframes and responsive web component animations.',
-    summaryAr: 'أداة هندسية وبيئة تشغيلية لتصميم رسوم اللوتي المتحركة (Lottie)، وتوليد متجهات الإطارات المفتاحية ومكونات الويب التفاعلية الحديثة.',
-    image: '/assets/images/project_motrilog.jpg',
-    links: [
-      { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/animator', type: 'launch' }
-    ],
-    techStack: ['TypeScript', 'Lottie-Web', 'Canvas API', 'JSON Keyframes', 'Reactive UI'],
-    highlights: [
-      'Interactive keyframe vector timeline editing and real-time canvas playback',
-      'Seamless JSON export compatible with modern Web, iOS, and Android applications',
-      'Lightweight component-based UI architecture with zero external runtime bloat'
-    ],
-    highlightsAr: [
-      'محرر تفاعلي للخط الزمني مع تشغيل فوري على متجهات الـ Canvas',
-      'تصدير ملفات JSON معيارية متوافقة مباشرة مع تطبيقات الويب والأندرويد والـ iOS',
-      'معمارية مكونات خفيفة بدون أي حمل تشغيلي زائد'
-    ]
-  },
-  {
     id: 'numbers-game',
     title: 'Numbers Game Engine',
     titleAr: 'محرك لعبة الأرقام (Numbers-Game)',
