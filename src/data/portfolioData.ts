@@ -1,9 +1,22 @@
 import type { Project, Skill } from '../types/portfolio';
 
+export interface ExperienceItem {
+  id: string;
+  role: string;
+  roleAr: string;
+  organization: string;
+  organizationAr: string;
+  period: string;
+  periodAr: string;
+  description: string;
+  descriptionAr: string;
+  tags: string[];
+}
+
 export const projectsData: Project[] = [
   {
     id: 'motrilog',
-    title: 'MotriLog',
+    title: 'MotriLog Telemetry',
     titleAr: 'موتري لوج (MotriLog)',
     category: 'web-3d',
     is3dInteractive: true,
@@ -129,6 +142,34 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: 'animator',
+    title: 'Lottie Web Animator Studio',
+    titleAr: 'استوديو محاكي اللوتي (Lottie Animator)',
+    category: 'web-3d',
+    tags: [
+      { text: 'TypeScript', textAr: 'تايب سكريبت', color: 'cyan' },
+      { text: 'Lottie Vector', textAr: 'رسوم لوتي المتجهة', color: 'default' },
+      { text: 'Web Components', textAr: 'مكونات الويب', color: 'cyan' }
+    ],
+    summary: 'Vector animation engineering tool and runtime studio for building interactive Lottie keyframes and responsive web component animations.',
+    summaryAr: 'أداة هندسية وبيئة تشغيلية لتصميم رسوم اللوتي المتحركة (Lottie)، وتوليد متجهات الإطارات المفتاحية ومكونات الويب التفاعلية الحديثة.',
+    image: '/assets/images/project_motrilog.jpg',
+    links: [
+      { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/animator', type: 'launch' }
+    ],
+    techStack: ['TypeScript', 'Lottie-Web', 'Canvas API', 'JSON Keyframes', 'Reactive UI'],
+    highlights: [
+      'Interactive keyframe vector timeline editing and real-time canvas playback',
+      'Seamless JSON export compatible with modern Web, iOS, and Android applications',
+      'Lightweight component-based UI architecture with zero external runtime bloat'
+    ],
+    highlightsAr: [
+      'محرر تفاعلي للخط الزمني مع تشغيل فوري على متجهات الـ Canvas',
+      'تصدير ملفات JSON معيارية متوافقة مباشرة مع تطبيقات الويب والأندرويد والـ iOS',
+      'معمارية مكونات خفيفة بدون أي حمل تشغيلي زائد'
+    ]
+  },
+  {
     id: 'numbers-game',
     title: 'Numbers Game Engine',
     titleAr: 'محرك لعبة الأرقام (Numbers-Game)',
@@ -183,56 +224,6 @@ export const projectsData: Project[] = [
       'إدارة ديناميكية للحالة وتحسين كفاءة إعادة التصيير Re-rendering',
       'تأسيس وتطبيق مفاهيم تطوير الواجهات القائمة على المكونات Reusable Components'
     ]
-  },
-  {
-    id: 'game-ranking',
-    title: 'Game Ranking Showcase',
-    titleAr: 'معرض تصنيف الألعاب',
-    category: 'games',
-    tags: [
-      { text: 'HTML5', textAr: 'HTML5', color: 'default' },
-      { text: 'Gaming Curation', textAr: 'تقييم الألعاب', color: 'default' }
-    ],
-    summary: 'Curated gaming critique and architectural review of open-world masterpieces: Ark, Kingdom Come: Deliverance II, and Elden Ring.',
-    summaryAr: 'استعراض تحليلي وتقييمي لأبرز تحف الألعاب في العوالم المفتوحة والـ RPG: Ark وKingdom Come II وElden Ring.',
-    image: '/assets/images/ga.png',
-    links: [
-      { label: 'Open Project', labelAr: 'فتح المشروع', url: '/assets/Game Ranking Project.html', type: 'launch' }
-    ],
-    techStack: ['HTML5', 'Semantic Web', 'Game Reviews'],
-    highlights: [
-      'Curated review of open-world and RPG gaming masterpieces',
-      'Clean HTML5 semantic hierarchy and visual media presentation'
-    ],
-    highlightsAr: [
-      'مراجعة معمقة لأفضل ألعاب العالم المفتوح وتجارب تقمص الأدوار',
-      'بنية دلالية نظيفة بتقنيات HTML5 مع عرض وسائط مرئية متناسق'
-    ]
-  },
-  {
-    id: 'birthday-invite',
-    title: 'University Event Invitation',
-    titleAr: 'دعوة فعالية جامعية',
-    category: 'web-3d',
-    tags: [
-      { text: 'HTML5', textAr: 'HTML5', color: 'pink' },
-      { text: 'IAU Coordinates', textAr: 'موقع جامعة IAU', color: 'pink' }
-    ],
-    summary: 'Celebration invite pinned at Imam Abdulrahman Bin Faisal University (IAU) campus with interactive Google Maps integration.',
-    summaryAr: 'بطاقة دعوة رقمية محددة بمقر جامعة الإمام عبد الرحمن بن فيصل مع ربط مباشر بإحداثيات خرائط جوجل.',
-    image: '/assets/images/br.png',
-    links: [
-      { label: 'Open Project', labelAr: 'فتح المشروع', url: '/assets/Birthday Invite Project.html', type: 'launch' }
-    ],
-    techStack: ['HTML5', 'Google Maps API', 'Event Planning'],
-    highlights: [
-      'Location coordinates linked directly to IAU University campus in Dammam',
-      'Creative responsive event invite card design'
-    ],
-    highlightsAr: [
-      'ربط جغرافي مباشر مع حرم جامعة الإمام عبد الرحمن بن فيصل بالدمام',
-      'تصميم بطاقة دعوة متجاوب وأنيق'
-    ]
   }
 ];
 
@@ -249,4 +240,55 @@ export const skillsData: Skill[] = [
   { name: 'Git & Version Control', nameAr: 'Git وإدارة الإصدارات', category: 'tools' },
   { name: 'Google Cloud Platform (GCP)', nameAr: 'منصة قوقل السحابية GCP', category: 'tools' },
   { name: 'Software Architecture', nameAr: 'هندسة ومعمارية البرمجيات', category: 'tools' }
+];
+
+export const experienceData: ExperienceItem[] = [
+  {
+    id: 'coop-training',
+    role: 'Software Engineering Training (COOP / Field Internship)',
+    roleAr: 'التدريب الميداني في هندسة وتطوير البرمجيات',
+    organization: 'Computer Science Practical Internship Program',
+    organizationAr: 'برنامج التدريب العملي الميداني لعلوم الحاسب',
+    period: 'Completed / Recent Graduate',
+    periodAr: 'مكتمل بنجاح',
+    description: 'Successfully completed rigorous software engineering practical training covering native mobile app workflows, reactive web architecture, and full-stack software development.',
+    descriptionAr: 'إتمام برنامج التدريب الميداني بنجاح، وتطبيق أحدث المعايير البرمجية في تطوير تطبيقات الجوال، وبرمجيات الويب التفاعلية، وإدارة دورة حياة الأنظمة البرمجية.',
+    tags: ['Software Engineering', 'Android Development', 'Full-Stack Web', 'Git CI/CD']
+  },
+  {
+    id: 'iau-degree',
+    role: "Bachelor's in Computer Science",
+    roleAr: 'بكالوريوس علوم الحاسب الآلي',
+    organization: 'Imam Abdulrahman Bin Faisal University (IAU)',
+    organizationAr: 'جامعة الإمام عبد الرحمن بن فيصل - كلية علوم الحاسب (CCSIT)',
+    period: 'Eastern Province, Saudi Arabia',
+    periodAr: 'المنطقة الشرقية، المملكة العربية السعودية',
+    description: 'Studying core Computer Science disciplines: Data Structures, Algorithms, Software Engineering, Database Systems, Object-Oriented Programming, and Web/Mobile Architectures.',
+    descriptionAr: 'دراسة التخصصات الجوهرية: هياكل البيانات، الخوارزميات، هندسة البرمجيات، قواعد البيانات، البرمجة كائنية التوجه، وتطوير الأنظمة الموزعة والمحمولة.',
+    tags: ['Data Structures', 'Algorithms', 'OOP', 'Databases', 'Computer Networks']
+  },
+  {
+    id: 'gdg-campus',
+    role: 'Google Developer Groups on Campus (GDG) Member',
+    roleAr: 'عضو مجتمع مطوري جوجل الجامعي (GDG on Campus)',
+    organization: 'GDG at IAU',
+    organizationAr: 'مجتمع مطوري قوقل - جامعة الإمام عبد الرحمن بن فيصل',
+    period: 'Active Tech Community Member',
+    periodAr: 'عضو ومشارك تقني نشط',
+    description: 'Active participant in Google technologies workshops, modern developer tooling sessions, and collaborative hackathons.',
+    descriptionAr: 'المشاركة الفعالة في ورش العمل والفعاليات التقنية المتخصصة بأحدث تقنيات قوقل والحوسبة السحابية وأدوات التطوير الحديثة.',
+    tags: ['Google Cloud', 'Web Dev', 'Mobile Technologies', 'Developer Community']
+  },
+  {
+    id: 'hackathon',
+    role: 'Industrial Hackathon Participant (Advanced Tech Track)',
+    roleAr: 'مشارك في هاكاثون الصناعة (مسار التقنيات المتقدمة)',
+    organization: 'ISE Club & Advanced Technology Track',
+    organizationAr: 'نادي الهندسة الصناعية والأنظمة (ISE Club)',
+    period: 'Advanced Technology Innovation',
+    periodAr: 'ابتكار التقنيات المتقدمة',
+    description: 'Engineered technological prototypes addressing industrial logistics and telemetry challenges under competitive hackathon timelines.',
+    descriptionAr: 'بناء وتطوير نماذج برمجية وتقنية متقدمة لحل تحديات الرقمنة الصناعية والمتابعة اللوجستية ضمن فرق عمل تنافسية.',
+    tags: ['Telemetry', 'Innovation Track', 'Prototyping', 'Team Engineering']
+  }
 ];
