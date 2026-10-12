@@ -17,7 +17,7 @@ export const projectsData: Project[] = [
   {
     id: 'motrilog',
     title: 'MotriLog',
-    titleAr: 'MotriLog',
+    titleAr: 'موتري لوج (MotriLog)',
     category: 'web-3d',
     is3dInteractive: true,
     tags: [
@@ -48,8 +48,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'ghos',
-    title: 'ghos',
-    titleAr: 'ghos',
+    title: 'ghos (GameHub Store)',
+    titleAr: 'متجر غوس للألعاب (ghos)',
     category: 'web-3d',
     tags: [
       { text: 'E-Commerce', textAr: 'تجارة إلكترونية', color: 'pink' },
@@ -143,8 +143,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'numbers-game',
-    title: 'Numbers-Game',
-    titleAr: 'Numbers-Game',
+    title: 'Numbers Game',
+    titleAr: 'لعبة الأرقام (Numbers Game)',
     category: 'games',
     tags: [
       { text: 'Java', textAr: 'جافا', color: 'default' },
@@ -171,8 +171,8 @@ export const projectsData: Project[] = [
   },
   {
     id: 'my-first-react',
-    title: 'My-First-React',
-    titleAr: 'My-First-React',
+    title: 'My First React',
+    titleAr: 'مشروعي الأول في رياكت (My First React)',
     category: 'web-3d',
     tags: [
       { text: 'React', textAr: 'رياكت', color: 'pink' },
