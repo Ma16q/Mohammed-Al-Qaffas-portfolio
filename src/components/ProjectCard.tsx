@@ -1,7 +1,8 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import type { Project } from '../types/portfolio';
 import { Car3DViewer } from './Car3DViewer';
-import { Info } from 'lucide-react';
+import { Info, ExternalLink, Activity, Box } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ProjectCardProps {
   project: Project;
@@ -11,6 +12,11 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInspect }) => {
   const [motriView, setMotriView] = useState<'3d' | 'hologram'>('3d');
+  const { language, t } = useLanguage();
+  const isAr = language === 'ar';
+
+  const title = isAr && project.titleAr ? project.titleAr : project.title;
+  const summary = isAr && project.summaryAr ? project.summaryAr : project.summary;
 
   if (project.is3dInteractive) {
     return (
@@ -25,7 +31,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               setMotriView('3d');
             }}
           >
-            <span>🎮 3D Interactive</span>
+            <Box size={14} />
+            <span>{t.projects.interactiveTab}</span>
           </button>
           <button
             type="button"
@@ -35,7 +42,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               setMotriView('hologram');
             }}
           >
-            <span>🖼️ Hologram UI</span>
+            <Activity size={14} />
+            <span>{t.projects.hologramTab}</span>
           </button>
         </div>
 
@@ -53,7 +61,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               <div className="holo-scan-line"></div>
               <div className="holo-badge">
                 <span className="holo-radar-dot"></span>
-                <span>3D Telemetry HUD</span>
+                <span>{t.projects.hudBadge}</span>
               </div>
               <div className="holo-hotspots">
                 <span className="hotspot hotspot-engine">
@@ -72,13 +80,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
         <div className="project-tags">
           {project.tags.map((tag, i) => (
             <span key={i} className={`tag ${tag.color || ''}`}>
-              {tag.text}
+              {isAr && tag.textAr ? tag.textAr : tag.text}
             </span>
           ))}
         </div>
 
-        <h3 className="project-title">{project.title}</h3>
-        <p className="project-summary">{project.summary}</p>
+        <h3 className="project-title">{title}</h3>
+        <p className="project-summary">{summary}</p>
 
         <div className="project-actions">
           {project.links.map((link, i) => (
@@ -89,7 +97,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               rel="noopener noreferrer"
               className={`btn-card ${link.type}`}
             >
-              <span>{link.label}</span>
+              <span>{isAr && link.labelAr ? link.labelAr : link.label}</span>
+              <ExternalLink size={13} />
             </a>
           ))}
           {onInspect && (
@@ -97,7 +106,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               type="button"
               className="btn-card outline"
               onClick={() => onInspect(project)}
-              title="Inspect project details"
+              title={t.projects.inspectBtn}
               style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
             >
               <Info size={16} />
@@ -115,24 +124,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
       <article className="project-card glass-panel app-card">
         <div className={`app-icon-preview ${isSunan ? 'sunan-preview' : 'musbihati-preview'}`}>
           <div className="app-icon-wrap">
-            <img src={project.appIcon} alt={`${project.title} - Official App Icon`} className="app-icon-img" loading="lazy" />
+            <img src={project.appIcon} alt={`${title} - App Icon`} className="app-icon-img" loading="lazy" />
           </div>
           <div className="holo-badge" style={{ top: '0.75rem', left: '0.75rem' }}>
             <span className="holo-radar-dot" style={{ background: isSunan ? '#10b981' : '#38bdf8' }}></span>
-            <span>Google Play App</span>
+            <span>{t.projects.appBadge}</span>
           </div>
         </div>
 
         <div className="project-tags">
           {project.tags.map((tag, i) => (
             <span key={i} className={`tag ${tag.color || ''}`}>
-              {tag.text}
+              {isAr && tag.textAr ? tag.textAr : tag.text}
             </span>
           ))}
         </div>
 
-        <h3 className="project-title">{project.title}</h3>
-        <p className="project-summary">{project.summary}</p>
+        <h3 className="project-title">{title}</h3>
+        <p className="project-summary">{summary}</p>
 
         <div className="project-actions">
           {project.links.map((link, i) => (
@@ -143,7 +152,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               rel="noopener noreferrer"
               className="btn-card google-play"
             >
-              <span>{link.label}</span>
+              <span>{isAr && link.labelAr ? link.labelAr : link.label}</span>
+              <ExternalLink size={13} />
             </a>
           ))}
           {onInspect && (
@@ -151,7 +161,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
               type="button"
               className="btn-card outline"
               onClick={() => onInspect(project)}
-              title="Inspect details"
+              title={t.projects.inspectBtn}
               style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
             >
               <Info size={16} />
@@ -166,20 +176,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
   return (
     <article className="project-card glass-panel">
       <div className="project-preview">
-        <img src={project.image} alt={`${project.title} preview`} className="project-img" loading="lazy" />
+        <img src={project.image} alt={`${title} preview`} className="project-img" loading="lazy" />
         <div className="project-overlay"></div>
       </div>
 
       <div className="project-tags">
         {project.tags.map((tag, i) => (
           <span key={i} className={`tag ${tag.color || ''}`}>
-            {tag.text}
+            {isAr && tag.textAr ? tag.textAr : tag.text}
           </span>
         ))}
       </div>
 
-      <h3 className="project-title">{project.title}</h3>
-      <p className="project-summary">{project.summary}</p>
+      <h3 className="project-title">{title}</h3>
+      <p className="project-summary">{summary}</p>
 
       <div className="project-actions">
         {project.links.map((link, i) => (
@@ -190,7 +200,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
             rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
             className={`btn-card ${link.type}`}
           >
-            <span>{link.label}</span>
+            <span>{isAr && link.labelAr ? link.labelAr : link.label}</span>
+            <ExternalLink size={13} />
           </a>
         ))}
         {onInspect && (
@@ -198,7 +209,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
             type="button"
             className="btn-card outline"
             onClick={() => onInspect(project)}
-            title="Inspect details"
+            title={t.projects.inspectBtn}
             style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
           >
             <Info size={16} />

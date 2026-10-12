@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProjectsSection } from './components/ProjectsSection';
@@ -7,9 +7,10 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { DevTerminal } from './components/DevTerminal';
+import { LanguageProvider } from './context/LanguageContext';
 import type { Project } from './types/portfolio';
 
-export const App: React.FC = () => {
+const PortfolioContent: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem('portfolio-theme');
     return (saved === 'light' || saved === 'dark') ? saved : 'dark';
@@ -68,13 +69,21 @@ export const App: React.FC = () => {
         onClose={() => setSelectedProject(null)}
       />
 
-      {/* Interactive Developer CLI Terminal */}
+      {/* Interactive Developer CLI Terminal with AI & Security Guard */}
       <DevTerminal
         isOpen={isTerminalOpen}
         onClose={() => setIsTerminalOpen(false)}
         onToggleTheme={handleToggleTheme}
       />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <PortfolioContent />
+    </LanguageProvider>
   );
 };
 

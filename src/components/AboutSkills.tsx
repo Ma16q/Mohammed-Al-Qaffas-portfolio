@@ -1,25 +1,25 @@
-﻿import React from 'react';
+import React from 'react';
 import { skillsData } from '../data/portfolioData';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Cpu, Gamepad2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const AboutSkills: React.FC = () => {
+  const { language, t } = useLanguage();
+  const isAr = language === 'ar';
+
   return (
     <section className="about-section" id="about">
       <div className="container">
         <div className="section-header">
-          <span className="section-pill">About & Skills</span>
-          <h2 className="section-title">Who I Am</h2>
+          <span className="section-pill">{t.about.sectionPill}</span>
+          <h2 className="section-title">{t.about.sectionTitle}</h2>
         </div>
 
         <div className="about-card glass-panel">
           <div className="about-text">
-            <h3>Mohamed Ahmed (Ma16q)</h3>
-            <p>
-              Student at <strong>Imam Abdulrahman Bin Faisal University (IAU)</strong>, Eastern Province, Saudi Arabia.
-            </p>
-            <p>
-              Participant in <strong>هاكاثون الصناعة (Industrial Hackathon)</strong> (Advanced Technology Track with the ISE Club). I enjoy building software tools, web platforms, and responsive interfaces with clean code and modern Glassmorphism aesthetics.
-            </p>
+            <h3>{t.about.name}</h3>
+            <p>{t.about.uniText}</p>
+            <p>{t.about.hackathonText}</p>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <a
@@ -29,7 +29,7 @@ export const AboutSkills: React.FC = () => {
                 className="btn-secondary"
                 style={{ padding: '0.6rem 1.2rem', fontSize: '0.88rem' }}
               >
-                <span>GitHub Profile</span>
+                <span>{t.about.githubBtn}</span>
                 <ExternalLink size={14} />
               </a>
               <a
@@ -39,7 +39,7 @@ export const AboutSkills: React.FC = () => {
                 className="btn-secondary"
                 style={{ padding: '0.6rem 1.2rem', fontSize: '0.88rem' }}
               >
-                <span>Linktree</span>
+                <span>{t.about.linktreeBtn}</span>
                 <ExternalLink size={14} />
               </a>
             </div>
@@ -48,12 +48,14 @@ export const AboutSkills: React.FC = () => {
           <div className="about-side-box">
             {/* Real Skills */}
             <div className="mini-glass-card">
-              <h4>🛠️ Technical Skills</h4>
-              <div className="skills-grid" style={{ marginTop: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.75rem' }}>
+                <Cpu size={16} style={{ color: 'var(--accent-cyan)' }} />
+                <h4 style={{ margin: 0 }}>{t.about.skillsTitle}</h4>
+              </div>
+              <div className="skills-grid">
                 {skillsData.map((s, idx) => (
                   <span key={idx} className="skill-pill">
-                    <span>{s.icon}</span>
-                    <span>{s.name}</span>
+                    <span>{isAr && s.nameAr ? s.nameAr : s.name}</span>
                   </span>
                 ))}
               </div>
@@ -61,9 +63,12 @@ export const AboutSkills: React.FC = () => {
 
             {/* Favorite Games */}
             <div className="mini-glass-card" style={{ marginTop: '1.25rem' }}>
-              <h4>🎮 Favorite Games</h4>
-              <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', marginTop: '0.4rem' }}>
-                Ark: Survival Evolved • Kingdom Come: Deliverance II • Elden Ring
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.4rem' }}>
+                <Gamepad2 size={16} style={{ color: 'var(--accent-pink)' }} />
+                <h4 style={{ margin: 0 }}>{t.about.gamesTitle}</h4>
+              </div>
+              <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)' }}>
+                {t.about.gamesList}
               </p>
             </div>
           </div>

@@ -1,6 +1,7 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import type { Project } from '../types/portfolio';
-import { X, CheckCircle, ExternalLink, Sparkles, Layers } from 'lucide-react';
+import { X, ExternalLink, Cpu, CheckCircle } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -8,6 +9,9 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const { language, t } = useLanguage();
+  const isAr = language === 'ar';
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -17,59 +21,70 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [project, onClose]);
 
   if (!project) return null;
 
+  const title = isAr && project.titleAr ? project.titleAr : project.title;
+  const summary = isAr && project.summaryAr ? project.summaryAr : project.summary;
+  const highlights = isAr && project.highlightsAr ? project.highlightsAr : project.highlights;
+
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-card glass-panel" onClick={(e) => e.stopPropagation()}>
-        {/* Close Button */}
-        <button type="button" className="modal-close-btn" onClick={onClose} aria-label="Close modal">
-          <X size={20} />
-        </button>
-
-        {/* Modal Header Preview */}
-        <div className="modal-media-wrap">
-          {project.isGooglePlay ? (
-            <div className={`app-icon-preview ${project.id === 'sunan' ? 'sunan-preview' : 'musbihati-preview'}`} style={{ height: '180px', marginBottom: 0 }}>
-              <div className="app-icon-wrap" style={{ width: '90px', height: '90px' }}>
-                <img src={project.appIcon} alt={project.title} className="app-icon-img" />
-              </div>
-            </div>
-          ) : (
-            <img src={project.image} alt={project.title} className="modal-media-img" />
-          )}
-          <div className="modal-media-overlay"></div>
+        {/* Header */}
+        <div className="modal-header">
+          <div className="modal-title-wrap">
+            <span className="section-pill" style={{ marginBottom: 0 }}>
+              {project.category.toUpperCase()}
+            </span>
+            <h2 className="modal-title">{title}</h2>
+          </div>
+          <button
+            type="button"
+            className="modal-close-btn"
+            onClick={onClose}
+            aria-label="Close modal"
+          >
+            <X size={18} />
+          </button>
         </div>
 
-        {/* Modal Body */}
+        {/* Modal Scroll Body */}
         <div className="modal-body">
-          <div className="project-tags" style={{ marginBottom: '0.6rem' }}>
-            {project.tags.map((t, idx) => (
-              <span key={idx} className={`tag ${t.color || ''}`}>
-                {t.text}
-              </span>
-            ))}
-          </div>
+          {/* Banner image or App Icon */}
+          {project.image ? (
+            <div className="modal-banner-wrap">
+              <img src={project.image} alt={title} className="modal-banner-img" />
+            </div>
+          ) : project.appIcon ? (
+            <div className="modal-icon-banner">
+              <img src={project.appIcon} alt={title} className="modal-app-icon" />
+              <div>
+                <h3 style={{ fontSize: '1.25rem', color: '#f8fafc' }}>{title}</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  {isAr && project.badgeAr ? project.badgeAr : project.badge}
+                </p>
+              </div>
+            </div>
+          ) : null}
 
-          <h2 className="modal-title">{project.title}</h2>
-          <p className="modal-desc">{project.summary}</p>
+          {/* Summary */}
+          <p className="modal-summary-text">{summary}</p>
 
           {/* Highlights */}
-          {project.highlights && project.highlights.length > 0 && (
+          {highlights && highlights.length > 0 && (
             <div className="modal-section">
               <h4 className="modal-section-title">
-                <Sparkles size={16} style={{ color: 'var(--accent-cyan)' }} />
-                <span>Technical Highlights & Features</span>
+                <CheckCircle size={16} style={{ color: 'var(--accent-cyan)' }} />
+                <span>{t.projects.keyHighlights}</span>
               </h4>
               <ul className="modal-highlights-list">
-                {project.highlights.map((h, idx) => (
-                  <li key={idx}>
-                    <CheckCircle size={15} style={{ color: '#10b981', flexShrink: 0, marginTop: '2px' }} />
+                {highlights.map((h, i) => (
+                  <li key={i} className="modal-highlight-item">
                     <span>{h}</span>
                   </li>
                 ))}
@@ -78,38 +93,43 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           )}
 
           {/* Tech Stack */}
-          {project.techStack && project.techStack.length > 0 && (
+          {project.techStack && (
             <div className="modal-section">
               <h4 className="modal-section-title">
-                <Layers size={16} style={{ color: 'var(--accent-indigo)' }} />
-                <span>Technologies & Architecture</span>
+                <Cpu size={16} style={{ color: 'var(--accent-pink)' }} />
+                <span>{t.projects.techStack}</span>
               </h4>
               <div className="modal-tech-pills">
-                {project.techStack.map((tech, idx) => (
-                  <span key={idx} className="skill-pill" style={{ fontSize: '0.8rem', padding: '0.35rem 0.75rem' }}>
+                {project.techStack.map((tech, i) => (
+                  <span key={i} className="tech-pill">
                     {tech}
                   </span>
                 ))}
               </div>
             </div>
           )}
+        </div>
 
-          {/* Action Links */}
-          <div className="modal-actions">
-            {project.links.map((link, idx) => (
+        {/* Modal Footer Actions */}
+        <div className="modal-footer">
+          <div className="modal-links-row">
+            {project.links.map((link, i) => (
               <a
-                key={idx}
+                key={i}
                 href={link.url}
-                target={link.url.startsWith('http') ? '_blank' : undefined}
-                rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`btn-card ${link.type}`}
-                style={{ padding: '0.8rem 1.5rem', fontSize: '0.95rem' }}
+                style={{ padding: '0.65rem 1.25rem' }}
               >
-                <span>{link.label}</span>
-                <ExternalLink size={15} />
+                <span>{isAr && link.labelAr ? link.labelAr : link.label}</span>
+                <ExternalLink size={14} />
               </a>
             ))}
           </div>
+          <button type="button" className="btn-secondary" onClick={onClose} style={{ fontSize: '0.85rem' }}>
+            {t.projects.closeModal}
+          </button>
         </div>
       </div>
     </div>

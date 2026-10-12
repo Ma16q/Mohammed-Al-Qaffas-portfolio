@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Terminal, X, Sparkles, Send } from "lucide-react";
+import { Terminal, X, ShieldCheck, Send, CheckCircle, Code2, Smartphone, User, HelpCircle, RefreshCw, Car } from "lucide-react";
 import { projectsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 interface DevTerminalProps {
   isOpen: boolean;
@@ -13,35 +14,32 @@ interface CommandLog {
   output: React.ReactNode;
 }
 
-const INITIAL_BANNER: CommandLog = {
-  command: 'welcome',
-  output: (
-    <div style={{ lineHeight: 1.6 }}>
-      <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
-        🚀 Mohamed Ahmed (Ma16q) Developer Terminal & AI [v2.4.0]
-      </p>
-      <p style={{ color: 'var(--text-muted)' }}>
-        اكتب <span style={{ color: '#f59e0b', fontWeight: 'bold' }}>help</span> أو <span style={{ color: '#f59e0b', fontWeight: 'bold' }}>مساعدة</span> لعرض الأوامر، أو انقر على الأسئلة السريعة بالأسفل!
-      </p>
-    </div>
-  )
-};
-
-const QUICK_CHIPS = [
-  { label: '💼 المشاريع (projects)', cmd: 'projects' },
-  { label: '🛠️ المهارات (skills)', cmd: 'skills' },
-  { label: '📱 تطبيقات Google Play', cmd: 'play' },
-  { label: '👤 من أنا؟ (bio)', cmd: 'bio' },
-  { label: '🤖 خبرتي الأكاديمية والعملية؟', cmd: 'ما هي خبرتك وماذا تدرس؟' },
-  { label: '🚗 مميزات سيارة 3D', cmd: 'car' },
-  { label: '📞 تواصل معي (contact)', cmd: 'contact' },
-  { label: '🌓 تبديل الثيم', cmd: 'theme toggle' },
-  { label: '🧹 مسح (clear)', cmd: 'clear' },
-];
+// Security Detection RegEx Patterns
+const SQLI_REGEX = /('|"|;|--|\/\*|\*\/)\s*(or|and|union|select|insert|drop|delete|update|truncate|xp_|exec|cast|schema)/i;
+const SQLI_KEYWORDS = /(or\s+1\s*=\s*1|union\s+select|drop\s+table|delete\s+from|insert\s+into)/i;
+const PROMPT_INJ_REGEX = /(ignore\s+(all\s+)?(previous|prior)\s+instructions|system\s+prompt|you\s+are\s+now\s+dan|developer\s+mode|jailbreak|bypass\s+safety|forget\s+instructions)/i;
+const SCRIPT_INJ_REGEX = /(<script|javascript:|eval\(|document\.cookie)/i;
 
 export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onToggleTheme }) => {
   const [inputVal, setInputVal] = useState('');
-  const [history, setHistory] = useState<CommandLog[]>([INITIAL_BANNER]);
+  const { language, t } = useLanguage();
+  const isAr = language === 'ar';
+
+  const initialBanner: CommandLog = {
+    command: 'welcome',
+    output: (
+      <div style={{ lineHeight: 1.6 }}>
+        <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
+          {t.terminal.welcomeMsg}
+        </p>
+        <p style={{ color: 'var(--text-muted)' }}>
+          {t.terminal.typeHelp}
+        </p>
+      </div>
+    )
+  };
+
+  const [history, setHistory] = useState<CommandLog[]>([initialBanner]);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -56,163 +54,244 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history]);
 
+  // Sync welcome banner on language switch if history only contains banner
+  useEffect(() => {
+    setHistory((prev) => {
+      if (prev.length === 1 && prev[0].command === 'welcome') {
+        return [initialBanner];
+      }
+      return prev;
+    });
+  }, [language]);
+
   if (!isOpen) return null;
+
+  const quickChips = [
+    { label: t.terminal.chips.projects, cmd: 'projects', icon: <Code2 size={13} /> },
+    { label: t.terminal.chips.skills, cmd: 'skills', icon: <Terminal size={13} /> },
+    { label: t.terminal.chips.apps, cmd: 'play', icon: <Smartphone size={13} /> },
+    { label: t.terminal.chips.bio, cmd: 'bio', icon: <User size={13} /> },
+    { label: t.terminal.chips.aiAcademic, cmd: isAr ? 'ما هي دراستك وخبرتك الأكاديمية؟' : 'What is your academic & dev experience?', icon: <HelpCircle size={13} /> },
+    { label: t.terminal.chips.car3d, cmd: 'car', icon: <Car size={13} /> },
+    { label: t.terminal.chips.contact, cmd: 'contact', icon: <Send size={13} /> },
+    { label: t.terminal.chips.theme, cmd: 'theme toggle', icon: <RefreshCw size={13} /> },
+    { label: t.terminal.chips.clear, cmd: 'clear', icon: <RefreshCw size={13} /> },
+  ];
 
   const processInput = (rawCmd: string) => {
     const trimmed = rawCmd.trim();
     if (!trimmed) return;
 
-    const lower = trimmed.toLowerCase();
-    let output: React.ReactNode;
-
-    // 1. CLEAR command (Keeps the welcome header intact as requested)
-    if (lower === 'clear' || lower === 'مسح' || lower === 'تنظيف' || lower === 'cls') {
-      setHistory([INITIAL_BANNER]);
+    // --- SECURITY FIREWALL LAYER ---
+    // 1. SQL Injection Detection
+    if (SQLI_REGEX.test(trimmed) || SQLI_KEYWORDS.test(trimmed)) {
+      const output = (
+        <div className="terminal-sec-alert">
+          <p style={{ color: '#ef4444', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <ShieldCheck size={16} />
+            <span>{isAr ? '[تدقيق الأمان: حماية SQL]' : '[SECURITY AUDIT: SQL DEFENSE]'}</span>
+          </p>
+          <p style={{ color: '#fca5a5', marginTop: '0.2rem', fontSize: '0.86rem' }}>
+            {t.terminal.secSqLi}
+          </p>
+        </div>
+      );
+      setHistory((prev) => [...prev, { command: trimmed, output }]);
       setInputVal('');
       return;
     }
 
-    // 2. HELP / مساعدة
+    // 2. Prompt Injection & Script Injection Detection
+    if (PROMPT_INJ_REGEX.test(trimmed) || SCRIPT_INJ_REGEX.test(trimmed)) {
+      const output = (
+        <div className="terminal-sec-alert">
+          <p style={{ color: '#f59e0b', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <ShieldCheck size={16} />
+            <span>{isAr ? '[تدقيق الأمان: حماية الأوامر]' : '[SECURITY AUDIT: INJECTION BLOCKED]'}</span>
+          </p>
+          <p style={{ color: '#fde68a', marginTop: '0.2rem', fontSize: '0.86rem' }}>
+            {t.terminal.secPromptInj}
+          </p>
+        </div>
+      );
+      setHistory((prev) => [...prev, { command: trimmed, output }]);
+      setInputVal('');
+      return;
+    }
+
+    const lower = trimmed.toLowerCase();
+    let output: React.ReactNode;
+
+    // --- COMMAND HANDLERS ---
+    // Clear command: restores initial welcome banner
+    if (lower === 'clear' || lower === 'مسح' || lower === 'تنظيف' || lower === 'cls') {
+      setHistory([initialBanner]);
+      setInputVal('');
+      return;
+    }
+
+    // Help
     if (lower === 'help' || lower === 'مساعدة' || lower === 'أوامر' || lower === 'اوامر') {
       output = (
         <div style={{ lineHeight: 1.7 }}>
-          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>📜 الأوامر المتاحة (Available Commands):</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.4rem', marginTop: '0.4rem' }}>
-            <p>• <span style={{ color: '#38bdf8' }}>projects / مشاريع</span> : استعراض كافة المشاريع</p>
-            <p>• <span style={{ color: '#38bdf8' }}>skills / مهارات</span> : التقنيات ولغات البرمجة</p>
-            <p>• <span style={{ color: '#38bdf8' }}>play / تطبيقات</span> : تطبيقات متجر Google Play</p>
-            <p>• <span style={{ color: '#38bdf8' }}>bio / من انا</span> : نبذة عن محمد وجامعة IAU</p>
-            <p>• <span style={{ color: '#38bdf8' }}>contact / تواصل</span> : طرق التواصل والروابط</p>
-            <p>• <span style={{ color: '#38bdf8' }}>car / سيارة</span> : تفاصيل تجربة سيارة 3D WebGL</p>
-            <p>• <span style={{ color: '#38bdf8' }}>theme light / dark</span> : تبديل المظهر النهاري/الليلي</p>
-            <p>• <span style={{ color: '#38bdf8' }}>clear / مسح</span> : إعادة ضبط الطرفية</p>
-            <p>• <span style={{ color: '#38bdf8' }}>exit / خروج</span> : إغلاق الطرفية</p>
-          </div>
-          <p style={{ color: '#f59e0b', marginTop: '0.5rem', fontSize: '0.85rem' }}>
-            💡 ملاحظة: يمكنك كتابة أي سؤال بالعربي وسيجيبك المساعد الذكي المدمج مباشرة!
+          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
+            {isAr ? 'قائمة الأوامر الهندسية المتاحة:' : 'Available Engineering Commands:'}
           </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.4rem', marginTop: '0.4rem' }}>
+            <p>• <span style={{ color: '#38bdf8' }}>projects / مشاريع</span> : {isAr ? 'عرض كافة المشاريع' : 'List all projects'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>skills / مهارات</span> : {isAr ? 'عرض القدرات التقنية' : 'Display technical stack'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>play / تطبيقات</span> : {isAr ? 'تطبيقات متجر Google Play' : 'Google Play published apps'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>bio / من انا</span> : {isAr ? 'نبذة عن المطور والجامعة' : 'Developer background & IAU'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>contact / تواصل</span> : {isAr ? 'قنوات التواصل المباشر' : 'Official contact channels'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>car / سيارة</span> : {isAr ? 'تفاصيل محاكاة سيارة 3D' : '3D WebGL car telemetry'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>theme light / dark</span> : {isAr ? 'تبديل المظهر' : 'Toggle dark/light theme'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>clear / مسح</span> : {isAr ? 'إعادة ضبط الشاشة' : 'Reset terminal log'}</p>
+            <p>• <span style={{ color: '#38bdf8' }}>exit / خروج</span> : {isAr ? 'إغلاق الطرفية' : 'Close terminal window'}</p>
+          </div>
         </div>
       );
     }
-    // 3. PROJECTS / مشاريع
+    // Projects
     else if (lower === 'projects' || lower === 'مشاريع' || lower === 'المشاريع') {
       output = (
         <div>
-          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>⚡ دليل المشاريع (Projects Directory):</p>
-          {projectsData.map((p) => (
-            <div key={p.id} style={{ margin: '0.4rem 0', paddingLeft: '0.5rem', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
-              <p style={{ color: '#f8fafc', fontWeight: 600 }}>• {p.title} <span style={{ fontSize: '0.78rem', color: '#38bdf8' }}>[{p.category}]</span></p>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{p.summary.slice(0, 85)}...</p>
-            </div>
-          ))}
+          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
+            {isAr ? 'دليل المشاريع البرمجية:' : 'Projects Directory:'}
+          </p>
+          {projectsData.map((p) => {
+            const pTitle = isAr && p.titleAr ? p.titleAr : p.title;
+            const pSumm = isAr && p.summaryAr ? p.summaryAr : p.summary;
+            return (
+              <div key={p.id} style={{ margin: '0.4rem 0', paddingLeft: '0.5rem', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
+                <p style={{ color: '#f8fafc', fontWeight: 600 }}>• {pTitle} <span style={{ fontSize: '0.78rem', color: '#38bdf8' }}>[{p.category}]</span></p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{pSumm.slice(0, 90)}...</p>
+              </div>
+            );
+          })}
         </div>
       );
     }
-    // 4. SKILLS / مهارات
+    // Skills
     else if (lower === 'skills' || lower === 'مهارات' || lower === 'المهارات') {
       output = (
         <div>
-          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>🛠️ المهارات التقنية وهندسة البرمجيات:</p>
-          <p>• <span style={{ color: '#38bdf8' }}>لغات البرمجة:</span> Python, Java, TypeScript, JavaScript, HTML5/CSS3</p>
-          <p>• <span style={{ color: '#38bdf8' }}>تطوير الجوال:</span> Android Studio (Native Java), Flutter (Dart)</p>
-          <p>• <span style={{ color: '#38bdf8' }}>ثلاثي الأبعاد والويب:</span> Three.js, WebGL, React 19, Blender 3D, GLTF/DRACO</p>
-          <p>• <span style={{ color: '#38bdf8' }}>الأدوات السحابية:</span> Git & GitHub, Google Cloud Platform (GCP), VS Code</p>
+          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
+            {isAr ? 'المهارات الهندسية وحزم التطوير:' : 'Technical Engineering Stack:'}
+          </p>
+          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'اللغات:' : 'Languages:'}</span> Python, Java SDK, TypeScript, JavaScript (ES6+), HTML5/CSS3</p>
+          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'تطبيقات الجوال:' : 'Mobile Development:'}</span> Android Studio (Native Java), Flutter & Dart</p>
+          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'الويب وثلاثي الأبعاد:' : '3D & WebGL:'}</span> React 19, Three.js, WebGL Shaders, Blender 3D, GLTF/DRACO</p>
+          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'الأدوات والأنظمة:' : 'DevOps & Tools:'}</span> Git & GitHub, Google Cloud Platform (GCP), VS Code</p>
         </div>
       );
     }
-    // 5. PLAY / تطبيقات Google Play
+    // Play
     else if (lower === 'play' || lower === 'تطبيقات' || lower === 'تطبيقاتي' || lower === 'قوقل بلاي' || lower === 'apps') {
       output = (
         <div>
-          <p style={{ color: '#10b981', fontWeight: 'bold' }}>📱 تطبيقات منشورة رسمياً على Google Play:</p>
-          <p style={{ marginTop: '0.3rem' }}>
-            1. <strong style={{ color: '#f8fafc' }}>مستحبات السنن</strong>: تطبيق أندرويد متكامل يضم أدعية وزيارات وإحصائيات عبادية مع واجهة أنيقة.
+          <p style={{ color: '#10b981', fontWeight: 'bold' }}>
+            {isAr ? 'التطبيقات المنشورة على متجر Google Play:' : 'Published Google Play Applications:'}
           </p>
           <p style={{ marginTop: '0.3rem' }}>
-            2. <strong style={{ color: '#f8fafc' }}>مسبحتي (Digital Tasbih)</strong>: محاكي خاتم تسبيح واقعي مع اهتزاز لمسي وحفظ تلقائي للأذكار.
+            1. <strong style={{ color: '#f8fafc' }}>{isAr ? 'مستحبات السنن' : 'Mustahabbat Al-Sunan'}</strong>: {isAr ? 'تطبيق شامل للأذكار والسنن اليومية بأداء فائق وخيارات قراءة مخصصة.' : 'Islamic Sunnah habits & manners tracker with lightweight native performance.'}
           </p>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.4rem', fontSize: '0.85rem' }}>
-            🔗 متوفرة مجاناً للتحميل برابط مباشر في قسم المشاريع.
+          <p style={{ marginTop: '0.3rem' }}>
+            2. <strong style={{ color: '#f8fafc' }}>{isAr ? 'مسبحتي (Digital Tasbih)' : 'Musbihati (Digital Tasbih)'}</strong>: {isAr ? 'محاكاة واقعية لخاتم التسبيح الذكي مع اهتزاز لمسي وحفظ تلقائي.' : 'Smart digital tasbih simulated as a portable tally ring with haptic feedback.'}
           </p>
         </div>
       );
     }
-    // 6. BIO / من أنا
+    // Bio
     else if (lower === 'bio' || lower === 'من انا' || lower === 'من_انا' || lower === 'عني' || lower === 'about') {
       output = (
         <div style={{ lineHeight: 1.6 }}>
-          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>👤 نبذة عن المطور محمد أحمد (Ma16q):</p>
-          <p>🎓 طالب في <strong>جامعة الإمام عبد الرحمن بن فيصل (IAU)</strong> - المنطقة الشرقية، المملكة العربية السعودية.</p>
-          <p>🏆 مشارك في <strong>هاكاثون الصناعة (Industrial Hackathon)</strong> بمسار التقنيات المتقدمة مع نادي الهندسة الصناعية (ISE).</p>
-          <p>💡 متخصص في بناء التطبيقات المتقدمة، وبرمجيات الويب التفاعلية ثلاثية الأبعاد (3D WebGL)، وتصميم الواجهات الحديثة Glassmorphism.</p>
+          <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
+            {isAr ? 'نبذة عن المطور محمد أحمد (Ma16q):' : 'About Mohamed Ahmed (Ma16q):'}
+          </p>
+          <p>{isAr ? 'طالب علوم حاسب في جامعة الإمام عبد الرحمن بن فيصل (IAU) بالمنطقة الشرقية.' : 'Computer Science student at Imam Abdulrahman Bin Faisal University (IAU), Eastern Province, Saudi Arabia.'}</p>
+          <p>{isAr ? 'مشارك في هاكاثون الصناعة (مسار التقنيات المتقدمة مع نادي الهندسة الصناعية).' : 'Participant in Industrial Hackathon (Advanced Technology Track with the ISE Club).'}</p>
+          <p>{isAr ? 'متخصص في تطوير التطبيقات الأصيلة، وبرمجيات الويب التفاعلية 3D WebGL، وتصميم الواجهات الزجاجية المتناسقة.' : 'Specialized in native mobile development, interactive 3D WebGL experiences, and modern Glassmorphism interfaces.'}</p>
         </div>
       );
     }
-    // 7. CAR / سيارة 3D
+    // Car 3D
     else if (lower === 'car' || lower === 'سيارة' || lower === '3d') {
       output = (
         <div>
-          <p style={{ color: '#38bdf8', fontWeight: 'bold' }}>🚗 استعراض سيارة 3D التفاعلي (WebGL Showcase):</p>
-          <p>• تم بناؤها باستخدام مكتبة <strong>Three.js</strong> وتقنيات الإضاءة الفيزيائية PBR.</p>
-          <p>• تتيح تغيير لون الطلاء، تشغيل المصابيح الأمامية/الخلفية، دوران الكاميرا السينمائي، وأصوات تشغيل المحرك الحقيقي.</p>
-          <p>• تفضل بتجربتها في قسم "3D Car Experience" داخل الموقع!</p>
+          <p style={{ color: '#38bdf8', fontWeight: 'bold' }}>
+            {isAr ? 'محاكاة سيارة 3D التفاعلية (Three.js WebGL):' : 'Interactive 3D WebGL Vehicle Experience:'}
+          </p>
+          <p>• {isAr ? 'مبنية بتقنيات Three.js مع إضاءة فيزيائية واقعية PBR ومحرك تدوير مداري 360 درجة.' : 'Built with Three.js featuring real-time PBR shaders, dynamic orbital camera, and engine audio synthesis.'}</p>
+          <p>• {isAr ? 'تحكم كامل بألوان الطلاء، المصابيح، وفحص التيليماتري الهيكلي.' : 'Full controls for paint customization, headlights, and structural wireframe telemetry.'}</p>
         </div>
       );
     }
-    // 8. CONTACT / تواصل
+    // Contact
     else if (lower === 'contact' || lower === 'تواصل' || lower === 'اتصال') {
       output = (
         <div>
-          <p style={{ color: '#38bdf8', fontWeight: 'bold' }}>📬 قنوات التواصل الرسمية:</p>
+          <p style={{ color: '#38bdf8', fontWeight: 'bold' }}>
+            {isAr ? 'قنوات التواصل الرسمية:' : 'Official Contact Channels:'}
+          </p>
           <p>• GitHub: <a href="https://github.com/Ma16q" target="_blank" rel="noreferrer" style={{ color: '#38bdf8', textDecoration: 'underline' }}>github.com/Ma16q</a></p>
-          <p>• Google Play: <a href="https://play.google.com/store/apps/developer?id=Ma16q" target="_blank" rel="noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>Ma16q Developer Page</a></p>
-          <p>• LinkedIn: متوفر في شريط التواصل السريع أسفل الموقع.</p>
+          <p>• Google Play: <a href="https://play.google.com/store/apps/developer?id=Ma16q" target="_blank" rel="noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>Ma16q Developer Profile</a></p>
+          <p>• Email: abcb1240009m@gmail.com</p>
         </div>
       );
     }
-    // 9. THEME CONTROLS
+    // Theme controls
     else if (lower === 'theme dark' || lower === 'dark' || lower === 'مظلم') {
       if (onToggleTheme) onToggleTheme('dark');
-      output = <p style={{ color: '#38bdf8' }}>تم تفعيل الوضع الليلي 🌙 (Dark Mode)</p>;
+      output = <p style={{ color: '#38bdf8' }}>{isAr ? 'تم تفعيل الوضع الليلي' : 'Dark Mode Activated'}</p>;
     }
     else if (lower === 'theme light' || lower === 'light' || lower === 'مضيء' || lower === 'نهاري') {
       if (onToggleTheme) onToggleTheme('light');
-      output = <p style={{ color: '#f59e0b' }}>تم تفعيل الوضع النهاري ☀️ (Light Mode)</p>;
+      output = <p style={{ color: '#f59e0b' }}>{isAr ? 'تم تفعيل الوضع النهاري' : 'Light Mode Activated'}</p>;
     }
     else if (lower === 'theme toggle' || lower === 'ثيم') {
       if (onToggleTheme) onToggleTheme();
-      output = <p style={{ color: '#38bdf8' }}>تم تبديل مظهر الموقع 🌓</p>;
+      output = <p style={{ color: '#38bdf8' }}>{isAr ? 'تم تبديل المظهر بنجاح' : 'Theme toggled successfully'}</p>;
     }
-    // 10. EXIT
+    // Exit
     else if (lower === 'exit' || lower === 'خروج' || lower === 'اغلاق' || lower === 'إغلاق') {
       onClose();
       return;
     }
-    // 11. AI ASSISTANT SMART RESPONDER (Matches questions or natural queries in Arabic/English)
+    // AI Assistant Natural Language Responder
     else {
       let aiResponse: string;
 
-      if (lower.includes('خبر') || lower.includes('تدرس') || lower.includes('جامع') || lower.includes('دراسة')) {
-        aiResponse = 'أنا محمد أحمد، طالب في جامعة الإمام عبد الرحمن بن فيصل (IAU). أجمع بين الدراسة الأكاديمية والشغف العملي، حيث أطور تطبيقات Android نيتف، ومواقع ويب حديثة بتقنيات React وThree.js، وشاركت في هاكاثون الصناعة لمسار التقنيات المتقدمة.';
-      } else if (lower.includes('طلب') || lower.includes('مشروع') || lower.includes('شغل') || lower.includes('عمل') || lower.includes('خدم')) {
-        aiResponse = 'يسعدني العمل على مشاريع تطوير تطبيقات الجوال (Android/Flutter)، وتطوير مواقع الويب الحديثة التفاعلية والمجسمات ثلاثية الأبعاد. يمكنك التواصل معي عبر حساب GitHub أو البريد الإلكتروني لمناقشة التفاصيل!';
-      } else if (lower.includes('تطبيق') || lower.includes('اندرويد') || lower.includes('android') || lower.includes('play')) {
-        aiResponse = 'قمت بنشر تطبيقين رسميين على متجر Google Play: "مستحبات السنن" لمتابعة الأذكار والسنن اليومية، و"مسبحتي" للمحاكاة الرقمية لخاتم التسبيح. كلاهما حاز على تقييمات إيجابية 5.0 نجوم.';
-      } else if (lower.includes('3d') || lower.includes('ثلاثي') || lower.includes('سيار') || lower.includes('three')) {
-        aiResponse = 'تجربة سيارة الـ 3D تم بناؤها باستخدام مكتبة Three.js مع WebGL، وتم تحسين النموذج عبر ضغط DRACO لضمان سرعة تحميل فائقة مع مؤثرات واقعية وتغيير ألوان الطلاء مباشرة في المتصفح.';
-      } else if (lower.includes('سعر') || lower.includes('تكلف')) {
-        aiResponse = 'تعتمد التكلفة على متطلبات المشروع وحجم الميزات التقنية (ويب عادي، تطبيق جوال، أو واجهة ثلاثية الأبعاد تفاعلية). يمكنك مراسلتي لنحدد النطاق معاً!';
+      if (lower.includes('خبر') || lower.includes('تدرس') || lower.includes('جامع') || lower.includes('دراسة') || lower.includes('study') || lower.includes('experience')) {
+        aiResponse = isAr
+          ? 'محمد أحمد يدرس علوم الحاسب في جامعة الإمام عبد الرحمن بن فيصل (IAU). يمتلك خبرة عملية في تطوير تطبيقات أندرويد نيتف (جافا)، وتطبيقات الويب الحديثة (React 19 + TypeScript)، وبرمجيات ثلاثية الأبعاد (Three.js)، وشارك في هاكاثون الصناعة لمسار التقنيات المتقدمة.'
+          : 'Mohamed Ahmed is a Computer Science student at Imam Abdulrahman Bin Faisal University (IAU). He specializes in native Android engineering (Java), modern React 19 web platforms, and Three.js 3D WebGL experiences, and participated in the Industrial Hackathon advanced tech track.';
+      } else if (lower.includes('طلب') || lower.includes('مشروع') || lower.includes('شغل') || lower.includes('عمل') || lower.includes('خدم') || lower.includes('hire') || lower.includes('project')) {
+        aiResponse = isAr
+          ? 'محمد متاح للتعاون في مشاريع تطوير تطبيقات الجوال (Android/Flutter) وحلول الويب التفاعلية ثلاثية الأبعاد. يمكنك التواصل عبر البريد الإلكتروني أو نموذج المراسلة المباشر في قسم التواصل أسفل الموقع.'
+          : 'Mohamed is open for software collaboration on mobile apps, full-stack web platforms, and interactive 3D WebGL systems. Reach out via email or the direct contact form below.';
+      } else if (lower.includes('تطبيق') || lower.includes('اندرويد') || lower.includes('android') || lower.includes('play') || lower.includes('app')) {
+        aiResponse = isAr
+          ? 'نشر محمد تطبيقين معتمدين على متجر Google Play: "مستحبات السنن" لمتابعة الأذكار، و"مسبحتي" لخاتم التسبيح الرقمي مع اهتزاز فيزيائي، وكلاهما بتقييمات ممتازة.'
+          : 'Mohamed has published two official apps on Google Play: "Mustahabbat Al-Sunan" (Islamic habits tracker) and "Musbihati" (digital tasbih ring simulator with haptics), both highly rated.';
+      } else if (lower.includes('3d') || lower.includes('ثلاثي') || lower.includes('سيار') || lower.includes('three') || lower.includes('car')) {
+        aiResponse = isAr
+          ? 'تجربة سيارة 3D مطورة باستخدام مكتبة Three.js مع WebGL ومحسنة بضغط DRACO. تتيح تدوير الكاميرا 360 درجة، تغيير ألوان الطلاء، ومحاكاة بيانات التيليماتري.'
+          : 'The 3D car experience is built with Three.js and WebGL, optimized with DRACO geometry compression, featuring 360° camera orbit, paint shader customization, and real-time telemetry.';
       } else if (lower.includes('سلام') || lower.includes('مرحبا') || lower.includes('هلا') || lower.includes('hi') || lower.includes('hello')) {
-        aiResponse = 'أهلاً وسهلاً بك! أنا المساعد الذكي لمحمد أحمد. كيف يمكنني مساعدتك اليوم؟ يمكنك استعراض المشاريع أو سؤالي عن أي مهارة أو تجربة.';
+        aiResponse = isAr
+          ? 'أهلاً بك! أنا المساعد الذكي لمحمد أحمد. كيف يمكنني إفادتك اليوم؟ يمكنك استعراض المشاريع أو الاستفسار عن أي مهارة هندسية.'
+          : `Hello and welcome! I am Mohamed Ahmed's AI Assistant. How can I help you today? You can browse projects or ask about his technical engineering stack.`;
       } else {
-        aiResponse = `شكراً لسؤالك! أنا المساعد الذكي الخاص بالموقع. بخصوص "${trimmed}"، يمكنك استعراض مشاريع محمد بكتابة "projects"، أو مهاراته بكتابة "skills"، أو التواصل معه مباشرة عبر الروابط في الموقع.`;
+        aiResponse = isAr
+          ? `بخصوص استفسارك "${trimmed}"، يمكنك استعراض المشاريع بكتابة "projects"، أو المهارات بكتابة "skills"، أو التواصل مباشرة عبر نموذج المراسلة.`
+          : `Regarding "${trimmed}", you can explore projects by typing "projects", inspect technical skills with "skills", or reach out directly through the contact section.`;
       }
 
       output = (
-        <div style={{ lineHeight: 1.6, background: 'rgba(56, 189, 248, 0.08)', padding: '0.6rem 0.85rem', borderRadius: '8px', borderRight: '3px solid var(--accent-cyan)' }}>
+        <div className="terminal-ai-response">
           <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.25rem' }}>
-            <Sparkles size={14} />
-            <span>رد المساعد الذكي (Ma16q AI):</span>
+            <CheckCircle size={14} />
+            <span>{t.terminal.aiTitle}</span>
           </p>
           <p style={{ color: '#f1f5f9' }}>{aiResponse}</p>
         </div>
@@ -244,17 +323,17 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
           </div>
           <div className="terminal-title">
             <Terminal size={14} style={{ color: 'var(--accent-cyan)' }} />
-            <span>bash + AI — mohamed@iau-workstation:~</span>
+            <span>{t.terminal.title}</span>
             <span className="terminal-ai-badge">
-              <Sparkles size={11} /> AI Enabled
+              <ShieldCheck size={12} /> {t.terminal.badge}
             </span>
           </div>
-          <button type="button" className="term-close-icon" onClick={onClose}>
+          <button type="button" className="term-close-icon" onClick={onClose} aria-label="Close terminal">
             <X size={16} />
           </button>
         </div>
 
-        {/* Terminal Body */}
+        {/* Terminal Body with Native Custom Scrollbar */}
         <div className="terminal-body" onClick={() => inputRef.current?.focus()}>
           {history.map((item, idx) => (
             <div key={idx} style={{ marginBottom: '0.85rem' }}>
@@ -263,7 +342,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
                 <span style={{ color: '#818cf8' }}>~</span>
                 <strong style={{ color: '#f8fafc' }}>{item.command}</strong>
               </div>
-              <div style={{ marginTop: '0.25rem', paddingLeft: '1rem', color: '#cbd5e1' }}>
+              <div style={{ marginTop: '0.25rem', paddingLeft: isAr ? '0' : '1rem', paddingRight: isAr ? '1rem' : '0', color: '#cbd5e1' }}>
                 {item.output}
               </div>
             </div>
@@ -279,7 +358,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               className="terminal-input"
-              placeholder="اكتب أمرك أو سؤالك (help, مشاريع, من أنت؟)..."
+              placeholder={t.terminal.inputPlaceholder}
               autoFocus
             />
             <button type="submit" className="terminal-send-btn" title="Send Command">
@@ -292,14 +371,15 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
         {/* Quick Shortcuts / Action Chips */}
         <div className="terminal-chips-bar">
           <div className="terminal-chips-scroll">
-            {QUICK_CHIPS.map((chip, i) => (
+            {quickChips.map((chip, i) => (
               <button
                 key={i}
                 type="button"
                 className="terminal-chip"
                 onClick={() => handleChipClick(chip.cmd)}
               >
-                {chip.label}
+                {chip.icon}
+                <span>{chip.label}</span>
               </button>
             ))}
           </div>

@@ -1,10 +1,12 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Mail, MapPin, Send, CheckCircle2, Copy } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const { t } = useLanguage();
 
   const email = 'abcb1240009m@gmail.com';
 
@@ -28,28 +30,28 @@ export const ContactSection: React.FC = () => {
     <section className="contact-section" id="contact">
       <div className="container">
         <div className="section-header">
-          <span className="section-pill">Reach Out</span>
-          <h2 className="section-title">Let's Connect</h2>
+          <span className="section-pill">{t.contact.sectionPill}</span>
+          <h2 className="section-title">{t.contact.sectionTitle}</h2>
         </div>
 
         <div className="contact-card glass-panel">
           {/* Channels Column */}
           <div className="contact-channels">
-            <h3 style={{ fontSize: '1.45rem', marginBottom: '0.5rem' }}>Get in Touch</h3>
+            <h3 style={{ fontSize: '1.45rem', marginBottom: '0.5rem' }}>{t.contact.sectionTitle}</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-              Feel free to reach out directly via email, GitHub, or through the contact form below.
+              {t.contact.subtitle}
             </p>
 
-            <div className="channel-item" onClick={handleCopyEmail} style={{ cursor: 'pointer' }} title="Click to copy email">
+            <div className="channel-item" onClick={handleCopyEmail} style={{ cursor: 'pointer' }} title={t.contact.emailLabel}>
               <div className="channel-icon">
                 <Mail size={18} />
               </div>
               <div>
-                <span className="channel-label">Email (Click to copy)</span>
+                <span className="channel-label">{t.contact.emailLabel}</span>
                 <strong className="channel-val">{email}</strong>
               </div>
               <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: copied ? '#10b981' : 'var(--text-dim)' }}>
-                {copied ? '✓ Copied!' : <Copy size={15} />}
+                {copied ? t.contact.copied : <Copy size={15} />}
               </span>
             </div>
 
@@ -67,7 +69,7 @@ export const ContactSection: React.FC = () => {
                 </svg>
               </div>
               <div>
-                <span className="channel-label">GitHub</span>
+                <span className="channel-label">{t.contact.githubLabel}</span>
                 <strong className="channel-val">github.com/Ma16q</strong>
               </div>
             </a>
@@ -77,8 +79,8 @@ export const ContactSection: React.FC = () => {
                 <MapPin size={18} />
               </div>
               <div>
-                <span className="channel-label">University / Location</span>
-                <strong className="channel-val">IAU Campus, Dammam, Saudi Arabia</strong>
+                <span className="channel-label">{t.contact.locationLabel}</span>
+                <strong className="channel-val">{t.contact.locationVal}</strong>
               </div>
             </div>
           </div>
@@ -86,12 +88,12 @@ export const ContactSection: React.FC = () => {
           {/* Form Column */}
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="contactName" className="form-label">Your Name</label>
+              <label htmlFor="contactName" className="form-label">{t.contact.formName}</label>
               <input
                 type="text"
                 id="contactName"
                 className="form-control"
-                placeholder="e.g. John Doe"
+                placeholder={t.contact.namePlaceholder}
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -99,12 +101,12 @@ export const ContactSection: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="contactEmail" className="form-label">Email Address</label>
+              <label htmlFor="contactEmail" className="form-label">{t.contact.formEmail}</label>
               <input
                 type="email"
                 id="contactEmail"
                 className="form-control"
-                placeholder="e.g. john@example.com"
+                placeholder={t.contact.emailPlaceholder}
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -112,12 +114,12 @@ export const ContactSection: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="contactMessage" className="form-label">Message</label>
+              <label htmlFor="contactMessage" className="form-label">{t.contact.formMessage}</label>
               <textarea
                 id="contactMessage"
                 className="form-control"
                 rows={4}
-                placeholder="Write your note or project inquiry here..."
+                placeholder={t.contact.messagePlaceholder}
                 required
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -128,11 +130,11 @@ export const ContactSection: React.FC = () => {
               {submitted ? (
                 <>
                   <CheckCircle2 size={18} />
-                  <span>Message Sent Successfully!</span>
+                  <span>{t.contact.sentSuccess}</span>
                 </>
               ) : (
                 <>
-                  <span>Send Message</span>
+                  <span>{t.contact.sendBtn}</span>
                   <Send size={16} />
                 </>
               )}
