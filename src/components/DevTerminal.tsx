@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { Terminal, X, ShieldCheck, Send, CheckCircle, Code2, Smartphone, User, HelpCircle, RefreshCw, Car } from "lucide-react";
 import { projectsData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
@@ -69,6 +70,15 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history]);
 
@@ -80,8 +90,6 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
       return prev;
     });
   }, [language]);
-
-  if (!isOpen) return null;
 
   const quickChips = [
     { label: t.terminal.chips.projects, cmd: 'projects', icon: <Code2 size={13} /> },
@@ -339,79 +347,99 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog">
-      <div className="terminal-card glass-panel" onClick={(e) => e.stopPropagation()}>
-        {/* Terminal Titlebar */}
-        <div className="terminal-titlebar">
-          <div className="terminal-controls">
-            <span className="term-dot dot-red" onClick={onClose} title="Close"></span>
-            <span className="term-dot dot-yellow" title="Minimize"></span>
-            <span className="term-dot dot-green" title="Maximize"></span>
-          </div>
-          <div className="terminal-title">
-            <Terminal size={14} style={{ color: 'var(--accent-cyan)' }} />
-            <span>{t.terminal.title}</span>
-            <span className="terminal-ai-badge">
-              <ShieldCheck size={12} /> {t.terminal.badge}
-            </span>
-          </div>
-          <button type="button" className="term-close-icon" onClick={onClose} aria-label="Close terminal">
-            <X size={16} />
-          </button>
-        </div>
-
-        {/* Terminal Body with Native Custom Scrollbar */}
-        <div className="terminal-body" onClick={() => inputRef.current?.focus()}>
-          {history.map((item, idx) => (
-            <div key={idx} style={{ marginBottom: '0.85rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-cyan)' }}>
-                <span>➜</span>
-                <span style={{ color: '#818cf8' }}>~</span>
-                <strong style={{ color: '#f8fafc' }}>{item.command}</strong>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="modal-backdrop"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <motion.div
+            className="terminal-card glass-panel"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 40, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.94, transition: { duration: 0.16 } }}
+            transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+          >
+            {/* Terminal Titlebar */}
+            <div className="terminal-titlebar">
+              <div className="terminal-controls">
+                <span className="term-dot dot-red" onClick={onClose} title="Close"></span>
+                <span className="term-dot dot-yellow" title="Minimize"></span>
+                <span className="term-dot dot-green" title="Maximize"></span>
               </div>
-              <div style={{ marginTop: '0.25rem', paddingLeft: isAr ? '0' : '1rem', paddingRight: isAr ? '1rem' : '0', color: '#cbd5e1' }}>
-                {item.output}
+              <div className="terminal-title">
+                <Terminal size={14} style={{ color: 'var(--accent-cyan)' }} />
+                <span>{t.terminal.title}</span>
+                <span className="terminal-ai-badge">
+                  <ShieldCheck size={12} /> {t.terminal.badge}
+                </span>
+              </div>
+              <button type="button" className="term-close-icon" onClick={onClose} aria-label="Close terminal">
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Terminal Body with Native Custom Scrollbar */}
+            <div className="terminal-body" onClick={() => inputRef.current?.focus()}>
+              {history.map((item, idx) => (
+                <div key={idx} style={{ marginBottom: '0.85rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-cyan)' }}>
+                    <span>➜</span>
+                    <span style={{ color: '#818cf8' }}>~</span>
+                    <strong style={{ color: '#f8fafc' }}>{item.command}</strong>
+                  </div>
+                  <div style={{ marginTop: '0.25rem', paddingLeft: isAr ? '0' : '1rem', paddingRight: isAr ? '1rem' : '0', color: '#cbd5e1' }}>
+                    {item.output}
+                  </div>
+                </div>
+              ))}
+
+              {/* Prompt line */}
+              <form onSubmit={handleFormSubmit} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
+                <span style={{ color: 'var(--accent-cyan)' }}>➜</span>
+                <span style={{ color: '#818cf8' }}>~</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputVal}
+                  onChange={(e) => setInputVal(e.target.value)}
+                  className="terminal-input"
+                  placeholder={t.terminal.inputPlaceholder}
+                  autoFocus
+                />
+                <button type="submit" className="terminal-send-btn" title="Send Command">
+                  <Send size={14} />
+                </button>
+              </form>
+              <div ref={bottomRef}></div>
+            </div>
+
+            {/* Quick Shortcuts / Action Chips */}
+            <div className="terminal-chips-bar">
+              <div className="terminal-chips-scroll">
+                {quickChips.map((chip, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className="terminal-chip"
+                    onClick={() => handleChipClick(chip.cmd)}
+                  >
+                    {chip.icon}
+                    <span>{chip.label}</span>
+                  </button>
+                ))}
               </div>
             </div>
-          ))}
-
-          {/* Prompt line */}
-          <form onSubmit={handleFormSubmit} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
-            <span style={{ color: 'var(--accent-cyan)' }}>➜</span>
-            <span style={{ color: '#818cf8' }}>~</span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={inputVal}
-              onChange={(e) => setInputVal(e.target.value)}
-              className="terminal-input"
-              placeholder={t.terminal.inputPlaceholder}
-              autoFocus
-            />
-            <button type="submit" className="terminal-send-btn" title="Send Command">
-              <Send size={14} />
-            </button>
-          </form>
-          <div ref={bottomRef}></div>
-        </div>
-
-        {/* Quick Shortcuts / Action Chips */}
-        <div className="terminal-chips-bar">
-          <div className="terminal-chips-scroll">
-            {quickChips.map((chip, i) => (
-              <button
-                key={i}
-                type="button"
-                className="terminal-chip"
-                onClick={() => handleChipClick(chip.cmd)}
-              >
-                {chip.icon}
-                <span>{chip.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

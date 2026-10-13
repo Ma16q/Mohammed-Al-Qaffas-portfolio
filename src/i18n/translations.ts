@@ -107,6 +107,37 @@ export interface Translations {
     copy: string;
     top: string;
   };
+  ui: {
+    themeToLight: string;
+    themeToDark: string;
+    typedPrefix: string;
+    typedPhrases: string[];
+    toastCopied: string;
+    toastCopyFailed: string;
+    toastSendFallback: string;
+    toastInvalid: string;
+    toastActivation: string;
+    errName: string;
+    errEmail: string;
+    errMessage: string;
+    sending: string;
+    sent: string;
+    openMailApp: string;
+    dock: {
+      open: string;
+      close: string;
+      title: string;
+      status: string;
+      message: string;
+      copyEmail: string;
+      rateTitle: string;
+      rateLabels: string[];
+      ratePlaceholder: string;
+      rateSend: string;
+      rateThanks: string;
+      rateFailed: string;
+    };
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -217,6 +248,37 @@ export const translations: Record<Language, Translations> = {
       copy: `© ${new Date().getFullYear()} Mohamed Ahmed (Ma16q) • Imam Abdulrahman Bin Faisal University (IAU). All rights reserved.`,
       top: 'Back to Top',
     },
+    ui: {
+      themeToLight: 'Switch to light mode',
+      themeToDark: 'Switch to dark mode',
+      typedPrefix: 'I build with',
+      typedPhrases: ['React 19 + TypeScript', 'Native Android (Java)', 'Three.js & WebGL', 'Blender 3D', 'Flutter & Dart'],
+      toastCopied: 'Email copied to clipboard',
+      toastCopyFailed: 'Could not copy — please copy the email manually',
+      toastSendFallback: 'Direct sending failed, so your mail app was opened instead',
+      toastInvalid: 'Please check the highlighted fields',
+      toastActivation: 'Message sent! (Note: First time submission requires email activation confirmation).',
+      errName: 'Please enter your name',
+      errEmail: 'Enter a valid email address',
+      errMessage: 'Write a short message first',
+      sending: 'Sending Email...',
+      sent: 'Email Sent Successfully!',
+      openMailApp: 'Open in Mail App Directly',
+      dock: {
+        open: 'Quick contact & feedback',
+        close: 'Close',
+        title: 'Quick Connect',
+        status: 'Available for projects',
+        message: 'Send a message',
+        copyEmail: 'Copy email',
+        rateTitle: 'How was your visit?',
+        rateLabels: ['Needs work', 'Fair', 'Good', 'Great', 'Outstanding'],
+        ratePlaceholder: 'Anything you would improve? (optional)',
+        rateSend: 'Send feedback',
+        rateThanks: 'Thanks — your feedback was sent!',
+        rateFailed: 'Could not send feedback right now. Please try again later.',
+      },
+    },
   },
   ar: {
     nav: {
@@ -324,6 +386,37 @@ export const translations: Record<Language, Translations> = {
     footer: {
       copy: `© ${new Date().getFullYear()} محمد أحمد (Ma16q) • جامعة الإمام عبد الرحمن بن فيصل (IAU). جميع الحقوق محفوظة.`,
       top: 'العودة للأعلى',
+    },
+    ui: {
+      themeToLight: 'التبديل إلى الوضع النهاري',
+      themeToDark: 'التبديل إلى الوضع الليلي',
+      typedPrefix: 'أبني باستخدام',
+      typedPhrases: ['React 19 + TypeScript', 'Native Android (Java)', 'Three.js & WebGL', 'Blender 3D', 'Flutter & Dart'],
+      toastCopied: 'تم نسخ البريد الإلكتروني',
+      toastCopyFailed: 'تعذّر النسخ — انسخ البريد يدوياً من فضلك',
+      toastSendFallback: 'تعذّر الإرسال المباشر، ففتحنا لك تطبيق البريد',
+      toastInvalid: 'راجع الحقول المظللة من فضلك',
+      toastActivation: 'تم إرسال الرسالة! (ملاحظة: إذا كانت هذه أول مرة، يُرجى تفعيل النموذج عبر الرابط المرسل لبريدك الإلكتروني).',
+      errName: 'اكتب اسمك من فضلك',
+      errEmail: 'أدخل بريداً إلكترونياً صحيحاً',
+      errMessage: 'اكتب رسالة قصيرة أولاً',
+      sending: 'جارٍ إرسال البريد...',
+      sent: 'تم إرسال الرسالة إلى البريد بنجاح!',
+      openMailApp: 'فتح تطبيق البريد مباشرة (Mail App)',
+      dock: {
+        open: 'تواصل سريع وتقييم',
+        close: 'إغلاق',
+        title: 'تواصل سريع',
+        status: 'متاح للمشاريع',
+        message: 'أرسل رسالة',
+        copyEmail: 'نسخ البريد',
+        rateTitle: 'كيف كانت زيارتك للموقع؟',
+        rateLabels: ['يحتاج تحسين', 'مقبول', 'جيد', 'رائع', 'مبهر'],
+        ratePlaceholder: 'شيء تتمنى تحسينه؟ (اختياري)',
+        rateSend: 'إرسال التقييم',
+        rateThanks: 'شكراً لك — وصل تقييمك!',
+        rateFailed: 'تعذّر إرسال التقييم الآن، حاول لاحقاً.',
+      },
     },
   },
 };

@@ -21,29 +21,32 @@ export const projectsData: Project[] = [
     category: 'web-3d',
     is3dInteractive: true,
     tags: [
-      { text: 'Python', textAr: 'بايثون', color: 'default' },
-      { text: 'Smart Telemetry', textAr: 'تيليماتري ذكية', color: 'default' },
-      { text: 'Three.js WebGL 3D', textAr: 'ثلاثي الأبعاد WebGL', color: 'cyan' },
-      { text: 'GitHub', textAr: 'جيت هب', color: 'default' }
+      { text: 'Python & Flask', textAr: 'بايثون وفلاسك', color: 'default' },
+      { text: 'Docker Compose', textAr: 'دوكر كومبوز', color: 'default' },
+      { text: 'MongoDB', textAr: 'مونغو دي بي', color: 'default' },
+      { text: 'Leaflet Maps', textAr: 'خرائط Leaflet', color: 'default' },
+      { text: 'Three.js 3D WebGL', textAr: 'تيليماتري 3D تفاعلي', color: 'cyan' }
     ],
-    summary: 'Smart vehicle maintenance platform with real-time 3D interactive car telemetry to track service records, predict repair schedules, and monitor live vehicle health.',
-    summaryAr: 'منصة ذكية لصيانة المركبات مع محاكاة ثلاثية الأبعاد تفاعلية للسيارة وتتبع سجلات الخدمة وتنبؤ مواعيد الإصلاح ومراقبة صحة المحرك والإطارات.',
+    summary: 'Software Engineering (SWE) Course Project — Smart vehicle maintenance platform engineered with Python/Flask, MongoDB, and Docker Compose. Features predictive maintenance algorithms (oil & service cycles), an interactive workshop locator via Leaflet.js & OpenStreetMap, and a real-time 3D telemetry digital twin.',
+    summaryAr: 'مشروع مادة هندسة البرمجيات (SWE) — منصة ذكية لصيانة وتتبع سجلات المركبات مبنية بـ Python و Flask و Docker و MongoDB. تتضمن خوارزميات ذكية للتنبؤ بمواعيد الصيانة الدورية، وخريطة تفاعلية لتحديد ورش الإصلاح القريبة عبر Leaflet.js و OpenStreetMap، مع محاكاة تيليماتري ثلاثية الأبعاد تفاعلية تتجاوب مع السكرول.',
     image: '/assets/images/project_motrilog_3d.jpg',
     links: [
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/MotriLog', type: 'launch' }
     ],
-    techStack: ['Python', 'Three.js', 'WebGL', 'GLTF/DRACO', 'CSS Glassmorphism', 'Telemetry Analytics'],
+    techStack: ['Python 3.9+', 'Flask', 'MongoDB', 'Docker & Compose', 'Leaflet.js', 'OpenStreetMap', 'Three.js WebGL', 'Telemetry Analytics'],
     highlights: [
-      'Interactive 360° car orbit drag & real-time WebGL render loop',
-      'Diagnostic wireframe telemetry inspection mode for engine and chassis',
-      'Smart service prediction algorithm estimating oil and tire wear cycles',
-      'Dynamic cyber neon paint customization with physical material shaders'
+      'Comprehensive vehicle maintenance log history & scheduled service tracking',
+      'Predictive service algorithm estimating oil life, brake wear, and inspection intervals',
+      'Interactive nearby workshop locator utilizing Leaflet.js and OpenStreetMap without paid API dependencies',
+      'Synchronized multi-container deployment architecture via Docker Compose & MongoDB',
+      'Interactive lightweight 3D vehicle telemetry digital twin with scroll-driven diagnostic states'
     ],
     highlightsAr: [
-      'محاكاة مدارية 360 درجة للسيارة في بيئة WebGL واقعية وفائقة السلاسة',
-      'وضع فحص التيليماتري الهيكلي والشعاعي للمحرك ونظام التعليق',
-      'خوارزمية ذكية لتقدير دورات الصيانة الدورية وتآكل الإطارات والزيوت',
-      'تخصيص ألوان الطلاء مباشرة مع معالجة الإضاءة الفيزيائية PBR'
+      'سجل شامل لتوثيق وتتبع عمليات الصيانة الدورية والفحص الفني للمركبة',
+      'خوارزمية ذكية للتنبؤ باحتياجات ومواعيد الصيانة الدورية (تغيير الزيوت، استهلاك الفرامل، والفحص القادم)',
+      'خريطة تفاعلية لتحديد مواقع ورش ومراكز الصيانة القريبة باستخدام Leaflet.js و OpenStreetMap',
+      'معمارية حاويات معيارية متكاملة عبر Docker Compose وقاعدة بيانات MongoDB',
+      'توأم رقمي ثلاثي الأبعاد تفاعلي للتيليماتري يتغير بسلاسة مع التمرير (السكرول)'
     ]
   },
   {
@@ -53,32 +56,37 @@ export const projectsData: Project[] = [
     category: 'web-3d',
     tags: [
       { text: 'E-Commerce', textAr: 'تجارة إلكترونية', color: 'pink' },
-      { text: 'Production Store', textAr: 'متجر نشط', color: 'pink' },
-      { text: 'Gaming', textAr: 'ألعاب رقمية', color: 'default' }
+      { text: 'PHP & MySQL', textAr: 'PHP وقواعد MySQL', color: 'default' },
+      { text: '2FA Security', textAr: 'أمان ومصادقة 2FA', color: 'pink' },
+      { text: 'Resend API', textAr: 'خدمة البريد Resend', color: 'default' }
     ],
-    summary: 'Live online gaming storefront and digital products hub for gaming enthusiasts with instant checkout and gaming deals.',
-    summaryAr: 'متجر إلكتروني نشط لمنتجات وبطاقات الألعاب الرقمية مع واجهة مستخدم إلكترونية للشراء الفوري.',
+    summary: 'Production digital game keys e-commerce storefront (ghos.shop) featuring multi-mode authentication with 2FA, dual-email account security verification, timed 6-digit password resets, and session-persistent carts.',
+    summaryAr: 'متجر إلكتروني حي ومتكامل لبطاقات ومفاتيح الألعاب الرقمية (ghos.shop) يتميز بنظام مصادقة ثنائية (2FA)، حماية الحسابات بالتحقق المزدوج من البريد، ورموز استعادة مؤقتة، وسلة مشتريات ذكية تنقل الجلسات تلقائياً.',
     image: '/assets/images/project_ghos.jpg',
     links: [
       { label: 'Live Store (ghos.shop)', labelAr: 'المتجر المباشر (ghos.shop)', url: 'https://ghos.shop', type: 'launch' },
       { label: 'Source Repo', labelAr: 'الكود المصدري', url: 'https://github.com/Ma16q/ghos', type: 'outline' }
     ],
-    techStack: ['E-Commerce Engine', 'JavaScript', 'CSS3', 'Payment Gateways', 'Digital Storefront'],
+    techStack: ['PHP', 'MySQL', 'JavaScript', 'CSS3', 'Resend API', '2FA Engine', 'Apache'],
     highlights: [
-      'Production deployment serving digital gaming titles and gear',
-      'High-conversion cyber-aesthetic storefront with responsive catalog',
-      'Streamlined digital delivery and cart management system'
+      'Production deployment serving digital gaming titles, gift cards, and game keys',
+      'Two-Factor Authentication (2FA) via email and timed 6-digit verification codes for password reset',
+      'Dual-Email security verification requiring confirmation from old and new emails to prevent account hijacking',
+      'Session-persistent shopping cart automatically transferred upon guest-to-user login',
+      'Role-Based Access Control (RBAC) dashboard for customers, merchants, and administrators'
     ],
     highlightsAr: [
-      'نظام متجر إلكتروني منشور في بيئة الإنتاج لخدمة اللاعبين والمنتجات الرقمية',
-      'تصميم متجاوب عالي التحويل بجماليات رقمية حديثة وسريعة الاستجابة',
-      'نظام سلة مشتريات وتوصيل فوري للرموز الرقمية'
+      'نظام متجر إلكتروني منشور في بيئة الإنتاج لخدمة اللاعبين والمنتجات الرقمية ومفاتيح الألعاب',
+      'نظام مصادقة ثنائية 2FA عبر البريد الإلكتروني مع رموز استعادة مؤقتة مكونة من 6 أرقام',
+      'حماية أمنية متقدمة بالتحقق المزدوج من البريدين القديم والجديد عند تعديل الحساب لمنع الاختراق',
+      'سلة مشتريات ذكية تحفظ جلسات الزوار وتدمجها تلقائياً عند تسجيل الدخول',
+      'لوحة تحكم إدارية وتجارية متقدمة بنظام الصلاحيات المتعددة (RBAC) للمستخدمين والتجار والمسؤولين'
     ]
   },
   {
     id: 'sunan',
-    title: 'Mustahabbat Al-Sunan',
-    titleAr: 'مستحبات السنن',
+    title: 'Mustahabbat Wa Sunan',
+    titleAr: 'مستحبات وسنن',
     category: 'mobile',
     isGooglePlay: true,
     appIcon: '/assets/images/icon_sunan.png',
@@ -89,23 +97,23 @@ export const projectsData: Project[] = [
       { text: 'Java SDK', textAr: 'جافا SDK', color: 'green' },
       { text: 'Google Play', textAr: 'قوقل بلاي', color: 'green' }
     ],
-    summary: 'Published Android app on Google Play — Islamic Sunnah habits & manners tracker with modern UI and custom reading themes. Built with Android Studio & Java.',
-    summaryAr: 'تطبيق أندرويد منشور رسمياً على متجر Google Play — لمتابعة السنن والأذكار اليومية بواجهات حديثة وأنماط قراءة مخصصة.',
+    summary: 'Published Android app on Google Play — Comprehensive Islamic Sunnah habits & daily manners tracker categorized by daily routines with custom reading themes. Built natively with Android Studio & Java.',
+    summaryAr: 'تطبيق أندرويد منشور رسمياً على متجر Google Play — دليل شامل لإحياء سنن وآداب ومستحبات النبي ﷺ اليومية، مصنفة ومنظمة لتناسب الروتين اليومي للمسلم بواجهات مريحة وقراءة ليلية.',
     links: [
       { label: 'View on Google Play', labelAr: 'عرض على Google Play', url: 'https://play.google.com/store/apps/details?id=com.mustahabbat.sunan', type: 'google-play' }
     ],
-    techStack: ['Android Studio', 'Java', 'Android SDK', 'Material Design', 'Google Play Store'],
+    techStack: ['Android Studio', 'Java SDK', 'Material Design', 'Android XML', 'Google Play Store'],
     highlights: [
       'Published on Google Play Store with active users and 5-star ratings',
-      'Comprehensive Islamic Sunnah habits catalog categorized by daily routines',
-      'Custom reading modes, text zoom, and high-contrast night theme',
+      'Comprehensive Islamic Sunnah habits catalog categorized by daily routines and occasions',
+      'Comfortable reading mode with scalable typography and high-contrast night theme',
       'Native Android performance with zero latency and lightweight APK size'
     ],
     highlightsAr: [
-      'منشور على متجر Google Play مع مستخدمين نشطين وتقييمات ممتازة',
-      'فهرس شامل للأذكار والسنن مصنف حسب الأوقات والأنشطة اليومية',
-      'أنماط قراءة مريحة مع تكبير الخط ووضع القراءة الليلي عالي التباين',
-      'أداء أصيل Native بدون أي تأخير وحجم تطبيق خفيف وسريع التحميل'
+      'منشور رسمياً على متجر Google Play مع مستخدمين نشطين وتقييمات ممتازة',
+      'فهرس منظم وشامل للسنن والمستحبات النبوية مقسمة حسب الأوقات والأنشطة اليومية',
+      'أنماط قراءة مريحة مع إمكانية تكبير الخط ودعم كامل للوضع الليلي المريح للعين',
+      'أداء أصيل Native Java يضمن سرعة واستجابة فورية وحجماً تطبيقياً خفيفاً جداً'
     ]
   },
   {
@@ -122,51 +130,54 @@ export const projectsData: Project[] = [
       { text: 'Java SDK', textAr: 'جافا SDK', color: 'green' },
       { text: 'Google Play', textAr: 'قوقل بلاي', color: 'green' }
     ],
-    summary: 'Published Android app on Google Play — Smart digital tasbih & dhikr counter simulated as a portable tally ring device with haptic vibration feedback.',
-    summaryAr: 'تطبيق أندرويد منشور رسمياً على متجر Google Play — محاكي رقمي لخاتم التسبيح الذكي مع اهتزاز لمسي وحفظ تلقائي للإحصائيات.',
+    summary: 'Published Android app on Google Play — Lightweight digital tasbih & dhikr counter simulated as a portable tally ring device with haptic vibration feedback and persistent count state.',
+    summaryAr: 'تطبيق أندرويد منشور رسمياً على متجر Google Play — محاكاة ذكية لخاتم التسبيح الإلكتروني على الهاتف بحجم خفيف جداً، مع اهتزاز لمسي وحفظ تلقائي للإحصائيات والأذكار اليومية.',
     links: [
       { label: 'View on Google Play', labelAr: 'عرض على Google Play', url: 'https://play.google.com/store/apps/details?id=com.musbihati', type: 'google-play' }
     ],
-    techStack: ['Android Studio', 'Java', 'Android SDK', 'Haptic Feedback', 'Google Play Store'],
+    techStack: ['Android Studio', 'Java SDK', 'Haptic Feedback', 'SharedPreferences', 'Google Play Store'],
     highlights: [
       'Published on Google Play Store with realistic tally ring physical simulation',
-      'Haptic vibration feedback upon every count for screenless tasbih',
+      'Haptic vibration feedback upon every count for screenless tasbih remembrance',
       'Persistent counter state saving across app reboots via Android SharedPreferences',
-      'Multiple custom counter targets and Islamic dhikr presets'
+      'Lightweight package footprint and immediate responsive performance'
     ],
     highlightsAr: [
-      'منشور على متجر Google Play مع محاكاة فيزيائية واقعية لخاتم التسبيح',
-      'تغذية لمسية Haptic Vibration عند كل نقرة للتسبيح دون الحاجة للنظر للشاشة',
-      'حفظ دائم لحالة العداد حتى بعد إغلاق التطبيق عبر Android SharedPreferences',
-      'أهداف مسبقة قابلة للتخصيص وقوائم للأذكار المتنوعة'
+      'منشور رسمياً على متجر Google Play بحجم خفيف جداً وأداء فائق السرعة',
+      'محاكاة واقعية لخاتم التسبيح مع استجابة اهتزازية لمسية Haptic عند كل تسبيحة',
+      'حفظ دائم لمجموع التسبيحات حتى بعد إعادة تشغيل الهاتف عبر SharedPreferences',
+      'أذكار يومية مرتبة وسلسة تناسب البرنامج اليومي مع إمكانية تصفير أو مواصلة العداد'
     ]
   },
   {
     id: 'numbers-game',
     title: 'Numbers Game',
     titleAr: 'لعبة الأرقام (Numbers Game)',
-    category: 'games',
+    category: 'mobile',
     tags: [
+      { text: 'Android', textAr: 'أندرويد', color: 'green' },
       { text: 'Java', textAr: 'جافا', color: 'default' },
-      { text: 'OOP Architecture', textAr: 'معمارية OOP', color: 'default' },
-      { text: 'Game Logic', textAr: 'منطق اللعبة', color: 'default' }
+      { text: 'Material 3', textAr: 'ماتيريال 3', color: 'cyan' },
+      { text: 'Streak Engine', textAr: 'عداد الحماس 🔥', color: 'pink' }
     ],
-    summary: 'Interactive numeric logic challenge game built with Java architecture and clean object-oriented patterns.',
-    summaryAr: 'لعبة تفاعلية للتحدي الرقمي مبنية بلغة جافا مع معمارية برمجية كائنية التوجه OOP.',
+    summary: 'Fast-paced Android game built with Java & modern Material 3 Design components. Players test quick-thinking reflexes by identifying and tapping the higher number card, featuring streak counters (🔥) and touch animations.',
+    summaryAr: 'لعبة أندرويد تفاعلية سريعة مبنية بلغة Java ومكونات Material 3 Design الحديثة. يختبر اللاعبون سرعة بديهتهم باختيار الرقم الأكبر مع عداد الحماس المتتالي (Streak 🔥) وتغذية بصرية ولمسية تفاعلية.',
     image: '/assets/images/project_numbers.jpg',
     links: [
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/Numbers-Game', type: 'launch' }
     ],
-    techStack: ['Java', 'OOP Patterns', 'Algorithms', 'Score State Engine'],
+    techStack: ['Android Studio', 'Java SDK', 'Material 3 Components', 'ConstraintLayout', 'SharedPreferences', 'Gradle DSL'],
     highlights: [
-      'Object-oriented architecture separating game state, rules, and UI',
-      'Dynamic numeric pattern challenge with progressive difficulty',
-      'Score tracking and session analytics'
+      'Built natively for Android (API 24 to 37) utilizing Google Material 3 Design tokens',
+      'Real-time score tracking, streak multiplier counter (🔥), and persistent high scores via SharedPreferences',
+      'Tactile card touch animations with color-coded feedback (green for correct, red for wrong)',
+      'Edge-to-edge system insets handling and fully localized in Arabic and English'
     ],
     highlightsAr: [
-      'معمارية كائنية التوجه تفصل بين منطق اللعبة وحالة النقاط وواجهة التفاعل',
-      'تحديات رقمية ديناميكية مع تصاعد تدريجي في الصعوبة',
-      'نظام احتساب النقاط وإحصائيات الجلسات'
+      'تطبيق أصيل لنظام أندرويد (API 24 إلى 37) مبني بمكونات وتصميم Material 3 الحديث',
+      'احتساب فوري للنقاط مع عداد الحماس المتتالي (Streak 🔥) وحفظ تلقائي لأعلى رقم قياسي',
+      'استجابة حركية تفاعلية للمس مع تغذية لونية (إطار أخضر للإجابة الصحيحة وأحمر للخاطئة)',
+      'تصميم يمتد لكامل أطراف الشاشة (Edge-to-Edge) مع دعم ثنائي للغتين العربية والإنجليزية'
     ]
   },
   {
@@ -179,8 +190,8 @@ export const projectsData: Project[] = [
       { text: 'JavaScript', textAr: 'جافاسكريبت', color: 'default' },
       { text: 'Frontend System', textAr: 'واجهات أمامية', color: 'default' }
     ],
-    summary: 'Interactive React laboratory exploring component hierarchy, hook state systems, and reactive UI patterns.',
-    summaryAr: 'مشروع استكشافي لمعمارية React الحديثة، إدارة الحالة عبر الـ Hooks، وتصميم المكونات التفاعلية.',
+    summary: 'Interactive React foundational laboratory exploring component hierarchy, hook state systems, and component-driven UI architecture.',
+    summaryAr: 'مشروع استكشافي لمعمارية React الحديثة، إدارة الحالة عبر الـ Hooks، وتصميم المكونات التفاعلية القابلة لإعادة الاستخدام.',
     image: '/assets/images/project_react.jpg',
     links: [
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/My-First-React', type: 'launch' }

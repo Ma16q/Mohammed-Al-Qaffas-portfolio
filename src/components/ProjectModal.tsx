@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import type { Project } from '../types/portfolio';
 import { X, ExternalLink, Cpu, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -8,33 +9,43 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+const bodyVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.12 } }
+};
+const rowVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 260, damping: 26 } }
+} as const;
+
+const ModalCard: React.FC<{ project: Project; onClose: () => void }> = ({ project, onClose }) => {
   const { language, t } = useLanguage();
   const isAr = language === 'ar';
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    if (project) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [project, onClose]);
-
-  if (!project) return null;
 
   const title = isAr && project.titleAr ? project.titleAr : project.title;
   const summary = isAr && project.summaryAr ? project.summaryAr : project.summary;
   const highlights = isAr && project.highlightsAr ? project.highlightsAr : project.highlights;
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-card glass-panel" onClick={(e) => e.stopPropagation()}>
+    <motion.div
+      className="modal-backdrop"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.22 }}
+    >
+      <motion.div
+        className="modal-card glass-panel"
+        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 48, scale: 0.92 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 28, scale: 0.95, transition: { duration: 0.18 } }}
+        transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+      >
         {/* Header */}
         <div className="modal-header">
           <div className="modal-title-wrap">
@@ -54,39 +65,39 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         </div>
 
         {/* Modal Scroll Body */}
-        <div className="modal-body">
+        <motion.div className="modal-body" variants={bodyVariants} initial="hidden" animate="show">
           {/* Banner image or App Icon */}
           {project.image ? (
-            <div className="modal-banner-wrap">
+            <motion.div className="modal-banner-wrap" variants={rowVariants}>
               <img src={project.image} alt={title} className="modal-banner-img" />
-            </div>
+            </motion.div>
           ) : project.appIcon ? (
-            <div className="modal-icon-banner">
+            <motion.div className="modal-icon-banner" variants={rowVariants}>
               <img src={project.appIcon} alt={title} className="modal-app-icon" />
               <div>
-                <h3 style={{ fontSize: '1.25rem', color: '#f8fafc' }}>{title}</h3>
+                <h3 style={{ fontSize: '1.25rem', color: 'var(--text-main)' }}>{title}</h3>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                   {isAr && project.badgeAr ? project.badgeAr : project.badge}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ) : null}
 
           {/* Summary */}
-          <p className="modal-summary-text">{summary}</p>
+          <motion.p className="modal-summary-text" variants={rowVariants}>{summary}</motion.p>
 
           {/* Highlights */}
           {highlights && highlights.length > 0 && (
             <div className="modal-section">
-              <h4 className="modal-section-title">
+              <motion.h4 className="modal-section-title" variants={rowVariants}>
                 <CheckCircle size={16} style={{ color: 'var(--accent-cyan)' }} />
                 <span>{t.projects.keyHighlights}</span>
-              </h4>
+              </motion.h4>
               <ul className="modal-highlights-list">
                 {highlights.map((h, i) => (
-                  <li key={i} className="modal-highlight-item">
+                  <motion.li key={i} className="modal-highlight-item" variants={rowVariants}>
                     <span>{h}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </div>
@@ -95,20 +106,20 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {/* Tech Stack */}
           {project.techStack && (
             <div className="modal-section">
-              <h4 className="modal-section-title">
+              <motion.h4 className="modal-section-title" variants={rowVariants}>
                 <Cpu size={16} style={{ color: 'var(--accent-pink)' }} />
                 <span>{t.projects.techStack}</span>
-              </h4>
+              </motion.h4>
               <div className="modal-tech-pills">
                 {project.techStack.map((tech, i) => (
-                  <span key={i} className="tech-pill">
+                  <motion.span key={i} className="tech-pill" variants={rowVariants}>
                     {tech}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* Modal Footer Actions */}
         <div className="modal-footer">
@@ -131,7 +142,29 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             {t.projects.closeModal}
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (project) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [project, onClose]);
+
+  return (
+    <AnimatePresence>
+      {project && <ModalCard key={project.id} project={project} onClose={onClose} />}
+    </AnimatePresence>
   );
 };

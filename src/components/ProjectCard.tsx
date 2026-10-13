@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Project } from '../types/portfolio';
 import { Car3DViewer } from './Car3DViewer';
+import { TiltCard } from './TiltCard';
 import { Info, ExternalLink, Activity, Box } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -20,7 +21,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
 
   if (project.is3dInteractive) {
     return (
-      <article className="project-card glass-panel" id="motrilogCard">
+      <TiltCard className="project-card glass-panel" id="motrilogCard" tilt={false}>
         {/* MotriLog View Mode Switcher */}
         <div className="motrilog-view-toggle" aria-label="Select MotriLog View Mode">
           <button
@@ -113,7 +114,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
             </button>
           )}
         </div>
-      </article>
+      </TiltCard>
     );
   }
 
@@ -121,7 +122,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
   if (project.isGooglePlay) {
     const isSunan = project.id === 'sunan';
     return (
-      <article className="project-card glass-panel app-card">
+      <TiltCard className="project-card glass-panel app-card">
         <div className={`app-icon-preview ${isSunan ? 'sunan-preview' : 'musbihati-preview'}`}>
           <div className="app-icon-wrap">
             <img src={project.appIcon} alt={`${title} - App Icon`} className="app-icon-img" loading="lazy" />
@@ -168,13 +169,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
             </button>
           )}
         </div>
-      </article>
+      </TiltCard>
     );
   }
 
   // Standard Project Card
   return (
-    <article className="project-card glass-panel">
+    <TiltCard className="project-card glass-panel">
       <div className="project-preview">
         <img src={project.image} alt={`${title} preview`} className="project-img" loading="lazy" />
         <div className="project-overlay"></div>
@@ -216,6 +217,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
           </button>
         )}
       </div>
-    </article>
+    </TiltCard>
   );
 };

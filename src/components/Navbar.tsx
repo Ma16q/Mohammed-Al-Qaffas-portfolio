@@ -1,54 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Terminal, Globe, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, useMotionValueEvent, useScroll } from 'motion/react';
+import { Terminal, Globe, Send } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { ThemeToggle, type ThemeOrigin } from './ThemeToggle';
+import { Magnetic } from './Magnetic';
+import type { SectionId } from '../hooks/useSectionNav';
 
 interface NavbarProps {
   theme: 'dark' | 'light';
-  onToggleTheme: (mode?: 'dark' | 'light') => void;
+  onToggleTheme: (mode?: 'dark' | 'light', origin?: ThemeOrigin) => void;
   onOpenTerminal?: () => void;
+  activeSection: SectionId;
+  onNavigate: (id: SectionId) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerminal }) => {
+export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerminal, activeSection, onNavigate }) => {
   const { language, setLanguage, t } = useLanguage();
-  const [activeSection, setActiveSection] = useState<string>('home');
-  const [clickedItem, setClickedItem] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Auto-detect active section on scroll
-  useEffect(() => {
-    const sections = ['home', 'projects', 'about', 'contact'];
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, 'change', (value) => setIsScrolled(value > 24));
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleNavClick = (sectionId: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleNavClick = (sectionId: SectionId, e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    setActiveSection(sectionId);
-    setClickedItem(sectionId);
-    setTimeout(() => setClickedItem(null), 500);
-
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    onNavigate(sectionId);
   };
 
-  const navItems = [
+  const navItems: { id: SectionId; label: string }[] = [
     { id: 'home', label: t.nav.home },
     { id: 'projects', label: t.nav.projects },
     { id: 'about', label: t.nav.about },
@@ -56,27 +34,40 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
   ];
 
   return (
-    <header className="navbar-wrapper">
+    <motion.header
+      className={`navbar-wrapper ${isScrolled ? 'is-scrolled' : ''}`}
+      layoutRoot
+      initial={{ y: -90, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: 'spring', stiffness: 160, damping: 22, delay: 0.1 }}
+    >
       <nav className="navbar" aria-label="Main Navigation">
         <a href="#home" className="brand-logo" aria-label="Mohammed Ahmed Portfolio Home" onClick={(e) => handleNavClick('home', e)}>
           <div className="logo-badge">MA</div>
           <span>Mohamed Ahmed</span>
         </a>
 
-        {/* Interactive Navigation Links with Active Indicator */}
+        {/* Navigation links share one pill that slides to the active section.
+            The layoutId is per-language so it does not fly across when the layout mirrors. */}
         <ul className="nav-links">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
-            const isJustClicked = clickedItem === item.id;
             return (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  className={`nav-link ${isActive ? 'active' : ''} ${isJustClicked ? 'just-clicked' : ''}`}
+                  className={`nav-link ${isActive ? 'active' : ''}`}
+                  aria-current={isActive ? 'true' : undefined}
                   onClick={(e) => handleNavClick(item.id, e)}
                 >
-                  <span>{item.label}</span>
-                  {isActive && <span className="nav-active-dot" aria-hidden="true" />}
+                  {isActive && (
+                    <motion.span
+                      layoutId={`nav-pill-${language}`}
+                      className="nav-pill"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  <span className="nav-link-label">{item.label}</span>
                 </a>
               </li>
             );
@@ -89,25 +80,28 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
             <div className="lang-globe-icon-wrap" title="Language Selector">
               <Globe size={13} className="lang-globe-icon" />
             </div>
-            <button
-              type="button"
-              className={`lang-segment-btn ${language === 'en' ? 'active' : ''}`}
-              onClick={() => setLanguage('en')}
-              title="Switch to English"
-              aria-pressed={language === 'en'}
-            >
-              EN
-            </button>
-            <span className="lang-segment-divider" aria-hidden="true"></span>
-            <button
-              type="button"
-              className={`lang-segment-btn ${language === 'ar' ? 'active' : ''}`}
-              onClick={() => setLanguage('ar')}
-              title="التحويل للغة العربية"
-              aria-pressed={language === 'ar'}
-            >
-              عربي
-            </button>
+            {/* One thumb slides between the two segments */}
+            <div className={`lang-segments is-${language}`}>
+              <span className="lang-thumb" aria-hidden="true"></span>
+              <button
+                type="button"
+                className={`lang-segment-btn ${language === 'en' ? 'active' : ''}`}
+                onClick={() => setLanguage('en')}
+                title="Switch to English"
+                aria-pressed={language === 'en'}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                className={`lang-segment-btn ${language === 'ar' ? 'active' : ''}`}
+                onClick={() => setLanguage('ar')}
+                title="التحويل للغة العربية"
+                aria-pressed={language === 'ar'}
+              >
+                عربي
+              </button>
+            </div>
           </div>
 
           {/* Interactive Developer CLI */}
@@ -125,27 +119,21 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
           )}
 
           {/* Contact Direct CTA */}
-          <a
-            href="#contact"
-            className="nav-cta"
-            onClick={(e) => handleNavClick('contact', e)}
-          >
-            <span>{t.nav.contactBtn}</span>
-            <Send size={14} />
-          </a>
+          <Magnetic className="nav-cta-wrap">
+            <a
+              href="#contact"
+              className="nav-cta"
+              onClick={(e) => handleNavClick('contact', e)}
+            >
+              <span>{t.nav.contactBtn}</span>
+              <Send size={14} className="cta-plane" />
+            </a>
+          </Magnetic>
 
           {/* Theme Toggle Button */}
-          <button
-            type="button"
-            className="theme-toggle"
-            onClick={() => onToggleTheme()}
-            aria-label="Toggle Light and Dark Mode"
-            title="Toggle Light / Dark Mode"
-          >
-            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
-          </button>
+          <ThemeToggle theme={theme} onToggle={(origin) => onToggleTheme(undefined, origin)} />
         </div>
       </nav>
-    </header>
+    </motion.header>
   );
 };

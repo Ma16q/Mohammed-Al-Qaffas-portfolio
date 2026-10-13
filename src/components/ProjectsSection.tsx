@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { projectsData } from '../data/portfolioData';
 import { ProjectCard } from './ProjectCard';
+import { Reveal } from './Reveal';
 import type { Category, Project } from '../types/portfolio';
 import { LayoutGrid, Smartphone, Box, Gamepad2, Search, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -10,10 +12,12 @@ interface ProjectsSectionProps {
   onInspect?: (project: Project) => void;
 }
 
+const cardSpring = { type: 'spring', stiffness: 260, damping: 28 } as const;
+
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspect }) => {
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   const categories: { id: Category; label: string; icon: React.ReactNode }[] = [
     { id: 'all', label: t.projects.categories.all, icon: <LayoutGrid size={15} /> },
@@ -22,8 +26,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspe
     { id: 'games', label: t.projects.categories.games, icon: <Gamepad2 size={15} /> }
   ];
 
+  const countFor = (id: Category) =>
+    id === 'all' ? projectsData.length : projectsData.filter((p) => p.category === id).length;
+
   const filteredProjects = projectsData.filter((p) => {
-    const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+    const matchesCategory =
+      activeCategory === 'all' ||
+      p.category === activeCategory ||
+      (activeCategory === 'games' && p.id === 'numbers-game') ||
+      (activeCategory === 'mobile' && p.id === 'numbers-game');
     const query = searchQuery.trim().toLowerCase();
     if (!query) return matchesCategory;
 
@@ -43,7 +54,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspe
   return (
     <section className="projects-section" id="projects">
       <div className="container">
-        <div className="section-header">
+        <Reveal className="section-header">
           <span className="section-pill">{t.projects.sectionPill}</span>
           <h2 className="section-title">{t.projects.sectionTitle}</h2>
           <p className="section-desc">
@@ -57,6 +68,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspe
               <input
                 type="text"
                 placeholder={t.projects.searchPlaceholder}
+                aria-label={t.projects.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -73,18 +85,33 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspe
               )}
             </div>
 
+            {/* The gradient pill is one shared element that glides between tabs */}
             <div className="category-filter-wrap">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  className={`filter-btn ${activeCategory === cat.id ? 'active' : ''}`}
-                  onClick={() => setActiveCategory(cat.id)}
-                >
-                  {cat.icon}
-                  <span>{cat.label}</span>
-                </button>
-              ))}
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`filter-btn ${isActive ? 'active' : ''}`}
+                    aria-pressed={isActive}
+                    onClick={() => setActiveCategory(cat.id)}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId={`filter-pill-${language}`}
+                        className="filter-pill"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className="filter-btn-content">
+                      {cat.icon}
+                      <span>{cat.label}</span>
+                      <span className="filter-count">{countFor(cat.id)}</span>
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             {searchQuery && (
@@ -93,10 +120,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspe
               </p>
             )}
           </div>
-        </div>
+        </Reveal>
 
-        {filteredProjects.length === 0 ? (
-          <div className="no-projects-box glass-panel">
+        {filteredProjects.length === 0 && (
+          <motion.div
+            className="no-projects-box glass-panel"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.15 }}
+          >
             <p>{t.projects.noResults}</p>
             <button
               type="button"
@@ -109,14 +141,28 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme, onInspe
             >
               {t.projects.resetFilters}
             </button>
-          </div>
-        ) : (
-          <div className="projects-grid">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} theme={theme} onInspect={onInspect} />
-            ))}
-          </div>
+          </motion.div>
         )}
+
+        {/* Cards animate out, in, and into their new grid slots whenever the filter changes */}
+        <div className="projects-grid">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                layout="position"
+                className="project-cell"
+                initial={{ opacity: 0, y: 36, scale: 0.94 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1, transition: { ...cardSpring, delay: (index % 3) * 0.08 } }}
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.18 } }}
+                viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+                transition={cardSpring}
+              >
+                <ProjectCard project={project} theme={theme} onInspect={onInspect} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
