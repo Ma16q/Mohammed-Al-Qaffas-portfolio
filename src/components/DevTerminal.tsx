@@ -35,7 +35,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
             ? '🚀 الطرفية الهندسية والمساعد الذكي لمحمد القفاص [v2.4.0]'
             : '🚀 Mohamed Al-Qaffas (Ma16q) Developer Terminal & AI [v2.4.0]'}
         </p>
-        <p style={{ color: 'var(--text-muted)', marginTop: '0.35rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.35rem' }}>
+        <p style={{ color: '#94a3b8', marginTop: '0.35rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.35rem' }}>
           {isAr ? (
             <>
               <span>اكتب</span>
@@ -159,16 +159,16 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
             {isAr ? 'قائمة الأوامر الهندسية المتاحة:' : 'Available Engineering Commands:'}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.4rem', marginTop: '0.4rem' }}>
-            <p>• <span style={{ color: '#38bdf8' }}>projects / مشاريع</span> : {isAr ? 'عرض كافة المشاريع الهندسية' : 'List all engineering projects'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>skills / مهارات</span> : {isAr ? 'عرض المهارات والتقنيات' : 'Display technical engineering stack'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>play / تطبيقات</span> : {isAr ? 'تطبيقات Google Play الرسمية' : 'Google Play published applications'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>bio / من انا</span> : {isAr ? 'نبذة عن محمد القفاص والتدريب' : 'Developer bio, training & IAU'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>training / تدريب</span> : {isAr ? 'تفاصيل التدريب الميداني المهني' : 'Software engineering COOP training'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>contact / تواصل</span> : {isAr ? 'قنوات التواصل وروابط LinkedIn' : 'LinkedIn & official contact'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>car / سيارة</span> : {isAr ? 'محاكاة سيارة 3D WebGL' : '3D WebGL car telemetry'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>theme light / dark</span> : {isAr ? 'تبديل المظهر' : 'Toggle theme'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>clear / مسح</span> : {isAr ? 'إعادة ضبط الشاشة' : 'Reset terminal log'}</p>
-            <p>• <span style={{ color: '#38bdf8' }}>exit / خروج</span> : {isAr ? 'إغلاق الطرفية' : 'Close terminal window'}</p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>projects / مشاريع</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'عرض كافة المشاريع الهندسية' : 'List all engineering projects'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>skills / مهارات</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'عرض المهارات والتقنيات' : 'Display technical engineering stack'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>play / تطبيقات</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'تطبيقات Google Play الرسمية' : 'Google Play published applications'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>bio / من انا</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'نبذة عن محمد القفاص والتدريب' : 'Developer bio, training & IAU'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>training / تدريب</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'تفاصيل التدريب الميداني المهني' : 'Software engineering COOP training'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>contact / تواصل</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'قنوات التواصل وروابط LinkedIn' : 'LinkedIn & official contact'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>car / سيارة</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'محاكاة سيارة 3D WebGL' : '3D WebGL car telemetry'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>theme light / dark</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'تبديل المظهر' : 'Toggle theme'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>clear / مسح</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'إعادة ضبط الشاشة' : 'Reset terminal log'}</span></p>
+            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>exit / خروج</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'إغلاق الطرفية' : 'Close terminal window'}</span></p>
           </div>
         </div>
       );
@@ -185,7 +185,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
             return (
               <div key={p.id} style={{ margin: '0.4rem 0', paddingLeft: '0.5rem', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
                 <p style={{ color: '#f8fafc', fontWeight: 600 }}>• {pTitle} <span style={{ fontSize: '0.78rem', color: '#38bdf8' }}>[{p.category}]</span></p>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{pSumm.slice(0, 95)}...</p>
+                <p style={{ color: '#cbd5e1', fontSize: '0.87rem', lineHeight: '1.5', marginTop: '0.15rem' }}>{pSumm}</p>
               </div>
             );
           })}
@@ -198,10 +198,10 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
           <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
             {isAr ? 'المهارات الهندسية وحزم التطوير:' : 'Technical Engineering Stack:'}
           </p>
-          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'اللغات:' : 'Languages:'}</span> Python, Java SDK, TypeScript, JavaScript (ES6+), HTML5/CSS3</p>
-          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'تطبيقات الجوال:' : 'Mobile Apps:'}</span> Android Studio (Native Java), Flutter & Dart</p>
-          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'الويب وثلاثي الأبعاد:' : '3D & WebGL:'}</span> React 19, Three.js, WebGL Shaders, Blender 3D, GLTF/DRACO</p>
-          <p>• <span style={{ color: '#38bdf8' }}>{isAr ? 'الأنظمة والسحابة:' : 'Cloud & DevOps:'}</span> Git & GitHub, Google Cloud Platform (GCP), VS Code, Vercel</p>
+          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'اللغات:' : 'Languages:'}</span> <span style={{ color: '#cbd5e1' }}>Python, Java SDK, TypeScript, JavaScript (ES6+), HTML5/CSS3</span></p>
+          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'تطبيقات الجوال:' : 'Mobile Apps:'}</span> <span style={{ color: '#cbd5e1' }}>Android Studio (Native Java), Flutter & Dart</span></p>
+          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الويب وثلاثي الأبعاد:' : '3D & WebGL:'}</span> <span style={{ color: '#cbd5e1' }}>React 19, Three.js, WebGL Shaders, Blender 3D, GLTF/DRACO</span></p>
+          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الأنظمة والسحابة:' : 'Cloud & DevOps:'}</span> <span style={{ color: '#cbd5e1' }}>Git & GitHub, Google Cloud Platform (GCP), VS Code, Vercel</span></p>
         </div>
       );
     }
@@ -212,10 +212,10 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
             {isAr ? 'التطبيقات المنشورة على متجر Google Play:' : 'Published Google Play Applications:'}
           </p>
           <p style={{ marginTop: '0.3rem' }}>
-            1. <strong style={{ color: '#f8fafc' }}>{isAr ? 'مستحبات السنن' : 'Mustahabbat Al-Sunan'}</strong>: {isAr ? 'تطبيق شامل للأذكار والسنن اليومية بأداء Native خفيف وخيارات قراءة مخصصة.' : 'Islamic Sunnah habits & manners tracker with lightweight native performance.'}
+            1. <strong style={{ color: '#f8fafc' }}>{isAr ? 'مستحبات وسنن' : 'Mustahabbat Wa Sunan'}</strong>: <span style={{ color: '#cbd5e1' }}>{isAr ? 'تطبيق شامل للأذكار والسنن اليومية بأداء Native خفيف وخيارات قراءة مخصصة.' : 'Islamic Sunnah habits & manners tracker with lightweight native performance.'}</span>
           </p>
           <p style={{ marginTop: '0.3rem' }}>
-            2. <strong style={{ color: '#f8fafc' }}>{isAr ? 'مسبحتي (Digital Tasbih)' : 'Musbihati (Digital Tasbih)'}</strong>: {isAr ? 'محاكاة واقعية لخاتم التسبيح الذكي مع اهتزاز لمسي وحفظ تلقائي.' : 'Smart digital tasbih simulated as a portable tally ring with haptic feedback.'}
+            2. <strong style={{ color: '#f8fafc' }}>{isAr ? 'مسبحتي (Digital Tasbih)' : 'Musbihati (Digital Tasbih)'}</strong>: <span style={{ color: '#cbd5e1' }}>{isAr ? 'محاكاة واقعية لخاتم التسبيح الذكي مع اهتزاز لمسي وحفظ تلقائي.' : 'Smart digital tasbih simulated as a portable tally ring with haptic feedback.'}</span>
           </p>
         </div>
       );
