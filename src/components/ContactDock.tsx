@@ -35,6 +35,7 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const [name, setName] = useState('');
   const [note, setNote] = useState('');
   const [sending, setSending] = useState(false);
   const [rated, setRated] = useState(() => localStorage.getItem(FEEDBACK_KEY) === 'sent');
@@ -80,11 +81,12 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
     try {
       await sendMessage(
         {
+          name: name.trim() || (language === 'ar' ? 'زائر' : 'Visitor'),
           rating: `${rating} / 5 — ${d.rateLabels[rating - 1]}`,
           note: note.trim() || '—',
           language
         },
-        `⭐ تقييم جديد لبورتفوليو Ma16q: ${rating}/5`
+        `⭐ تقييم جديد لبورتفوليو Ma16q: ${rating}/5${name.trim() ? ` من ${name.trim()}` : ''}`
       );
       localStorage.setItem(FEEDBACK_KEY, 'sent');
       setRated(true);
@@ -215,6 +217,16 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                           >
+                            <input
+                              type="text"
+                              className="form-control dock-name-input"
+                              maxLength={60}
+                              placeholder={d.rateNamePlaceholder || (language === 'ar' ? 'الاسم (اختياري)' : 'Your Name (optional)')}
+                              aria-label={d.rateNamePlaceholder || (language === 'ar' ? 'الاسم (اختياري)' : 'Your Name (optional)')}
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                              style={{ marginBottom: '0.45rem', fontSize: '0.8rem', padding: '0.45rem 0.75rem', borderRadius: '8px' }}
+                            />
                             <textarea
                               className="form-control dock-note"
                               rows={2}

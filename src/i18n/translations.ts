@@ -132,6 +132,7 @@ export interface Translations {
       copyEmail: string;
       rateTitle: string;
       rateLabels: string[];
+      rateNamePlaceholder?: string;
       ratePlaceholder: string;
       rateSend: string;
       rateThanks: string;
@@ -273,6 +274,7 @@ export const translations: Record<Language, Translations> = {
         copyEmail: 'Copy email',
         rateTitle: 'How was your visit?',
         rateLabels: ['Needs work', 'Fair', 'Good', 'Great', 'Outstanding'],
+        rateNamePlaceholder: 'Your Name (optional)',
         ratePlaceholder: 'Anything you would improve? (optional)',
         rateSend: 'Send feedback',
         rateThanks: 'Thanks — your feedback was sent!',

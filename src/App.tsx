@@ -9,7 +9,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { DevTerminal } from './components/DevTerminal';
-import { ScrollProgress } from './components/ScrollProgress';
+
 import { CursorAura } from './components/CursorAura';
 import { MobileDock } from './components/MobileDock';
 import { ContactDock } from './components/ContactDock';
@@ -73,7 +73,7 @@ const PortfolioContent: React.FC = () => {
 
   return (
     <div className="portfolio-app">
-      <ScrollProgress />
+      
 
       {/* Ambient Glow Orbs Background */}
       <div className="ambient-glow" aria-hidden="true">
