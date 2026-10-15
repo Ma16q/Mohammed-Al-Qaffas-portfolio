@@ -108,33 +108,60 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
     }
   };
 
+  useEffect(() => {
+    // Eagerly pre-decode avatar so opening the dock panel is 100% instant (0ms latency)
+    const img = new Image();
+    img.src = '/favicon.png';
+    if ('decode' in img) {
+      img.decode().catch(() => {});
+    }
+  }, []);
+
   const shownRating = hoverRating || rating;
 
   return (
-    <AnimatePresence>
-      {(scrolled || open) && (
-        <motion.div
-          ref={rootRef}
-          className="contact-dock"
-          initial={{ opacity: 0, scale: 0.4, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.4, y: 24 }}
-          transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-        >
-          <AnimatePresence>
-            {open && (
-              <motion.div
-                className="dock-panel"
-                role="dialog"
-                aria-label={d.title}
-                initial={{ opacity: 0, y: 18, scale: 0.88 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 12, scale: 0.92, transition: { duration: 0.16 } }}
-                transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-              >
-                <div className="dock-panel-head">
-                  <img src="/favicon.png" alt="" className="dock-avatar" />
-                  <div className="dock-panel-title">
+    <>
+      {/* Pre-render avatar offscreen to guarantee immediate decode in browser GPU cache */}
+      <img
+        src="/favicon.png"
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        decoding="sync"
+        style={{ position: 'fixed', width: 1, height: 1, opacity: 0, pointerEvents: 'none', top: -100, left: -100 }}
+      />
+      <AnimatePresence>
+        {(scrolled || open) && (
+          <motion.div
+            ref={rootRef}
+            className="contact-dock"
+            initial={{ opacity: 0, scale: 0.4, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.4, y: 24 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+          >
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  className="dock-panel"
+                  role="dialog"
+                  aria-label={d.title}
+                  initial={{ opacity: 0, y: 18, scale: 0.88 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 12, scale: 0.92, transition: { duration: 0.16 } }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 28 }}
+                >
+                  <div className="dock-panel-head">
+                    <img
+                      src="/favicon.png"
+                      alt={language === 'ar' ? 'محمد القفاص' : 'Mohamed Al-Qaffas'}
+                      className="dock-avatar"
+                      loading="eager"
+                      decoding="sync"
+                      width={44}
+                      height={44}
+                    />
+                    <div className="dock-panel-title">
                     <strong>{d.title}</strong>
                     <span className="dock-status">
                       <span className="status-dot"></span>
@@ -335,5 +362,6 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 };

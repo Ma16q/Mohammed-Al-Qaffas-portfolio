@@ -1108,6 +1108,8 @@ body.light-mode .dock-panel {
   border-radius: 14px;
   object-fit: cover;
   border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
 }
 
 .dock-panel-title {
