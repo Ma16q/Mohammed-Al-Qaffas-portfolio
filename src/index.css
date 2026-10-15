@@ -2163,21 +2163,27 @@ body.light-mode .section-pill {
 }
 body.light-mode .skill-pill,
 body.light-mode button.skill-pill.clickable {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.42) 100%) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: blur(16px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  border: 1.5px solid #cbd5e1 !important;
   color: #0f172a !important;
   font-weight: 600 !important;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08), inset 0 1px 1px #ffffff !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06), inset 0 1px 0 #ffffff !important;
 }
 body.light-mode .skill-pill:hover,
 body.light-mode button.skill-pill.clickable:hover {
-  background: linear-gradient(135deg, rgba(224, 242, 254, 0.95) 0%, rgba(238, 242, 255, 0.9) 100%) !important;
-  border-color: rgba(56, 189, 248, 0.8) !important;
+  background: #f0f9ff !important;
+  border-color: #38bdf8 !important;
   color: #0284c7 !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.28), inset 0 1px 1px #ffffff !important;
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.22), inset 0 1px 0 #ffffff !important;
+}
+body.light-mode button.skill-pill.clickable .skill-pill-indicator {
+  color: #64748b !important;
+}
+body.light-mode button.skill-pill.clickable:hover .skill-pill-indicator {
+  color: #0284c7 !important;
 }
 body.light-mode .channel-item {
   background: rgba(255, 255, 255, 0.8);

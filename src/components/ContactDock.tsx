@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
-import { MessageCircle, X, Send, Copy, Star, Loader2, CheckCircle2 } from 'lucide-react';
+import { MessageCircle, X, Send, Copy, Star, Loader2, CheckCircle2, Mail } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
 import { RECIPIENT_EMAIL, sendMessage } from '../lib/sendMessage';
@@ -75,6 +75,15 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
     }
   };
 
+  const handleSendDirectEmail = async () => {
+    await copyText(RECIPIENT_EMAIL);
+    notify(language === 'ar' ? 'تم نسخ البريد وجاري فتح تطبيق الإيميل' : 'Email copied & opening mail client');
+    const subject = encodeURIComponent(
+      language === 'ar' ? 'تواصل مهني مع محمد القفاص (بورتفوليو)' : 'Career Opportunity - Mohamed Al-Qaffas'
+    );
+    window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}`;
+  };
+
   const handleSendRating = async () => {
     if (!rating || sending) return;
     setSending(true);
@@ -139,20 +148,40 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
                     <Send size={16} />
                     <span>{d.message}</span>
                   </motion.button>
-                  <motion.button type="button" className="dock-action" variants={itemVariants} onClick={handleCopyEmail}>
-                    <Copy size={16} />
-                    <span>{d.copyEmail}</span>
-                  </motion.button>
-                  <motion.a
-                    href="https://www.linkedin.com/in/ma16q/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="dock-action"
+
+                  {/* Long/Vertical Email Bar: Direct Send on click + dedicated Copy Button */}
+                  <motion.div
+                    className="dock-email-bar"
                     variants={itemVariants}
+                    onClick={handleSendDirectEmail}
+                    role="button"
+                    tabIndex={0}
+                    title={language === 'ar' ? 'إرسال بريد إلكتروني مباشر' : 'Send direct email'}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleSendDirectEmail();
+                      }
+                    }}
                   >
-                    <LinkedinIcon size={16} />
-                    <span>LinkedIn</span>
-                  </motion.a>
+                    <div className="dock-email-info">
+                      <Mail size={15} className="dock-email-icon" />
+                      <span className="dock-email-addr">{RECIPIENT_EMAIL}</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="dock-copy-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyEmail();
+                      }}
+                      title={d.copyEmail}
+                    >
+                      <Copy size={13} />
+                      <span>{language === 'ar' ? 'نسخ' : 'Copy'}</span>
+                    </button>
+                  </motion.div>
+
                   <motion.a
                     href="https://github.com/Ma16q"
                     target="_blank"
@@ -160,8 +189,18 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
                     className="dock-action"
                     variants={itemVariants}
                   >
-                    <GithubIcon size={16} />
+                    <GithubIcon size={18} />
                     <span>GitHub</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://www.linkedin.com/in/ma16q/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="dock-action"
+                    variants={itemVariants}
+                  >
+                    <LinkedinIcon size={18} />
+                    <span>LinkedIn</span>
                   </motion.a>
                   <motion.a
                     href="https://www.instagram.com/dev_m.qaffas/"
@@ -170,7 +209,7 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
                     className="dock-action"
                     variants={itemVariants}
                   >
-                    <InstagramIcon size={16} />
+                    <InstagramIcon size={18} />
                     <span>Instagram</span>
                   </motion.a>
                 </motion.div>

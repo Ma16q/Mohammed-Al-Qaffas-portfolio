@@ -1148,10 +1148,18 @@ body.light-mode .dock-panel {
   color: var(--accent-cyan);
 }
 
+body.light-mode .dock-action {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
 body.light-mode .dock-action:hover {
-  background: #eef2ff;
-  border-color: #6366f1;
-  color: #4338ca;
+  background: #f0f9ff;
+  border-color: #38bdf8;
+  color: #0284c7;
+  transform: translateY(-2px);
 }
 
 .dock-action.primary,
@@ -1167,6 +1175,100 @@ body.light-mode .dock-action.primary:hover {
   color: #fff;
   font-size: 0.88rem;
   box-shadow: 0 6px 18px rgba(56, 189, 248, 0.3);
+}
+
+.dock-email-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dock-email-bar:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.dock-email-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.dock-email-icon {
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.dock-email-addr {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dock-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.dock-copy-btn:hover {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  color: #0f172a;
+  transform: scale(1.04);
+}
+
+body.light-mode .dock-email-bar {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+body.light-mode .dock-email-bar:hover {
+  background: #f0f9ff;
+  border-color: #38bdf8;
+}
+
+body.light-mode .dock-email-icon {
+  color: #0284c7;
+}
+
+body.light-mode .dock-copy-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+}
+
+body.light-mode .dock-copy-btn:hover {
+  background: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff;
 }
 
 body.light-mode .dock-action.primary,

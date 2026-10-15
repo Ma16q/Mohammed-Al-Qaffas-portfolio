@@ -21,18 +21,18 @@ export const projectsData: Project[] = [
     category: 'web-3d',
     tags: [
       { text: 'React 19', textAr: 'رياكت 19', color: 'cyan' },
+      { text: 'TypeScript', textAr: 'تايب سكريبت', color: 'cyan' },
       { text: 'Tailwind CSS v4', textAr: 'تيلويند v4', color: 'pink' },
       { text: 'Recharts', textAr: 'تحليلات بيانية', color: 'default' },
-      { text: 'Learning Platform', textAr: 'منصة تعليمية وتدريبية', color: 'cyan' },
-      { text: 'React Router v8', textAr: 'راوتر v8', color: 'default' }
+      { text: 'Learning Platform', textAr: 'منصة تعليمية وتدريبية', color: 'cyan' }
     ],
-    summary: 'Full-featured interactive EdTech training platform & learning marketplace built with React 19, Tailwind CSS 4, and Recharts. Features dynamic course catalogues with deep filtering, student learning analytics dashboards, multi-role auth, and complete enrollment & payment checkout flows.',
-    summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 وتيلويند 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
-    image: '/assets/images/project_capsule_tahawul.png',
+    summary: 'Full-featured interactive EdTech training platform & learning marketplace built with React 19, TypeScript, Tailwind CSS 4, and Recharts. Features dynamic course catalogues with deep filtering, student learning analytics dashboards, multi-role auth, and complete enrollment & payment checkout flows.',
+    summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 و TypeScript وتيلويند 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
+    image: '/assets/images/project_capsule_platform.png',
     links: [
-      { label: 'Project Repository', labelAr: 'مستودع المشروع', url: 'https://github.com/Ma16q/My-First-React-Website', type: 'launch' }
+      { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/capsuletahawul/team_c', type: 'launch' }
     ],
-    techStack: ['React 19', 'Tailwind CSS v4', 'Recharts', 'React Router v8', 'Context API', 'Role-Based Access Control', 'Vite', 'Oxlint'],
+    techStack: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Recharts', 'React Router v8', 'Context API', 'Role-Based Access Control', 'Vite', 'Oxlint'],
     highlights: [
       'Comprehensive course & bootcamp catalogue with dynamic multi-criteria category filtering',
       'Interactive student analytics dashboard powered by Recharts visualizing learning progress, study hours, and certifications',
@@ -97,8 +97,7 @@ export const projectsData: Project[] = [
     summaryAr: 'متجر إلكتروني حي ومتكامل لبطاقات ومفاتيح الألعاب الرقمية (ghos.shop) يتميز بنظام مصادقة ثنائية (2FA)، حماية الحسابات بالتحقق المزدوج من البريد، ورموز استعادة مؤقتة، وسلة مشتريات ذكية تنقل الجلسات تلقائياً.',
     image: '/assets/images/project_ghos_storefront.png',
     links: [
-      { label: 'Live Store (ghos.shop)', labelAr: 'المتجر المباشر (ghos.shop)', url: 'https://ghos.shop', type: 'launch' },
-      { label: 'Source Repo', labelAr: 'الكود المصدري', url: 'https://github.com/Ma16q/ghos', type: 'outline' }
+      { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/ghos', type: 'launch' }
     ],
     techStack: ['PHP', 'MySQL', 'JavaScript', 'CSS3', 'Resend API', '2FA Engine', 'Apache'],
     highlights: [
@@ -248,6 +247,7 @@ export const skillsData: Skill[] = [
   { name: 'Java SDK', nameAr: 'جافا SDK', category: 'languages' },
   { name: 'React 19', nameAr: 'رياكت 19', category: 'frontend' },
   { name: 'TypeScript', nameAr: 'تايب سكريبت', category: 'frontend' },
+  { name: 'Tailwind CSS v4', nameAr: 'تيلويند CSS', category: 'frontend' },
   { name: 'JavaScript (ES6+)', nameAr: 'جافاسكريبت', category: 'frontend' },
   { name: 'HTML5 & Modern CSS', nameAr: 'HTML5 وتقنيات CSS الحديثة', category: 'frontend' },
   { name: 'Android Studio', nameAr: 'أندرويد ستوديو', category: 'mobile' },

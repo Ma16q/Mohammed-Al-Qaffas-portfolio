@@ -80,6 +80,12 @@ export const normalizeSkillKeywords = (raw: string): string[] => {
   if (q.includes('javascript') || q.includes('جافاسكريبت') || q.includes('js')) {
     keywords.push('javascript', 'js', 'جافاسكريبت');
   }
+  if (q.includes('typescript') || q.includes('تايب سكريبت') || q.includes('تايب') || q === 'ts') {
+    keywords.push('typescript', 'تايب سكريبت', 'تايب', 'ts', 'capsule-tahawul');
+  }
+  if (q.includes('tailwind') || q.includes('تيلويند')) {
+    keywords.push('tailwind', 'تيلويند', 'capsule-tahawul');
+  }
   if (q.includes('css') || q.includes('html')) {
     keywords.push('css', 'html');
   }
