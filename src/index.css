@@ -1296,6 +1296,10 @@ body.light-mode .studio-3d-viewport {
   margin-bottom: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.4s ease;
+  isolation: isolate;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .sunan-preview {
@@ -1318,10 +1322,15 @@ body.light-mode .studio-3d-viewport {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
   background: #ffffff;
   z-index: 2;
+  pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .project-card:hover .app-icon-wrap {
-  transform: scale(1.1) rotate(2deg);
+  transform: scale(1.08) translateZ(0);
   box-shadow: 0 22px 48px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(56, 189, 248, 0.4);
 }
 
@@ -1330,6 +1339,9 @@ body.light-mode .studio-3d-viewport {
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .tag.green {
