@@ -7,7 +7,7 @@ import { RECIPIENT_EMAIL, sendMessage } from '../lib/sendMessage';
 import { copyText } from '../lib/clipboard';
 import { Reveal } from './Reveal';
 import { Confetti } from './Confetti';
-import { GithubIcon } from './BrandIcons';
+import { GithubIcon, InstagramIcon } from './BrandIcons';
 
 type Field = 'name' | 'email' | 'message';
 type FieldState = 'idle' | 'valid' | 'invalid';
@@ -261,6 +261,27 @@ export const ContactSection: React.FC = () => {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
                     <span className="channel-label">{t.contact.githubLabel}</span>
                     <strong className="channel-val">github.com/Ma16q</strong>
+                  </div>
+                  <span className="channel-action">
+                    <ExternalLink size={15} />
+                  </span>
+                </a>
+              </motion.div>
+
+              <motion.div variants={channelRow}>
+                <a
+                  href="https://www.instagram.com/dev_m.qaffas/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="channel-item"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className="channel-icon" style={{ color: '#e1306c' }}>
+                    <InstagramIcon />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
+                    <span className="channel-label">{isAr ? 'انستقرام' : 'Instagram'}</span>
+                    <strong className="channel-val">@dev_m.qaffas</strong>
                   </div>
                   <span className="channel-action">
                     <ExternalLink size={15} />

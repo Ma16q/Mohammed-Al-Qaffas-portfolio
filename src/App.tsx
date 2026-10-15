@@ -11,6 +11,8 @@ import { ProjectModal } from './components/ProjectModal';
 import { DevTerminal } from './components/DevTerminal';
 
 import { CursorAura } from './components/CursorAura';
+
+// Soft glow that trails the mouse behind the glass panels (mouse devices only).
 import { MobileDock } from './components/MobileDock';
 import { ContactDock } from './components/ContactDock';
 import { LanguageProvider } from './context/LanguageContext';
@@ -30,7 +32,16 @@ const PortfolioContent: React.FC = () => {
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [selectedSkillFilter, setSelectedSkillFilter] = useState<string | null>(null);
   const { active: activeSection, goTo } = useSectionNav();
+
+  const handleSelectSkill = useCallback((skill: string) => {
+    setSelectedSkillFilter(skill);
+    const target = document.getElementById('projects');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   // Layout effect so the body class is already applied when the view transition snapshots the new theme
   useLayoutEffect(() => {
@@ -75,11 +86,12 @@ const PortfolioContent: React.FC = () => {
     <div className="portfolio-app">
       
 
-      {/* Ambient Glow Orbs Background */}
+      {/* Ambient Velvet Background with Chromatic Cyan, Violet & Rose Orbs */}
       <div className="ambient-glow" aria-hidden="true">
         <div className="glow-orb orb-1"></div>
         <div className="glow-orb orb-2"></div>
         <div className="glow-orb orb-3"></div>
+        <div className="glow-orb orb-pink"></div>
         <CursorAura />
       </div>
 
@@ -96,8 +108,10 @@ const PortfolioContent: React.FC = () => {
         <ProjectsSection
           theme={theme}
           onInspect={(proj) => setSelectedProject(proj)}
+          skillFilter={selectedSkillFilter}
+          onClearSkillFilter={() => setSelectedSkillFilter(null)}
         />
-        <AboutSkills />
+        <AboutSkills onSelectSkill={handleSelectSkill} />
         <ContactSection />
       </main>
 

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Project } from '../types/portfolio';
-import { Car3DViewer } from './Car3DViewer';
 import { TiltCard } from './TiltCard';
-import { Info, ExternalLink, Activity, Box } from 'lucide-react';
+import { Info, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface ProjectCardProps {
@@ -11,114 +10,14 @@ interface ProjectCardProps {
   onInspect?: (project: Project) => void;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInspect }) => {
-  const [motriView, setMotriView] = useState<'3d' | 'hologram'>('3d');
-  const { language, t } = useLanguage();
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onInspect }) => {
+  const { t, language } = useLanguage();
   const isAr = language === 'ar';
 
   const title = isAr && project.titleAr ? project.titleAr : project.title;
   const summary = isAr && project.summaryAr ? project.summaryAr : project.summary;
 
-  if (project.is3dInteractive) {
-    return (
-      <TiltCard className="project-card glass-panel" id="motrilogCard" tilt={false}>
-        {/* MotriLog View Mode Switcher */}
-        <div className="motrilog-view-toggle" aria-label="Select MotriLog View Mode">
-          <button
-            type="button"
-            className={`motri-tab-btn ${motriView === '3d' ? 'active' : ''}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setMotriView('3d');
-            }}
-          >
-            <Box size={14} />
-            <span>{t.projects.interactiveTab}</span>
-          </button>
-          <button
-            type="button"
-            className={`motri-tab-btn ${motriView === 'hologram' ? 'active' : ''}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setMotriView('hologram');
-            }}
-          >
-            <Activity size={14} />
-            <span>{t.projects.hologramTab}</span>
-          </button>
-        </div>
-
-        <div className="project-preview motrilog-preview-wrap">
-          {motriView === '3d' ? (
-            <Car3DViewer theme={theme} />
-          ) : (
-            <div className="car3d-static-render active">
-              <img
-                src={project.image}
-                alt="MotriLog 3D Holographic Vehicle Telemetry"
-                className="project-img"
-                loading="lazy"
-              />
-              <div className="holo-scan-line"></div>
-              <div className="holo-badge">
-                <span className="holo-radar-dot"></span>
-                <span>{t.projects.hudBadge}</span>
-              </div>
-              <div className="holo-hotspots">
-                <span className="hotspot hotspot-engine">
-                  <span className="hotspot-pulse"></span>
-                  <span className="hotspot-label">Engine 94%</span>
-                </span>
-                <span className="hotspot hotspot-tire">
-                  <span className="hotspot-pulse"></span>
-                  <span className="hotspot-label">Tires 35 PSI</span>
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="project-tags">
-          {project.tags.map((tag, i) => (
-            <span key={i} className={`tag ${tag.color || ''}`}>
-              {isAr && tag.textAr ? tag.textAr : tag.text}
-            </span>
-          ))}
-        </div>
-
-        <h3 className="project-title">{title}</h3>
-        <p className="project-summary">{summary}</p>
-
-        <div className="project-actions">
-          {project.links.map((link, i) => (
-            <a
-              key={i}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn-card ${link.type}`}
-            >
-              <span>{isAr && link.labelAr ? link.labelAr : link.label}</span>
-              <ExternalLink size={13} />
-            </a>
-          ))}
-          {onInspect && (
-            <button
-              type="button"
-              className="btn-card outline"
-              onClick={() => onInspect(project)}
-              title={t.projects.inspectBtn}
-              style={{ flex: '0 0 auto', padding: '0.7rem 0.9rem' }}
-            >
-              <Info size={16} />
-            </button>
-          )}
-        </div>
-      </TiltCard>
-    );
-  }
-
-  // Google Play App Card
+  // Google Play Published App Card
   if (project.isGooglePlay) {
     const isSunan = project.id === 'sunan';
     return (
@@ -127,7 +26,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
           <div className="app-icon-wrap">
             <img src={project.appIcon} alt={`${title} - App Icon`} className="app-icon-img" loading="lazy" />
           </div>
-          <div className="holo-badge" style={{ top: '0.75rem', left: '0.75rem' }}>
+          <div className="holo-badge" style={{ top: '0.75rem', left: isAr ? 'auto' : '0.75rem', right: isAr ? '0.75rem' : 'auto' }}>
             <span className="holo-radar-dot" style={{ background: isSunan ? '#10b981' : '#38bdf8' }}></span>
             <span>{t.projects.appBadge}</span>
           </div>
@@ -173,7 +72,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
     );
   }
 
-  // Standard Project Card
+  // Standard Software Project Card (MotriLog, Ghos, Numbers Game, My First React)
   return (
     <TiltCard className="project-card glass-panel">
       <div className="project-preview">
@@ -197,8 +96,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, theme, onInsp
           <a
             key={i}
             href={link.url}
-            target={link.url.startsWith('http') ? '_blank' : undefined}
-            rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`btn-card ${link.type}`}
           >
             <span>{isAr && link.labelAr ? link.labelAr : link.label}</span>

@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
 import { RECIPIENT_EMAIL, sendMessage } from '../lib/sendMessage';
 import { copyText } from '../lib/clipboard';
-import { GithubIcon, LinkedinIcon } from './BrandIcons';
+import { GithubIcon, LinkedinIcon, InstagramIcon } from './BrandIcons';
 import { Confetti } from './Confetti';
 import type { SectionId } from '../hooks/useSectionNav';
 
@@ -162,6 +162,16 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
                   >
                     <GithubIcon size={16} />
                     <span>GitHub</span>
+                  </motion.a>
+                  <motion.a
+                    href="https://www.instagram.com/dev_m.qaffas/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="dock-action"
+                    variants={itemVariants}
+                  >
+                    <InstagramIcon size={16} />
+                    <span>Instagram</span>
                   </motion.a>
                 </motion.div>
 

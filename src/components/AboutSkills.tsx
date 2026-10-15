@@ -6,6 +6,10 @@ import { trackSpotlight } from '../lib/pointer';
 import { ExternalLink, Cpu, Briefcase, GraduationCap, Users, Trophy } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
+interface AboutSkillsProps {
+  onSelectSkill?: (skill: string) => void;
+}
+
 // Skill pills pop in one by one when the card scrolls into view
 const pillContainer = {
   hidden: {},
@@ -16,7 +20,7 @@ const pillItem = {
   show: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 380, damping: 20 } }
 } as const;
 
-export const AboutSkills: React.FC = () => {
+export const AboutSkills: React.FC<AboutSkillsProps> = ({ onSelectSkill }) => {
   const { language, t } = useLanguage();
   const isAr = language === 'ar';
 
@@ -90,10 +94,15 @@ export const AboutSkills: React.FC = () => {
 
             <div className="about-side-box">
               {/* Real Skills */}
-              <div className="mini-glass-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.75rem' }}>
-                  <Cpu size={16} style={{ color: 'var(--accent-cyan)' }} />
-                  <h4 style={{ margin: 0 }}>{t.about.skillsTitle}</h4>
+              <div className="mini-glass-card skills-glass-panel">
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.45rem', marginBottom: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                    <Cpu size={16} style={{ color: 'var(--accent-cyan)' }} />
+                    <h4 style={{ margin: 0 }}>{t.about.skillsTitle}</h4>
+                  </div>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', opacity: 0.8 }}>
+                    {t.projects.clickToFilter}
+                  </span>
                 </div>
                 <motion.div
                   className="skills-grid"
@@ -104,9 +113,16 @@ export const AboutSkills: React.FC = () => {
                 >
                   {skillsData.map((s, idx) => (
                     <motion.span key={idx} className="pop-item" variants={pillItem}>
-                      <span className="skill-pill">
+                      <button
+                        type="button"
+                        className="skill-pill clickable"
+                        onClick={() => onSelectSkill?.(s.name)}
+                        title={t.projects.clickToFilter}
+                        aria-label={`${isAr && s.nameAr ? s.nameAr : s.name} - ${t.projects.clickToFilter}`}
+                      >
                         <span>{isAr && s.nameAr ? s.nameAr : s.name}</span>
-                      </span>
+                        <span className="skill-pill-indicator" aria-hidden="true">↗</span>
+                      </button>
                     </motion.span>
                   ))}
                 </motion.div>
@@ -135,9 +151,7 @@ export const AboutSkills: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '0.65rem',
-                    borderRadius: '14px',
-                    background: 'var(--glass-bg)',
-                    border: '1px solid var(--glass-border)'
+                    borderRadius: '14px'
                   }}
                 >
                   {/* Top Row: Icon + Status Pill Badge */}
@@ -168,7 +182,7 @@ export const AboutSkills: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Main Titles: Full Card Width, No Squishing */}
+                  {/* Main Titles */}
                   <div>
                     <h4 style={{
                       margin: '0 0 0.35rem 0',
@@ -200,22 +214,20 @@ export const AboutSkills: React.FC = () => {
                     {isAr ? exp.descriptionAr : exp.description}
                   </p>
 
-                  {/* Skill / Technology Tags */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: 'auto', paddingTop: '0.35rem' }}>
+                  {/* Skill / Technology Tags - Clickable buttons */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: 'auto', paddingTop: '0.45rem' }}>
                     {exp.tags.map((tag, tIdx) => (
-                      <span
+                      <button
                         key={tIdx}
-                        style={{
-                          fontSize: '0.75rem',
-                          padding: '0.15rem 0.5rem',
-                          background: 'rgba(56, 189, 248, 0.08)',
-                          border: '1px solid rgba(56, 189, 248, 0.2)',
-                          borderRadius: '4px',
-                          color: '#93c5fd'
-                        }}
+                        type="button"
+                        className="exp-tag-btn"
+                        onClick={() => onSelectSkill?.(tag)}
+                        title={t.projects.clickToFilter}
+                        aria-label={`${tag} - ${t.projects.clickToFilter}`}
                       >
-                        {tag}
-                      </span>
+                        <span>{tag}</span>
+                        <span className="exp-tag-indicator" aria-hidden="true">↗</span>
+                      </button>
                     ))}
                   </div>
                 </div>

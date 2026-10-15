@@ -43,14 +43,17 @@ export interface Translations {
       games: string;
     };
     inspectBtn: string;
-    interactiveTab: string;
-    hologramTab: string;
-    hudBadge: string;
     appBadge: string;
     modalTitle: string;
     techStack: string;
     keyHighlights: string;
     closeModal: string;
+    filteredBySkill: (skill: string) => string;
+    viewSkillOnGithub: (skill: string) => string;
+    skillOnGithubOnlyTitle: string;
+    skillOnGithubOnlyDesc: (skill: string) => string;
+    exploreGithubSkillBtn: string;
+    clickToFilter: string;
   };
   about: {
     sectionPill: string;
@@ -94,7 +97,6 @@ export interface Translations {
       apps: string;
       bio: string;
       aiAcademic: string;
-      car3d: string;
       contact: string;
       theme: string;
       clear: string;
@@ -185,14 +187,17 @@ export const translations: Record<Language, Translations> = {
         games: 'Games & OOP Systems',
       },
       inspectBtn: 'Inspect Details',
-      interactiveTab: '3D Interactive View',
-      hologramTab: 'Telemetry HUD',
-      hudBadge: '3D Telemetry HUD',
       appBadge: 'Google Play Application',
       modalTitle: 'Project Architecture & Inspection',
       techStack: 'Tech Stack & Engineering Tools',
       keyHighlights: 'Key Engineering Highlights',
       closeModal: 'Close',
+      filteredBySkill: (s) => `Filtered by skill: "${s}"`,
+      viewSkillOnGithub: (s) => `Search "${s}" repositories on GitHub`,
+      skillOnGithubOnlyTitle: 'More projects for this skill are on GitHub',
+      skillOnGithubOnlyDesc: (s) => `This portfolio highlights selected production projects. Additional codebases, assignments, and repositories using "${s}" can be found on GitHub.`,
+      exploreGithubSkillBtn: 'Explore Repositories on GitHub',
+      clickToFilter: 'Click to filter projects using this skill',
     },
     about: {
       sectionPill: 'About & Competencies',
@@ -214,7 +219,7 @@ export const translations: Record<Language, Translations> = {
       copied: 'Copied to clipboard!',
       githubLabel: 'GitHub Developer Page',
       locationLabel: 'Campus / Location',
-      locationVal: 'IAU Campus, Dammam, Eastern Province, Saudi Arabia',
+      locationVal: 'Eastern Province, Saudi Arabia',
       formName: 'Your Full Name',
       formEmail: 'Email Address',
       formMessage: 'Project Inquiry / Message',
@@ -225,9 +230,9 @@ export const translations: Record<Language, Translations> = {
       sentSuccess: 'Message sent successfully! Thank you.',
     },
     terminal: {
-      badge: 'Security Guard Active',
-      title: 'bash + AI — mohamed@iau-workstation:~',
-      welcomeMsg: 'Mohamed Ahmed (Ma16q) Developer Terminal & AI [v2.4.0]',
+      badge: 'Interactive CLI Active',
+      title: 'zsh / bash CLI — mohamed@iau-workstation:~',
+      welcomeMsg: 'Mohamed Al-Qaffas (Ma16q) Developer Terminal [v2.4.0]',
       typeHelp: 'Type help or مساعدة for commands, or select a shortcut chip below.',
       inputPlaceholder: 'Type command or inquiry (e.g. help, projects, skills)...',
       chips: {
@@ -235,15 +240,14 @@ export const translations: Record<Language, Translations> = {
         skills: 'Skills',
         apps: 'Google Play',
         bio: 'About Mohamed',
-        aiAcademic: 'Academic & Experience Profile',
-        car3d: '3D WebGL Vehicle Features',
+        aiAcademic: 'Academic & Training',
         contact: 'Contact Info',
         theme: 'Toggle Theme',
         clear: 'Clear Terminal',
       },
       secSqLi: '[SECURITY AUDIT] SQL Injection attempt detected and neutralized. Static client environment is immutable and SQL-free.',
-      secPromptInj: '[SECURITY AUDIT] Prompt Injection / System Override blocked. Security constraints remain active and enforced.',
-      aiTitle: 'Ma16q AI Engine:',
+      secPromptInj: '[SECURITY AUDIT] Command / injection attempt blocked. Security constraints remain active and enforced.',
+      aiTitle: 'Ma16q CLI System:',
     },
     footer: {
       copy: `© ${new Date().getFullYear()} Mohamed Ahmed (Ma16q) • Imam Abdulrahman Bin Faisal University (IAU). All rights reserved.`,
@@ -253,7 +257,7 @@ export const translations: Record<Language, Translations> = {
       themeToLight: 'Switch to light mode',
       themeToDark: 'Switch to dark mode',
       typedPrefix: 'I build with',
-      typedPhrases: ['React 19 + TypeScript', 'Native Android (Java)', 'Three.js & WebGL', 'Blender 3D', 'Flutter & Dart'],
+      typedPhrases: ['React 19 + TypeScript', 'Native Android (Java)', 'Three.js & WebGL', 'Blender 3D', 'Software Engineering'],
       toastCopied: 'Email copied to clipboard',
       toastCopyFailed: 'Could not copy — please copy the email manually',
       toastSendFallback: 'Direct sending failed, so your mail app was opened instead',
@@ -325,14 +329,17 @@ export const translations: Record<Language, Translations> = {
         games: 'الألعاب والأنظمة البرمجية',
       },
       inspectBtn: 'فحص التفاصيل',
-      interactiveTab: 'العرض التفاعلي 3D',
-      hologramTab: 'شاشة البيانات HUD',
-      hudBadge: 'بيانات التيليماتري 3D',
       appBadge: 'تطبيق رسمي على Google Play',
       modalTitle: 'فحص معمارية وتفاصيل المشروع',
       techStack: 'حزمة التقنيات وأدوات الهندسة',
       keyHighlights: 'أبرز الإنجازات والخصائص الهندسية',
       closeModal: 'إغلاق',
+      filteredBySkill: (s) => `تصفية المشاريع حسب مهارة: "${s}"`,
+      viewSkillOnGithub: (s) => `استعراض كافة مستودعات "${s}" على GitHub`,
+      skillOnGithubOnlyTitle: 'مشاريع هذه المهارة متوفرة على حساب GitHub',
+      skillOnGithubOnlyDesc: (s) => `يعرض البورتفوليو نخبة مختارة من المشاريع، بينما تتوفر مشاريع، وأكواد، وتطبيقات إضافية تستخدم "${s}" مباشرة في مستودعات GitHub.`,
+      exploreGithubSkillBtn: 'استعراض المستودعات على GitHub',
+      clickToFilter: 'انقر لعرض المشاريع التي تستخدم هذه المهارة',
     },
     about: {
       sectionPill: 'عن المطور والقدرات',
@@ -354,7 +361,7 @@ export const translations: Record<Language, Translations> = {
       copied: 'تم نسخ البريد بنجاح!',
       githubLabel: 'صفحة المطور على GitHub',
       locationLabel: 'المقر / الجامعة',
-      locationVal: 'جامعة الإمام عبد الرحمن بن فيصل، الدمام، المنطقة الشرقية، المملكة العربية السعودية',
+      locationVal: 'الشرقية، المملكة العربية السعودية',
       formName: 'الاسم الكامل',
       formEmail: 'البريد الإلكتروني',
       formMessage: 'تفاصيل المشروع أو الرسالة',
@@ -365,9 +372,9 @@ export const translations: Record<Language, Translations> = {
       sentSuccess: 'تم إرسال رسالتك بنجاح! شكراً لتواصلك.',
     },
     terminal: {
-      badge: 'حماية الأمان نشطة',
-      title: 'bash + AI — mohamed@iau-workstation:~',
-      welcomeMsg: 'الطرفية الهندسية والمساعد الذكي لمحمد أحمد [v2.4.0]',
+      badge: 'الطرفية التفاعلية نشطة',
+      title: 'zsh / bash CLI — mohamed@iau-workstation:~',
+      welcomeMsg: 'طرفية المطور التفاعلية لمحمد القفاص [v2.4.0]',
       typeHelp: 'اكتب help أو مساعدة لعرض الأوامر، أو انقر على الاختصارات السريعة بالأسفل.',
       inputPlaceholder: 'اكتب أمراً أو سؤالاً (مثال: help, مشاريع, مهارات)...',
       chips: {
@@ -375,15 +382,14 @@ export const translations: Record<Language, Translations> = {
         skills: 'المهارات',
         apps: 'تطبيقات Google Play',
         bio: 'من أنا؟',
-        aiAcademic: 'الخبرة والمسيرة الأكاديمية',
-        car3d: 'مميزات سيارة 3D WebGL',
+        aiAcademic: 'المسيرة والتدريب',
         contact: 'قنوات التواصل',
         theme: 'تبديل المظهر',
         clear: 'مسح الطرفية',
       },
       secSqLi: '[تدقيق الأمان] تم اكتشاف محاولة حقن SQL وإبطالها فوراً. بيئة العميل ثابتة ومحصنة وخالية من قواعد SQL.',
-      secPromptInj: '[تدقيق الأمان] تم اعتراض محاولة اختراق الأوامر (Prompt Injection) وحجبها. ضوابط الأمان مفروضة ونشطة.',
-      aiTitle: 'المساعد الذكي (Ma16q AI):',
+      secPromptInj: '[تدقيق الأمان] تم اعتراض محاولة اختراق الأوامر وحجبها. ضوابط الأمان مفروضة ونشطة.',
+      aiTitle: 'نظام طرفية المطور (Ma16q CLI):',
     },
     footer: {
       copy: `© ${new Date().getFullYear()} محمد أحمد (Ma16q) • جامعة الإمام عبد الرحمن بن فيصل (IAU). جميع الحقوق محفوظة.`,
@@ -393,7 +399,7 @@ export const translations: Record<Language, Translations> = {
       themeToLight: 'التبديل إلى الوضع النهاري',
       themeToDark: 'التبديل إلى الوضع الليلي',
       typedPrefix: 'أبني باستخدام',
-      typedPhrases: ['React 19 + TypeScript', 'Native Android (Java)', 'Three.js & WebGL', 'Blender 3D', 'Flutter & Dart'],
+      typedPhrases: ['React 19 + TypeScript', 'تطبيقات Android الأصلية (Java)', 'Three.js & WebGL', 'Blender 3D', 'هندسة البرمجيات'],
       toastCopied: 'تم نسخ البريد الإلكتروني',
       toastCopyFailed: 'تعذّر النسخ — انسخ البريد يدوياً من فضلك',
       toastSendFallback: 'تعذّر الإرسال المباشر، ففتحنا لك تطبيق البريد',

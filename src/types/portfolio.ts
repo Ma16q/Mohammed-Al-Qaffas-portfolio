@@ -10,7 +10,6 @@ export interface Project {
   summaryAr?: string;
   image?: string;
   appIcon?: string;
-  is3dInteractive?: boolean;
   isGooglePlay?: boolean;
   links: {
     label: string;

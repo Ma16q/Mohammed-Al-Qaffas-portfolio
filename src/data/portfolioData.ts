@@ -15,38 +15,71 @@ export interface ExperienceItem {
 
 export const projectsData: Project[] = [
   {
+    id: 'capsule-tahawul',
+    title: 'Capsule Tahawul',
+    titleAr: 'منصة كبسولة تحول (Capsule Tahawul)',
+    category: 'web-3d',
+    tags: [
+      { text: 'React 19', textAr: 'رياكت 19', color: 'cyan' },
+      { text: 'Tailwind CSS v4', textAr: 'تيلويند v4', color: 'pink' },
+      { text: 'Recharts', textAr: 'تحليلات بيانية', color: 'default' },
+      { text: 'Learning Platform', textAr: 'منصة تعليمية وتدريبية', color: 'cyan' },
+      { text: 'React Router v8', textAr: 'راوتر v8', color: 'default' }
+    ],
+    summary: 'Full-featured interactive EdTech training platform & learning marketplace built with React 19, Tailwind CSS 4, and Recharts. Features dynamic course catalogues with deep filtering, student learning analytics dashboards, multi-role auth, and complete enrollment & payment checkout flows.',
+    summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 وتيلويند 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
+    image: '/assets/images/project_capsule_tahawul.png',
+    links: [
+      { label: 'Project Repository', labelAr: 'مستودع المشروع', url: 'https://github.com/Ma16q/My-First-React-Website', type: 'launch' }
+    ],
+    techStack: ['React 19', 'Tailwind CSS v4', 'Recharts', 'React Router v8', 'Context API', 'Role-Based Access Control', 'Vite', 'Oxlint'],
+    highlights: [
+      'Comprehensive course & bootcamp catalogue with dynamic multi-criteria category filtering',
+      'Interactive student analytics dashboard powered by Recharts visualizing learning progress, study hours, and certifications',
+      'End-to-end checkout & payment system featuring order summary, multi-step billing forms, and promo validation',
+      'Role-Based Access Control (RBAC) architecture separating student, trainer, and administrator workflows',
+      'Modern responsive UI engineered with Tailwind CSS v4 and localized layout support'
+    ],
+    highlightsAr: [
+      'كتالوج شامل للدورات والمعسكرات التدريبية مع نظام تصفية وبحث متقدم متعدد المعايير',
+      'لوحة تحكم وتحليلات بيانية تفاعلية مدعومة بمكتبة Recharts لمتابعة تقدم المتعلم وساعاته التدريبية',
+      'دورة دفع وتسجيل متكاملة تشمل ملخص الطلب، نماذج الدفع الإلكتروني، وتأكيد الاشتراكات',
+      'معمارية إدارة صلاحيات متعددة (RBAC) تفصل تجارب الطلاب والمدربين وإدارة المنصة',
+      'واجهات عصرية فائقة الاستجابة مبنية بـ Tailwind CSS 4 تدعم الوضعين والتنقل السلس'
+    ]
+  },
+  {
     id: 'motrilog',
     title: 'MotriLog',
     titleAr: 'موتري لوج (MotriLog)',
     category: 'web-3d',
-    is3dInteractive: true,
     tags: [
       { text: 'Python & Flask', textAr: 'بايثون وفلاسك', color: 'default' },
       { text: 'Docker Compose', textAr: 'دوكر كومبوز', color: 'default' },
       { text: 'MongoDB', textAr: 'مونغو دي بي', color: 'default' },
       { text: 'Leaflet Maps', textAr: 'خرائط Leaflet', color: 'default' },
-      { text: 'Three.js 3D WebGL', textAr: 'تيليماتري 3D تفاعلي', color: 'cyan' }
+      { text: 'SWE Platform', textAr: 'مشروع هندسة برمجيات', color: 'cyan' }
     ],
-    summary: 'Software Engineering (SWE) Course Project — Smart vehicle maintenance platform engineered with Python/Flask, MongoDB, and Docker Compose. Features predictive maintenance algorithms (oil & service cycles), an interactive workshop locator via Leaflet.js & OpenStreetMap, and a real-time 3D telemetry digital twin.',
-    summaryAr: 'مشروع مادة هندسة البرمجيات (SWE) — منصة ذكية لصيانة وتتبع سجلات المركبات مبنية بـ Python و Flask و Docker و MongoDB. تتضمن خوارزميات ذكية للتنبؤ بمواعيد الصيانة الدورية، وخريطة تفاعلية لتحديد ورش الإصلاح القريبة عبر Leaflet.js و OpenStreetMap، مع محاكاة تيليماتري ثلاثية الأبعاد تفاعلية تتجاوب مع السكرول.',
-    image: '/assets/images/project_motrilog_3d.jpg',
+    summary: 'Software Engineering (SWE) Course Project — Smart vehicle maintenance platform engineered with Python/Flask, MongoDB, and Docker Compose. Features predictive maintenance algorithms (oil & service cycles), and an interactive workshop locator via Leaflet.js & OpenStreetMap.',
+    summaryAr: 'مشروع مادة هندسة البرمجيات (SWE) — منصة ذكية لصيانة وتتبع سجلات المركبات مبنية بـ Python و Flask و Docker و MongoDB. تتضمن خوارزميات ذكية للتنبؤ بمواعيد الصيانة الدورية، وخريطة تفاعلية لتحديد ورش الإصلاح القريبة عبر Leaflet.js و OpenStreetMap.',
+    image: '/assets/images/project_motrilog_card.png',
     links: [
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/MotriLog', type: 'launch' }
     ],
-    techStack: ['Python 3.9+', 'Flask', 'MongoDB', 'Docker & Compose', 'Leaflet.js', 'OpenStreetMap', 'Three.js WebGL', 'Telemetry Analytics'],
+    techStack: ['Python 3.9+', 'Flask', 'MongoDB', 'Docker & Compose', 'Leaflet.js', 'OpenStreetMap', 'REST APIs', 'Telegram Bot Service'],
     highlights: [
       'Comprehensive vehicle maintenance log history & scheduled service tracking',
       'Predictive service algorithm estimating oil life, brake wear, and inspection intervals',
       'Interactive nearby workshop locator utilizing Leaflet.js and OpenStreetMap without paid API dependencies',
       'Synchronized multi-container deployment architecture via Docker Compose & MongoDB',
-      'Interactive lightweight 3D vehicle telemetry digital twin with scroll-driven diagnostic states'
+      'Telegram bot integration for instant maintenance alerts and reminder notifications'
     ],
     highlightsAr: [
       'سجل شامل لتوثيق وتتبع عمليات الصيانة الدورية والفحص الفني للمركبة',
       'خوارزمية ذكية للتنبؤ باحتياجات ومواعيد الصيانة الدورية (تغيير الزيوت، استهلاك الفرامل، والفحص القادم)',
       'خريطة تفاعلية لتحديد مواقع ورش ومراكز الصيانة القريبة باستخدام Leaflet.js و OpenStreetMap',
       'معمارية حاويات معيارية متكاملة عبر Docker Compose وقاعدة بيانات MongoDB',
-      'توأم رقمي ثلاثي الأبعاد تفاعلي للتيليماتري يتغير بسلاسة مع التمرير (السكرول)'
+      'ربط مع خدمة Telegram Bot لإرسال تنبيهات الصيانة والإشعارات الفورية للمستخدم'
     ]
   },
   {
@@ -62,7 +95,7 @@ export const projectsData: Project[] = [
     ],
     summary: 'Production digital game keys e-commerce storefront (ghos.shop) featuring multi-mode authentication with 2FA, dual-email account security verification, timed 6-digit password resets, and session-persistent carts.',
     summaryAr: 'متجر إلكتروني حي ومتكامل لبطاقات ومفاتيح الألعاب الرقمية (ghos.shop) يتميز بنظام مصادقة ثنائية (2FA)، حماية الحسابات بالتحقق المزدوج من البريد، ورموز استعادة مؤقتة، وسلة مشتريات ذكية تنقل الجلسات تلقائياً.',
-    image: '/assets/images/project_ghos.jpg',
+    image: '/assets/images/project_ghos_storefront.png',
     links: [
       { label: 'Live Store (ghos.shop)', labelAr: 'المتجر المباشر (ghos.shop)', url: 'https://ghos.shop', type: 'launch' },
       { label: 'Source Repo', labelAr: 'الكود المصدري', url: 'https://github.com/Ma16q/ghos', type: 'outline' }
@@ -162,7 +195,7 @@ export const projectsData: Project[] = [
     ],
     summary: 'Fast-paced Android game built with Java & modern Material 3 Design components. Players test quick-thinking reflexes by identifying and tapping the higher number card, featuring streak counters (🔥) and touch animations.',
     summaryAr: 'لعبة أندرويد تفاعلية سريعة مبنية بلغة Java ومكونات Material 3 Design الحديثة. يختبر اللاعبون سرعة بديهتهم باختيار الرقم الأكبر مع عداد الحماس المتتالي (Streak 🔥) وتغذية بصرية ولمسية تفاعلية.',
-    image: '/assets/images/project_numbers.jpg',
+    image: '/assets/images/project_numbers_showcase.jpg',
     links: [
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/Numbers-Game', type: 'launch' }
     ],
@@ -218,7 +251,7 @@ export const skillsData: Skill[] = [
   { name: 'JavaScript (ES6+)', nameAr: 'جافاسكريبت', category: 'frontend' },
   { name: 'HTML5 & Modern CSS', nameAr: 'HTML5 وتقنيات CSS الحديثة', category: 'frontend' },
   { name: 'Android Studio', nameAr: 'أندرويد ستوديو', category: 'mobile' },
-  { name: 'Flutter & Dart', nameAr: 'فلاتر ودارت', category: 'mobile' },
+  { name: 'Native Android (Java)', nameAr: 'تطوير أندرويد الأصيل (Java)', category: 'mobile' },
   { name: 'Three.js & WebGL 3D', nameAr: 'Three.js و WebGL ثلاثي الأبعاد', category: 'tools' },
   { name: 'Git & Version Control', nameAr: 'Git وإدارة الإصدارات', category: 'tools' },
   { name: 'Google Cloud Platform (GCP)', nameAr: 'منصة قوقل السحابية GCP', category: 'tools' },
@@ -245,7 +278,7 @@ export const experienceData: ExperienceItem[] = [
     organization: 'Imam Abdulrahman Bin Faisal University (IAU)',
     organizationAr: 'جامعة الإمام عبد الرحمن بن فيصل - كلية علوم الحاسب (CCSIT)',
     period: 'Eastern Province, Saudi Arabia',
-    periodAr: 'المنطقة الشرقية، المملكة العربية السعودية',
+    periodAr: 'الشرقية، المملكة العربية السعودية',
     description: 'Studying core Computer Science disciplines: Data Structures, Algorithms, Software Engineering, Database Systems, Object-Oriented Programming, and Web/Mobile Architectures.',
     descriptionAr: 'دراسة التخصصات الجوهرية: هياكل البيانات، الخوارزميات، هندسة البرمجيات، قواعد البيانات، البرمجة كائنية التوجه، وتطوير الأنظمة الموزعة والمحمولة.',
     tags: ['Data Structures', 'Algorithms', 'OOP', 'Databases', 'Computer Networks']
@@ -275,3 +308,4 @@ export const experienceData: ExperienceItem[] = [
     tags: ['Telemetry', 'Innovation Track', 'Prototyping', 'Team Engineering']
   }
 ];
+

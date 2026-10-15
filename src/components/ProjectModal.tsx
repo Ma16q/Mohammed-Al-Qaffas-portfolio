@@ -107,7 +107,7 @@ const ModalCard: React.FC<{ project: Project; onClose: () => void }> = ({ projec
           {project.techStack && (
             <div className="modal-section">
               <motion.h4 className="modal-section-title" variants={rowVariants}>
-                <Cpu size={16} style={{ color: 'var(--accent-pink)' }} />
+                <Cpu size={16} style={{ color: 'var(--accent-cyan)' }} />
                 <span>{t.projects.techStack}</span>
               </motion.h4>
               <div className="modal-tech-pills">

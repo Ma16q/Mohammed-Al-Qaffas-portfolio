@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Terminal, X, ShieldCheck, Send, CheckCircle, Code2, Smartphone, User, HelpCircle, RefreshCw, Car } from "lucide-react";
+import { Terminal, X, ShieldCheck, Send, CheckCircle, Code2, Smartphone, User, HelpCircle, RefreshCw } from "lucide-react";
+import { InstagramIcon } from './BrandIcons';
 import { projectsData } from '../data/portfolioData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -32,8 +33,8 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
       <div style={{ lineHeight: 1.7 }}>
         <p style={{ color: 'var(--accent-cyan)', fontWeight: 'bold', fontSize: '0.98rem' }}>
           {isAr
-            ? '🚀 الطرفية الهندسية والمساعد الذكي لمحمد القفاص [v2.4.0]'
-            : '🚀 Mohamed Al-Qaffas (Ma16q) Developer Terminal & AI [v2.4.0]'}
+            ? '🚀 طرفية المطور الهندسية لمحمد القفاص [v2.4.0]'
+            : '🚀 Mohamed Al-Qaffas (Ma16q) Developer Interactive Terminal [v2.4.0]'}
         </p>
         <p style={{ color: '#94a3b8', marginTop: '0.35rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.35rem' }}>
           {isAr ? (
@@ -97,7 +98,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
     { label: t.terminal.chips.apps, cmd: 'play', icon: <Smartphone size={13} /> },
     { label: t.terminal.chips.bio, cmd: 'bio', icon: <User size={13} /> },
     { label: isAr ? 'التدريب المهني والخبرة؟' : 'Training & Work Experience', cmd: isAr ? 'ما هو تدريبك وخبرتك المهنية؟' : 'What is your software training & experience?', icon: <HelpCircle size={13} /> },
-    { label: t.terminal.chips.car3d, cmd: 'car', icon: <Car size={13} /> },
+    { label: isAr ? 'انستقرام' : 'Instagram', cmd: 'insta', icon: <InstagramIcon size={13} /> },
     { label: t.terminal.chips.contact, cmd: 'contact', icon: <Send size={13} /> },
     { label: t.terminal.chips.theme, cmd: 'theme toggle', icon: <RefreshCw size={13} /> },
     { label: t.terminal.chips.clear, cmd: 'clear', icon: <RefreshCw size={13} /> },
@@ -165,7 +166,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
             <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>bio / من انا</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'نبذة عن محمد القفاص والتدريب' : 'Developer bio, training & IAU'}</span></p>
             <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>training / تدريب</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'تفاصيل التدريب الميداني المهني' : 'Software engineering COOP training'}</span></p>
             <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>contact / تواصل</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'قنوات التواصل وروابط LinkedIn' : 'LinkedIn & official contact'}</span></p>
-            <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>car / سيارة</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'محاكاة سيارة 3D WebGL' : '3D WebGL car telemetry'}</span></p>
+            <p>• <span style={{ color: '#e1306c', fontWeight: 600 }}>insta / انستقرام</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'حساب Instagram الرسمي' : 'Official Instagram profile'}</span></p>
             <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>theme light / dark</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'تبديل المظهر' : 'Toggle theme'}</span></p>
             <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>clear / مسح</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'إعادة ضبط الشاشة' : 'Reset terminal log'}</span></p>
             <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>exit / خروج</span> : <span style={{ color: '#cbd5e1' }}>{isAr ? 'إغلاق الطرفية' : 'Close terminal window'}</span></p>
@@ -199,7 +200,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
             {isAr ? 'المهارات الهندسية وحزم التطوير:' : 'Technical Engineering Stack:'}
           </p>
           <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'اللغات:' : 'Languages:'}</span> <span style={{ color: '#cbd5e1' }}>Python, Java SDK, TypeScript, JavaScript (ES6+), HTML5/CSS3</span></p>
-          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'تطبيقات الجوال:' : 'Mobile Apps:'}</span> <span style={{ color: '#cbd5e1' }}>Android Studio (Native Java), Flutter & Dart</span></p>
+          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'تطبيقات الجوال:' : 'Mobile Apps:'}</span> <span style={{ color: '#cbd5e1' }}>Android Studio (Native Java), Material 3, Android SDK</span></p>
           <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الويب وثلاثي الأبعاد:' : '3D & WebGL:'}</span> <span style={{ color: '#cbd5e1' }}>React 19, Three.js, WebGL Shaders, Blender 3D, GLTF/DRACO</span></p>
           <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الأنظمة والسحابة:' : 'Cloud & DevOps:'}</span> <span style={{ color: '#cbd5e1' }}>Git & GitHub, Google Cloud Platform (GCP), VS Code, Vercel</span></p>
         </div>
@@ -244,14 +245,13 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
         </div>
       );
     }
-    else if (lower === 'car' || lower === 'سيارة' || lower === '3d') {
+    else if (lower === 'insta' || lower === 'instagram' || lower === 'انستا' || lower === 'انستقرام') {
       output = (
         <div>
-          <p style={{ color: '#38bdf8', fontWeight: 'bold' }}>
-            {isAr ? 'محاكاة سيارة 3D التفاعلية (Three.js WebGL):' : 'Interactive 3D WebGL Vehicle Experience:'}
+          <p style={{ color: '#e1306c', fontWeight: 'bold' }}>
+            {isAr ? 'حساب Instagram الرسمي:' : 'Official Instagram Profile:'}
           </p>
-          <p>• {isAr ? 'مبنية بتقنيات Three.js مع إضاءة فيزيائية واقعية PBR ومحرك تدوير مداري 360 درجة.' : 'Built with Three.js featuring real-time PBR shaders, dynamic orbital camera, and engine audio synthesis.'}</p>
-          <p>• {isAr ? 'تحكم كامل بألوان الطلاء، المصابيح، وفحص التيليماتري الهيكلي.' : 'Full controls for paint customization, headlights, and structural wireframe telemetry.'}</p>
+          <p>• Instagram: <a href="https://www.instagram.com/dev_m.qaffas/" target="_blank" rel="noreferrer" style={{ color: '#e1306c', textDecoration: 'underline' }}>https://www.instagram.com/dev_m.qaffas/ (@dev_m.qaffas)</a></p>
         </div>
       );
     }
@@ -263,7 +263,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
           </p>
           <p>• LinkedIn: <a href="https://www.linkedin.com/in/ma16q/" target="_blank" rel="noreferrer" style={{ color: '#38bdf8', textDecoration: 'underline' }}>linkedin.com/in/ma16q</a></p>
           <p>• GitHub: <a href="https://github.com/Ma16q" target="_blank" rel="noreferrer" style={{ color: '#38bdf8', textDecoration: 'underline' }}>github.com/Ma16q</a></p>
-          <p>• Google Play: <a href="https://play.google.com/store/apps/developer?id=Ma16q" target="_blank" rel="noreferrer" style={{ color: '#10b981', textDecoration: 'underline' }}>Ma16q Developer Profile</a></p>
+          <p>• Instagram: <a href="https://www.instagram.com/dev_m.qaffas/" target="_blank" rel="noreferrer" style={{ color: '#e1306c', textDecoration: 'underline' }}>@dev_m.qaffas</a></p>
           <p>• Email: mohammed.alqaffas1@gmail.com</p>
         </div>
       );
@@ -304,18 +304,18 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
         aiResponse = isAr
           ? 'نشر محمد تطبيقين معتمدين على متجر Google Play: "مستحبات السنن" لمتابعة الأذكار والسنن، و"مسبحتي" لخاتم التسبيح الرقمي مع اهتزاز فيزيائي، وحاز كلاهما على تقييمات ممتازة.'
           : 'Mohamed published two official apps on Google Play: "Mustahabbat Al-Sunan" (habits tracker) and "Musbihati" (digital tasbih ring with haptics), both highly rated.';
-      } else if (lower.includes('3d') || lower.includes('ثلاثي') || lower.includes('سيار') || lower.includes('three') || lower.includes('car')) {
+      } else if (lower.includes('3d') || lower.includes('ثلاثي') || lower.includes('blender') || lower.includes('three')) {
         aiResponse = isAr
-          ? 'تجربة سيارة 3D مطورة باستخدام مكتبة Three.js مع WebGL ومحسنة بضغط DRACO. تتيح تدوير الكاميرا 360 درجة، تغيير ألوان الطلاء، ومحاكاة بيانات التيليماتري.'
-          : 'The 3D car experience is built with Three.js and WebGL, optimized with DRACO geometry compression, featuring 360° camera orbit, paint shader customization, and real-time telemetry.';
+          ? 'يمتلك محمد خبرة في النمذجة ثلاثية الأبعاد (3D Modeling) عبر Blender، وتطوير عروض الويب التفاعلية ثلاثية الأبعاد باستخدام Three.js و WebGL.'
+          : 'Mohamed has solid experience in 3D Modeling with Blender, and creating interactive WebGL web experiences with Three.js.';
       } else if (lower.includes('نشر') || lower.includes('فيرسل') || lower.includes('vercel') || lower.includes('deploy')) {
         aiResponse = isAr
           ? 'المشروع مهيأ بالكامل للنشر الفوري على Vercel أو GitHub Pages بضغطة زر واحدة، حيث تم بناؤه بهيكلية سريعة وخفيفة بالكامل من جانب العميل بدون أي تعقيدات باك إند زائدة.'
           : 'The project is 100% optimized for instant zero-config deployment on Vercel or GitHub Pages, utilizing pure client-side React 19 architecture with zero backend bloat.';
       } else if (lower.includes('سلام') || lower.includes('مرحبا') || lower.includes('هلا') || lower.includes('hi') || lower.includes('hello')) {
         aiResponse = isAr
-          ? 'أهلاً وسهلاً بك! أنا المساعد الذكي لمحمد القفاص (Ma16q). كيف يمكنني إفادتك اليوم؟ يمكنك سؤالي عن مشاريعه، تدريبه الميداني، أو خبراته البرمجية.'
-          : `Hello and welcome! I am Mohamed Al-Qaffas's AI Assistant. How can I help you today? You can browse projects or ask about his software training and engineering stack.`;
+          ? 'أهلاً وسهلاً بك في طرفية المطور التفاعلية لمحمد القفاص (Ma16q). يمكنك استعراض المشاريع، المهارات، أو كتابة help لعرض قائمة الأوامر المتاحة.'
+          : `Hello and welcome to Mohamed Al-Qaffas's developer interactive terminal. You can explore projects, review tech skills, or type "help" to view all available commands.`;
       } else {
         aiResponse = isAr
           ? `بخصوص استفسارك "${trimmed}"، يمكنك استعراض المشاريع بكتابة "projects"، أو التدريب بكتابة "training"، أو زيارة LinkedIn عبر "contact".`
