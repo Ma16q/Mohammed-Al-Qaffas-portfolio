@@ -1164,17 +1164,25 @@ body.light-mode .dock-action:hover {
 
 .dock-action.primary,
 .dock-action.primary:hover,
+body.light-mode .dock-action.primary,
 body.light-mode .dock-action.primary:hover {
   grid-column: 1 / -1;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.7rem 1rem;
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-  border-color: transparent;
-  color: #fff;
+  border: 1px solid transparent !important;
+  color: #ffffff !important;
   font-size: 0.88rem;
   box-shadow: 0 6px 18px rgba(56, 189, 248, 0.3);
+}
+
+.dock-action.primary *,
+body.light-mode .dock-action.primary * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 .dock-email-bar {
@@ -1274,7 +1282,14 @@ body.light-mode .dock-copy-btn:hover {
 body.light-mode .dock-action.primary,
 body.light-mode .dock-action.primary:hover {
   background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #ffffff !important;
   box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
+}
+
+body.light-mode .dock-action.primary *,
+body.light-mode .dock-action.primary svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 .dock-rate {

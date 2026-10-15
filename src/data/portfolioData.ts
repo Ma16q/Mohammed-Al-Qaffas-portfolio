@@ -30,7 +30,8 @@ export const projectsData: Project[] = [
     summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 و TypeScript وتيلويند 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
     image: '/assets/images/project_capsule_platform.png',
     links: [
-      { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/capsuletahawul/team_c', type: 'launch' }
+      { label: 'Live Platform', labelAr: 'معاينة المنصة الحية', url: 'https://teamc-three.vercel.app/', type: 'launch' },
+      { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/capsuletahawul/team_c', type: 'outline' }
     ],
     techStack: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Recharts', 'React Router v8', 'Context API', 'Role-Based Access Control', 'Vite', 'Oxlint'],
     highlights: [
@@ -245,6 +246,7 @@ export const projectsData: Project[] = [
 export const skillsData: Skill[] = [
   { name: 'Python', nameAr: 'بايثون', category: 'languages' },
   { name: 'Java SDK', nameAr: 'جافا SDK', category: 'languages' },
+  { name: 'Node.js', nameAr: 'نود جي إس (Node.js)', category: 'languages' },
   { name: 'React 19', nameAr: 'رياكت 19', category: 'frontend' },
   { name: 'TypeScript', nameAr: 'تايب سكريبت', category: 'frontend' },
   { name: 'Tailwind CSS v4', nameAr: 'تيلويند CSS', category: 'frontend' },
@@ -252,10 +254,10 @@ export const skillsData: Skill[] = [
   { name: 'HTML5 & Modern CSS', nameAr: 'HTML5 وتقنيات CSS الحديثة', category: 'frontend' },
   { name: 'Android Studio', nameAr: 'أندرويد ستوديو', category: 'mobile' },
   { name: 'Native Android (Java)', nameAr: 'تطوير أندرويد الأصيل (Java)', category: 'mobile' },
-  { name: 'Three.js & WebGL 3D', nameAr: 'Three.js و WebGL ثلاثي الأبعاد', category: 'tools' },
+  { name: 'RESTful APIs', nameAr: 'واجهات REST APIs', category: 'tools' },
+  { name: 'AI Integration', nameAr: 'دمج تقنيات الذكاء الاصطناعي (AI)', category: 'tools' },
   { name: 'Git & Version Control', nameAr: 'Git وإدارة الإصدارات', category: 'tools' },
-  { name: 'Google Cloud Platform (GCP)', nameAr: 'منصة قوقل السحابية GCP', category: 'tools' },
-  { name: 'Software Architecture', nameAr: 'هندسة ومعمارية البرمجيات', category: 'tools' }
+  { name: 'Google Cloud Platform (GCP)', nameAr: 'منصة قوقل السحابية GCP', category: 'tools' }
 ];
 
 export const experienceData: ExperienceItem[] = [

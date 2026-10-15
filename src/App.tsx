@@ -11,6 +11,7 @@ import { ProjectModal } from './components/ProjectModal';
 import { DevTerminal } from './components/DevTerminal';
 
 import { CursorAura } from './components/CursorAura';
+import { Analytics } from '@vercel/analytics/react';
 
 // Soft glow that trails the mouse behind the glass panels (mouse devices only).
 import { MobileDock } from './components/MobileDock';
@@ -143,6 +144,7 @@ export const App: React.FC = () => {
       <MotionConfig reducedMotion="user">
         <ToastProvider>
           <PortfolioContent />
+          <Analytics />
         </ToastProvider>
       </MotionConfig>
     </LanguageProvider>

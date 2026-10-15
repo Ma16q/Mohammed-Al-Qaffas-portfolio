@@ -76,7 +76,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onInspect }) 
   return (
     <TiltCard className="project-card glass-panel">
       <div className="project-preview">
-        <img src={project.image} alt={`${title} preview`} className="project-img" loading="lazy" />
+        <img src={project.image} alt={`${title} preview`} className="project-img" loading="lazy" decoding="async" />
         <div className="project-overlay"></div>
       </div>
 

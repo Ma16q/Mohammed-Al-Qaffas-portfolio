@@ -157,6 +157,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                     <img
                       src="/assets/images/mohammed_3d_2.jpg"
                       alt="Mohamed 3D Avatar"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
                     />
                     <div className="floating-glass-tag">
                       <Box size={13} />
@@ -169,6 +172,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                     <img
                       src="/assets/images/mohammed_real.jpg"
                       alt="Mohamed Ahmed - Personal Photo"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="floating-glass-tag real-tag">
                       <UserCheck size={13} />

@@ -247,54 +247,57 @@ export const ContactSection: React.FC = () => {
                 </div>
               </motion.div>
 
-              <motion.div variants={channelRow}>
-                <a
-                  href="https://github.com/Ma16q"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="channel-item"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className="channel-icon">
-                    <GithubIcon />
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
-                    <span className="channel-label">{t.contact.githubLabel}</span>
-                    <strong className="channel-val">github.com/Ma16q</strong>
-                  </div>
-                  <span className="channel-action">
-                    <ExternalLink size={15} />
-                  </span>
-                </a>
-              </motion.div>
+              {/* Subgrid: GitHub & Instagram side-by-side to save height */}
+              <div className="contact-channels-subgrid">
+                <motion.div variants={channelRow}>
+                  <a
+                    href="https://github.com/Ma16q"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="channel-item channel-compact"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className="channel-icon">
+                      <GithubIcon />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', minWidth: 0, flex: 1, overflow: 'hidden' }}>
+                      <span className="channel-label">{isAr ? 'جيت هب' : 'GitHub'}</span>
+                      <strong className="channel-val text-truncate" title="github.com/Ma16q">Ma16q</strong>
+                    </div>
+                    <span className="channel-action">
+                      <ExternalLink size={14} />
+                    </span>
+                  </a>
+                </motion.div>
+
+                <motion.div variants={channelRow}>
+                  <a
+                    href="https://www.instagram.com/dev_m.qaffas/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="channel-item channel-compact"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className="channel-icon" style={{ color: '#e1306c' }}>
+                      <InstagramIcon />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', minWidth: 0, flex: 1, overflow: 'hidden' }}>
+                      <span className="channel-label">{isAr ? 'انستقرام' : 'Instagram'}</span>
+                      <strong className="channel-val text-truncate" title="@dev_m.qaffas">@dev_m.qaffas</strong>
+                    </div>
+                    <span className="channel-action">
+                      <ExternalLink size={14} />
+                    </span>
+                  </a>
+                </motion.div>
+              </div>
 
               <motion.div variants={channelRow}>
-                <a
-                  href="https://www.instagram.com/dev_m.qaffas/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="channel-item"
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className="channel-icon" style={{ color: '#e1306c' }}>
-                    <InstagramIcon />
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
-                    <span className="channel-label">{isAr ? 'انستقرام' : 'Instagram'}</span>
-                    <strong className="channel-val">@dev_m.qaffas</strong>
-                  </div>
-                  <span className="channel-action">
-                    <ExternalLink size={15} />
-                  </span>
-                </a>
-              </motion.div>
-
-              <motion.div variants={channelRow}>
-                <div className="channel-item">
+                <div className="channel-item channel-compact">
                   <div className="channel-icon">
                     <MapPin size={18} />
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', minWidth: 0 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', minWidth: 0 }}>
                     <span className="channel-label">{t.contact.locationLabel}</span>
                     <strong className="channel-val">{t.contact.locationVal}</strong>
                   </div>
@@ -302,7 +305,7 @@ export const ContactSection: React.FC = () => {
               </motion.div>
 
               {/* Direct Mail Client Quick Action */}
-              <motion.div variants={channelRow} style={{ marginTop: 'auto', paddingTop: '1rem' }}>
+              <motion.div variants={channelRow} style={{ marginTop: '0.25rem' }}>
                 <button
                   type="button"
                   onClick={handleDirectMailto}
