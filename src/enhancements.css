@@ -145,6 +145,15 @@ body.light-mode ::selection {
   z-index: 2;
 }
 
+@media (max-width: 820px) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(root) {
+    animation: none !important;
+    display: none !important;
+  }
+}
+
 /* Colors must flip instantly so the new snapshot is already fully themed */
 html.theme-switching *,
 html.theme-switching *::before,

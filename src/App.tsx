@@ -51,36 +51,57 @@ const PortfolioContent: React.FC = () => {
     localStorage.setItem('portfolio-theme', theme);
   }, [theme]);
 
-  // Switches theme with a circular reveal that grows out of `origin` (the toggle button)
+  // Switches theme with instant change on mobile and smooth circular reveal on desktop
   const handleToggleTheme = useCallback((mode?: Theme, origin?: ThemeOrigin) => {
     const next = mode ?? (themeRef.current === 'dark' ? 'light' : 'dark');
     if (next === themeRef.current) return;
 
+    const isMobile = typeof window !== 'undefined' && (
+      window.innerWidth <= 820 ||
+      window.matchMedia('(max-width: 820px)').matches ||
+      ('ontouchstart' in window)
+    );
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!document.startViewTransition || reduceMotion) {
+
+    // Instant switch on mobile or when reduced motion is preferred
+    if (!document.startViewTransition || reduceMotion || isMobile) {
       setTheme(next);
       return;
     }
 
     const x = origin?.x ?? window.innerWidth / 2;
     const y = origin?.y ?? window.innerHeight / 2;
-    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    const maxDimension = Math.max(
+      window.innerWidth,
+      window.innerHeight,
+      document.documentElement.clientWidth,
+      document.documentElement.clientHeight
+    );
+    const radius = Math.hypot(maxDimension, maxDimension);
     const root = document.documentElement;
 
     root.classList.add('theme-switching');
-    const transition = document.startViewTransition(() => {
-      flushSync(() => setTheme(next));
-    });
+    try {
+      const transition = document.startViewTransition(() => {
+        flushSync(() => setTheme(next));
+      });
 
-    transition.ready
-      .then(() => {
-        root.animate(
-          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-          { duration: 700, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', pseudoElement: '::view-transition-new(root)' }
-        );
-      })
-      .catch(() => {});
-    transition.finished.finally(() => root.classList.remove('theme-switching'));
+      transition.ready
+        .then(() => {
+          const anim = root.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius * 1.5}px at ${x}px ${y}px)`] },
+            { duration: 550, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', pseudoElement: '::view-transition-new(root)' }
+          );
+          anim.onfinish = () => root.classList.remove('theme-switching');
+          anim.oncancel = () => root.classList.remove('theme-switching');
+        })
+        .catch(() => root.classList.remove('theme-switching'));
+
+      transition.finished.finally(() => root.classList.remove('theme-switching'));
+    } catch {
+      setTheme(next);
+      root.classList.remove('theme-switching');
+    }
   }, []);
 
   return (
