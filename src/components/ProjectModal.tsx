@@ -69,7 +69,18 @@ const ModalCard: React.FC<{ project: Project; onClose: () => void }> = ({ projec
           {/* Banner image or App Icon */}
           {project.image ? (
             <motion.div className="modal-banner-wrap" variants={rowVariants}>
-              <img src={project.image} alt={title} className="modal-banner-img" />
+              <img
+                src={project.image}
+                alt={title}
+                className={`modal-banner-img ${project.imageDark ? 'theme-img-light' : ''}`}
+              />
+              {project.imageDark && (
+                <img
+                  src={project.imageDark}
+                  alt={`${title} Dark`}
+                  className="modal-banner-img theme-img-dark"
+                />
+              )}
             </motion.div>
           ) : project.appIcon ? (
             <motion.div className="modal-icon-banner" variants={rowVariants}>

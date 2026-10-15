@@ -772,6 +772,22 @@ body.light-mode .projects-section::before {
   background: linear-gradient(180deg, transparent 40%, rgba(10, 14, 23, 0.85) 100%);
 }
 
+/* Theme-Aware Project Showcase Images (Dark Mode default, Light Mode toggle) */
+.theme-img-light {
+  display: none !important;
+}
+.theme-img-dark {
+  display: block !important;
+}
+
+body.light-mode .theme-img-light {
+  display: block !important;
+}
+body.light-mode .theme-img-dark {
+  display: none !important;
+}
+
+
 
 
 /* --- MotriLog Hologram Fallback View --- */

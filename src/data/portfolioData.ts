@@ -29,6 +29,7 @@ export const projectsData: Project[] = [
     summary: 'Full-featured interactive EdTech training platform & learning marketplace built with React 19, TypeScript, Tailwind CSS 4, and Recharts. Features dynamic course catalogues with deep filtering, student learning analytics dashboards, multi-role auth, and complete enrollment & payment checkout flows.',
     summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 و TypeScript وتيلويند 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
     image: '/assets/images/project_capsule_platform.png',
+    imageDark: '/assets/images/project_capsule_platform_dark.png',
     links: [
       { label: 'Live Platform', labelAr: 'معاينة المنصة الحية', url: 'https://teamc-three.vercel.app/', type: 'launch' },
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/capsuletahawul/team_c', type: 'outline' }

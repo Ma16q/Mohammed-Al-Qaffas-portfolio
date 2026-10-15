@@ -9,6 +9,7 @@ export interface Project {
   summary: string;
   summaryAr?: string;
   image?: string;
+  imageDark?: string;
   appIcon?: string;
   isGooglePlay?: boolean;
   links: {
