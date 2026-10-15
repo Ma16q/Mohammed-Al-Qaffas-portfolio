@@ -20,7 +20,7 @@
 
 ## 🌟 Overview
 
-A state-of-the-art, high-performance web portfolio engineered with **React 19**, **TypeScript**, **Three.js WebGL**, and pure **Vanilla CSS Glassmorphism**. Designed to showcase authentic native Android applications, software engineering platforms, production e-commerce systems, and 3D modeling work with fluid micro-interactions and complete Arabic (RTL) & English (LTR) localization.
+A state-of-the-art, high-performance web engineering portfolio built with **React 19**, **TypeScript**, **Tailwind CSS v4**, **Motion**, and pure **Vanilla CSS Glassmorphism**. Designed to showcase authentic native Android applications on Google Play, EdTech training platforms (Capsule Tahawul), SWE platforms (MotriLog), production e-commerce (ghos), and an embedded interactive CLI developer terminal with real-time feedback and instant email notification pipelines.
 
 ---
 
@@ -33,13 +33,18 @@ A state-of-the-art, high-performance web portfolio engineered with **React 19**,
 
 <br/>
 
-### 2. Engineering Projects Grid & MotriLog 3D Telemetry Twin
-![Projects Showcase & MotriLog 3D](docs/screenshots/projects_preview.png)
+### 2. Engineering Projects Showcase (Capsule Tahawul, MotriLog & ghos)
+![Projects Showcase](docs/screenshots/projects_preview.png)
 
 <br/>
 
 ### 3. Interactive Developer CLI Terminal (Built-in Assistant)
 ![DevTerminal CLI](docs/screenshots/terminal_preview.png)
+
+<br/>
+
+### 4. Live Rating Dock & Instant Email Notification Delivery Proof
+![Live Rating Instant Email Delivery Proof](docs/screenshots/email_notification_proof.jpg)
 
 </div>
 
