@@ -258,7 +258,7 @@ export const skillsData: Skill[] = [
   { name: 'RESTful APIs', nameAr: 'واجهات REST APIs', category: 'tools' },
   { name: 'AI Integration', nameAr: 'دمج تقنيات الذكاء الاصطناعي (AI)', category: 'tools' },
   { name: 'Git & Version Control', nameAr: 'Git وإدارة الإصدارات', category: 'tools' },
-  { name: 'Google Cloud Platform (GCP)', nameAr: 'منصة قوقل السحابية GCP', category: 'tools' }
+  { name: 'Google Play Console', nameAr: 'نشر تطبيقات Google Play', category: 'mobile' }
 ];
 
 export const experienceData: ExperienceItem[] = [
@@ -296,7 +296,7 @@ export const experienceData: ExperienceItem[] = [
     periodAr: 'عضو ومشارك تقني نشط',
     description: 'Active participant in Google technologies workshops, modern developer tooling sessions, and collaborative hackathons.',
     descriptionAr: 'المشاركة الفعالة في ورش العمل والفعاليات التقنية المتخصصة بأحدث تقنيات قوقل والحوسبة السحابية وأدوات التطوير الحديثة.',
-    tags: ['Google Cloud', 'Web Dev', 'Mobile Technologies', 'Developer Community']
+    tags: ['Google Technologies', 'Web Dev', 'Mobile Development', 'Developer Community']
   },
   {
     id: 'hackathon',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion, useSpring } from 'motion/react';
-import { ArrowDown, Code2, UserCheck, Terminal, RefreshCw, Box } from "lucide-react";
+import { ArrowDown, Code2, UserCheck, Terminal, RefreshCw, Box, FileDown } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { Magnetic } from './Magnetic';
@@ -29,7 +29,8 @@ const MAX_AVATAR_TILT = 10;
 
 export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isAr = language === 'ar';
   const reduceMotion = useReducedMotion();
   const typed = useTypewriter(t.ui.typedPhrases, !reduceMotion);
 
@@ -86,6 +87,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                 <a href="#projects" className="btn-primary">
                   <span>{t.hero.exploreBtn}</span>
                   <ArrowDown size={17} className="bounce-icon" />
+                </a>
+              </Magnetic>
+
+              {/* Direct Download CV Button */}
+              <Magnetic strength={0.2}>
+                <a
+                  href="/Mohammed_AlQaffas_CV.pdf"
+                  download="Mohammed_AlQaffas_CV.pdf"
+                  className="btn-secondary hero-cv-btn"
+                  title={isAr ? 'تحميل السيرة الذاتية (PDF)' : 'Download Resume (PDF)'}
+                >
+                  <FileDown size={16} style={{ color: 'var(--accent-cyan)' }} />
+                  <span>{isAr ? 'تحميل السيرة الذاتية' : 'Download CV'}</span>
                 </a>
               </Magnetic>
               {onOpenTerminal && (

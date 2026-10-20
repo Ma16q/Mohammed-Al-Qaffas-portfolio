@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useMotionValueEvent, useScroll } from 'motion/react';
-import { Terminal, Globe, Send } from 'lucide-react';
+import { Globe, Send, FileDown } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { ThemeToggle, type ThemeOrigin } from './ThemeToggle';
 import { Magnetic } from './Magnetic';
@@ -29,8 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
   const navItems: { id: SectionId; label: string }[] = [
     { id: 'home', label: t.nav.home },
     { id: 'projects', label: t.nav.projects },
-    { id: 'about', label: t.nav.about },
-    { id: 'contact', label: t.nav.contact }
+    { id: 'about', label: t.nav.about }
   ];
 
   return (
@@ -106,16 +105,18 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
 
           {/* Interactive Developer CLI */}
           {onOpenTerminal && (
-            <button
-              type="button"
-              className="terminal-nav-btn"
-              onClick={onOpenTerminal}
-              title="Open Interactive Dev Terminal (CLI)"
-              aria-label="Open Dev Terminal"
+            <Magnetic className="nav-cv-wrap">
+            <a
+              href="/Mohammed_AlQaffas_CV.pdf"
+              download="Mohammed_AlQaffas_CV.pdf"
+              className="nav-cv-btn"
+              title={language === 'ar' ? 'تحميل السيرة الذاتية (PDF)' : 'Download Resume (PDF)'}
+              aria-label={language === 'ar' ? 'تحميل السيرة الذاتية' : 'Download Resume'}
             >
-              <Terminal size={15} />
-              <span className="terminal-nav-text">{t.nav.cli}</span>
-            </button>
+              <FileDown size={14} className="cv-icon" />
+              <span>{language === 'ar' ? 'السيرة الذاتية' : 'Resume CV'}</span>
+            </a>
+          </Magnetic>
           )}
 
           {/* Contact Direct CTA */}

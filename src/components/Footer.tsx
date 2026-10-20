@@ -1,9 +1,14 @@
 import React from 'react';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Terminal } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+interface FooterProps {
+  onOpenTerminal?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
+  const { t, language } = useLanguage();
+  const isAr = language === 'ar';
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -21,6 +26,17 @@ export const Footer: React.FC = () => {
           <a href="#projects">{t.nav.projects}</a>
           <a href="#about">{t.nav.about}</a>
           <a href="https://github.com/Ma16q" target="_blank" rel="noopener noreferrer">GitHub</a>
+          {onOpenTerminal && (
+            <button
+              type="button"
+              onClick={onOpenTerminal}
+              className="footer-terminal-btn"
+              title={isAr ? 'فتح الطرفية البرمجية CLI' : 'Open Developer CLI'}
+            >
+              <Terminal size={14} />
+              <span>{isAr ? 'الطرفية البرمجية CLI' : 'Terminal CLI'}</span>
+            </button>
+          )}
           <button
             type="button"
             onClick={scrollToTop}

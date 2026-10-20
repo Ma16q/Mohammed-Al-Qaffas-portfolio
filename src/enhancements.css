@@ -1544,3 +1544,204 @@ body.light-mode .dock-rate-thanks {
     animation: none;
   }
 }
+
+/* --- NAV CV BUTTON & DOCK TERMINAL STYLES --- */
+.nav-cv-wrap {
+  display: inline-flex;
+}
+
+.nav-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-cv-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.55);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.28);
+}
+
+.hero-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.hero-cv-btn:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
+}
+
+.fab-terminal-pill {
+  position: absolute;
+  top: 0.2rem;
+  left: -8.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-full);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  color: #e0f2fe;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+body.rtl-mode .fab-terminal-pill {
+  left: auto;
+  right: -8.5rem;
+}
+
+.fab-terminal-pill:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(56, 189, 248, 0.3);
+}
+
+@keyframes contactPulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.8), 0 16px 48px -10px rgba(0, 0, 0, 0.6);
+    transform: scale(1);
+  }
+  30% {
+    box-shadow: 0 0 40px 10px rgba(56, 189, 248, 0.75), 0 0 0 2px rgba(56, 189, 248, 0.95);
+    transform: scale(1.015);
+  }
+  70% {
+    box-shadow: 0 0 25px 4px rgba(56, 189, 248, 0.45), 0 0 0 1px rgba(56, 189, 248, 0.6);
+    transform: scale(1.006);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0), 0 16px 48px -10px rgba(0, 0, 0, 0.6);
+    transform: scale(1);
+  }
+}
+
+.contact-pulse-highlight {
+  animation: contactPulseGlow 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+
+/* --- CONTACT SECTION REACT MOTION HIGHLIGHT BANNER --- */
+.contact-highlight-banner {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(168, 85, 247, 0.16));
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  box-shadow: 0 8px 26px rgba(56, 189, 248, 0.28);
+  color: #e0f2fe;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+body.light-mode .contact-highlight-banner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #1e293b;
+}
+
+.banner-icon {
+  font-size: 1.15rem;
+  animation: pulse 1.5s infinite alternate ease-in-out;
+}
+
+/* --- FOOTER TERMINAL BUTTON --- */
+.footer-terminal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  color: #38bdf8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.footer-terminal-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.3);
+}
+
+body.light-mode .footer-terminal-btn {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: rgba(2, 132, 199, 0.3);
+  color: #0284c7;
+}
+
+body.light-mode .footer-terminal-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+/* --- DOCK ACTION TERMINAL FULL-WIDTH STYLES --- */
+.dock-action.terminal-action {
+  grid-column: 1 / -1 !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.55rem !important;
+  padding: 0.65rem 1rem !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+  color: #e0f2fe !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  border-radius: 12px !important;
+  transition: all 0.25s ease !important;
+}
+
+.dock-action.terminal-action:hover {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: var(--accent-cyan) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+body.light-mode .dock-action.terminal-action {
+  background: #f8fafc !important;
+  border-color: rgba(2, 132, 199, 0.35) !important;
+  color: #0f172a !important;
+}
+
+body.light-mode .dock-action.terminal-action:hover {
+  background: #e0f2fe !important;
+  border-color: #0284c7 !important;
+  color: #0284c7 !important;
+}

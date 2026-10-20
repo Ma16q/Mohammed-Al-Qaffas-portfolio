@@ -78,6 +78,23 @@ const FormField: React.FC<FormFieldProps> = ({ id, label, error, state, children
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
+  const [isHighlighted, setIsHighlighted] = useState(false);
+
+  useEffect(() => {
+    const handleHighlight = () => {
+      setIsHighlighted(true);
+      setTimeout(() => {
+        const input = document.getElementById('contactName');
+        input?.focus({ preventScroll: true });
+      }, 650);
+      setTimeout(() => {
+        setIsHighlighted(false);
+      }, 4000);
+    };
+
+    window.addEventListener('portfolio:focus-contact', handleHighlight);
+    return () => window.removeEventListener('portfolio:focus-contact', handleHighlight);
+  }, []);
   const [status, setStatus] = useState<SubmitStatus>('idle');
   const [notice, setNotice] = useState('');
   const [formData, setFormData] = useState(EMPTY_FORM);
@@ -195,7 +212,37 @@ export const ContactSection: React.FC = () => {
         </Reveal>
 
         <Reveal>
-          <div className="contact-card glass-panel">
+          <motion.div
+            className={`contact-card glass-panel ${isHighlighted ? 'contact-pulse-highlight' : ''}`}
+            animate={isHighlighted ? {
+              scale: [1, 1.025, 0.995, 1],
+              boxShadow: [
+                '0 0 0 0 rgba(56, 189, 248, 0)',
+                '0 0 45px 12px rgba(56, 189, 248, 0.65), 0 0 0 2px rgba(56, 189, 248, 0.9)',
+                '0 0 20px 4px rgba(168, 85, 247, 0.4)',
+                '0 0 0 0 rgba(56, 189, 248, 0)'
+              ]
+            } : undefined}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <AnimatePresence>
+              {isHighlighted && (
+                <motion.div
+                  className="contact-highlight-banner"
+                  initial={{ opacity: 0, y: -16, scale: 0.92 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                >
+                  <span className="banner-icon">✨</span>
+                  <span>
+                    {isAr
+                      ? 'مرحباً بك! يسعدني جداً تواصلك ويسرني مناقشة الفرص والمشاريع معك'
+                      : 'Welcome! Delighted to connect with you — feel free to send a message'}
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
             {/* Channels Column */}
             <motion.div
               className="contact-channels"
@@ -394,7 +441,7 @@ export const ContactSection: React.FC = () => {
                 {status === 'sent' && <Confetti />}
               </motion.div>
             </form>
-          </div>
+          </motion.div>
         </Reveal>
       </div>
     </section>

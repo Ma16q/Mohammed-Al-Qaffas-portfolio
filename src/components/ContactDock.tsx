@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
-import { MessageCircle, X, Send, Copy, Star, Loader2, CheckCircle2, Mail } from 'lucide-react';
+import { MessageCircle, X, Send, Terminal, Copy, Star, Loader2, CheckCircle2, Mail } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
 import { RECIPIENT_EMAIL, sendMessage } from '../lib/sendMessage';
@@ -11,6 +11,7 @@ import type { SectionId } from '../hooks/useSectionNav';
 
 interface ContactDockProps {
   onNavigate: (id: SectionId) => void;
+  onOpenTerminal?: () => void;
 }
 
 const FEEDBACK_KEY = 'portfolio-feedback';
@@ -26,7 +27,7 @@ const itemVariants = {
 };
 
 // Floating quick-contact button: opens a small panel with contact shortcuts and a star rating.
-export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
+export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate, onOpenTerminal }) => {
   const { language, t } = useLanguage();
   const { notify } = useToast();
   const d = t.ui.dock;
@@ -175,6 +176,21 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
                     <Send size={16} />
                     <span>{d.message}</span>
                   </motion.button>
+                  {onOpenTerminal && (
+                    <motion.button
+                      type="button"
+                      className="dock-action terminal-action"
+                      variants={itemVariants}
+                      onClick={() => {
+                        setOpen(false);
+                        onOpenTerminal();
+                      }}
+                      title={language === 'ar' ? 'الطرفية الذكية CLI' : 'Dev Terminal CLI'}
+                    >
+                      <Terminal size={16} style={{ color: 'var(--accent-cyan)' }} />
+                      <span>{language === 'ar' ? 'الطرفية البرمجية CLI' : 'Dev Terminal CLI'}</span>
+                    </motion.button>
+                  )}
 
                   {/* Long/Vertical Email Bar: Direct Send on click + dedicated Copy Button */}
                   <motion.div
@@ -330,6 +346,21 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate }) => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {onOpenTerminal && (
+            <motion.button
+              type="button"
+              className="fab-terminal-pill"
+              onClick={onOpenTerminal}
+              title={language === 'ar' ? 'فتح الطرفية الذكية CLI' : 'Open Dev Terminal (CLI)'}
+              aria-label="Open Dev Terminal"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+            >
+              <Terminal size={17} style={{ color: 'var(--accent-cyan)' }} />
+              <span className="fab-terminal-text">{language === 'ar' ? 'الطرفية CLI' : 'CLI'}</span>
+            </motion.button>
+          )}
 
           <motion.button
             type="button"

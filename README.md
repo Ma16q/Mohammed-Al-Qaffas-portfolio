@@ -76,7 +76,7 @@ A state-of-the-art, high-performance web engineering portfolio built with **Reac
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![PHP](https://img.shields.io/badge/PHP_Backend-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
-[![Google Cloud](https://img.shields.io/badge/Google_Cloud_Platform-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com)
+[![Google Play Console](https://img.shields.io/badge/Google_Play_Console-Publishing-34A853?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/developer?id=Ma16q)
 [![Vercel](https://img.shields.io/badge/Vercel_Edge-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
 ### 🎨 3D Modeling & Design

@@ -54,7 +54,13 @@ export const useSectionNav = () => {
   const goTo = useCallback((id: SectionId) => {
     setActive(id);
     lockedUntil.current = performance.now() + 1200;
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (id === 'contact') {
+        window.dispatchEvent(new CustomEvent('portfolio:focus-contact'));
+      }
+    }
   }, []);
 
   return { active, goTo };

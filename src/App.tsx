@@ -137,11 +137,11 @@ const PortfolioContent: React.FC = () => {
         <ContactSection />
       </main>
 
-      <Footer />
+      <Footer onOpenTerminal={() => setIsTerminalOpen(true)} />
 
       {/* Mobile section tabs + floating quick-contact / feedback button */}
       <MobileDock activeSection={activeSection} onNavigate={goTo} />
-      <ContactDock onNavigate={goTo} />
+      <ContactDock onNavigate={goTo} onOpenTerminal={() => setIsTerminalOpen(true)} />
 
       {/* Interactive Project Deep-Dive Modal */}
       <ProjectModal

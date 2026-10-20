@@ -202,7 +202,7 @@ export const DevTerminal: React.FC<DevTerminalProps> = ({ isOpen, onClose, onTog
           <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'اللغات:' : 'Languages:'}</span> <span style={{ color: '#cbd5e1' }}>Python, Java SDK, TypeScript, JavaScript (ES6+), HTML5/CSS3</span></p>
           <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'تطبيقات الجوال:' : 'Mobile Apps:'}</span> <span style={{ color: '#cbd5e1' }}>Android Studio (Native Java), Material 3, Android SDK</span></p>
           <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الويب وثلاثي الأبعاد:' : '3D & WebGL:'}</span> <span style={{ color: '#cbd5e1' }}>React 19, Three.js, WebGL Shaders, Blender 3D, GLTF/DRACO</span></p>
-          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الأنظمة والسحابة:' : 'Cloud & DevOps:'}</span> <span style={{ color: '#cbd5e1' }}>Git & GitHub, Google Cloud Platform (GCP), VS Code, Vercel</span></p>
+          <p>• <span style={{ color: '#38bdf8', fontWeight: 600 }}>{isAr ? 'الأنظمة والسحابة:' : 'Cloud & DevOps:'}</span> <span style={{ color: '#cbd5e1' }}>Git & GitHub, Google Play Console, VS Code, Vercel</span></p>
         </div>
       );
     }
