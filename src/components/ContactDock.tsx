@@ -176,21 +176,6 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate, onOpenTerm
                     <Send size={16} />
                     <span>{d.message}</span>
                   </motion.button>
-                  {onOpenTerminal && (
-                    <motion.button
-                      type="button"
-                      className="dock-action terminal-action"
-                      variants={itemVariants}
-                      onClick={() => {
-                        setOpen(false);
-                        onOpenTerminal();
-                      }}
-                      title={language === 'ar' ? 'الطرفية الذكية CLI' : 'Dev Terminal CLI'}
-                    >
-                      <Terminal size={16} style={{ color: 'var(--accent-cyan)' }} />
-                      <span>{language === 'ar' ? 'الطرفية البرمجية CLI' : 'Dev Terminal CLI'}</span>
-                    </motion.button>
-                  )}
 
                   {/* Long/Vertical Email Bar: Direct Send on click + dedicated Copy Button */}
                   <motion.div
@@ -347,50 +332,51 @@ export const ContactDock: React.FC<ContactDockProps> = ({ onNavigate, onOpenTerm
             )}
           </AnimatePresence>
 
-          {onOpenTerminal && (
+          <div className="dock-trigger-row">
+            {onOpenTerminal && (
+              <motion.button
+                type="button"
+                className="dock-terminal-btn"
+                onClick={onOpenTerminal}
+                title={language === 'ar' ? 'فتح الطرفية البرمجية CLI' : 'Open Developer CLI'}
+                aria-label="Open Dev Terminal"
+                whileHover={{ scale: 1.06, y: -2 }}
+                whileTap={{ scale: 0.94 }}
+              >
+                <Terminal size={17} className="terminal-dock-icon" />
+                <span className="dock-terminal-text">{language === 'ar' ? 'الطرفية CLI' : 'Dev CLI'}</span>
+              </motion.button>
+            )}
+
             <motion.button
               type="button"
-              className="fab-terminal-pill"
-              onClick={onOpenTerminal}
-              title={language === 'ar' ? 'فتح الطرفية الذكية CLI' : 'Open Dev Terminal (CLI)'}
-              aria-label="Open Dev Terminal"
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
+              className={`fab ${open ? 'is-open' : ''}`}
+              onClick={() => setOpen((prev) => !prev)}
+              aria-expanded={open}
+              aria-label={open ? d.close : d.open}
+              title={open ? d.close : d.open}
+              whileHover={{ scale: 1.07 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <Terminal size={17} style={{ color: 'var(--accent-cyan)' }} />
-              <span className="fab-terminal-text">{language === 'ar' ? 'الطرفية CLI' : 'CLI'}</span>
+              {/* Ring fills as the page is scrolled */}
+              <svg className="fab-ring" viewBox="0 0 64 64" aria-hidden="true">
+                <motion.circle cx="32" cy="32" r="30" style={{ pathLength: ringProgress }} />
+              </svg>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={open ? 'close' : 'open'}
+                  className="fab-icon"
+                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.16 }}
+                >
+                  {open ? <X size={22} /> : <MessageCircle size={22} />}
+                </motion.span>
+              </AnimatePresence>
+              {!open && <span className="fab-pulse" aria-hidden="true" />}
             </motion.button>
-          )}
-
-          <motion.button
-            type="button"
-            className={`fab ${open ? 'is-open' : ''}`}
-            onClick={() => setOpen((prev) => !prev)}
-            aria-expanded={open}
-            aria-label={open ? d.close : d.open}
-            title={open ? d.close : d.open}
-            whileHover={{ scale: 1.07 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {/* Ring fills as the page is scrolled */}
-            <svg className="fab-ring" viewBox="0 0 64 64" aria-hidden="true">
-              <motion.circle cx="32" cy="32" r="30" style={{ pathLength: ringProgress }} />
-            </svg>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={open ? 'close' : 'open'}
-                className="fab-icon"
-                initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.16 }}
-              >
-                {open ? <X size={22} /> : <MessageCircle size={22} />}
-              </motion.span>
-            </AnimatePresence>
-            {!open && <span className="fab-pulse" aria-hidden="true" />}
-          </motion.button>
-        </motion.div>
+          </div></motion.div>
       )}
     </AnimatePresence>
     </>

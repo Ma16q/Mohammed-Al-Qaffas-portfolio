@@ -67,6 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
                     />
                   )}
                   <span className="nav-link-label">{item.label}</span>
+                  {isActive && <span className="nav-active-dot" aria-hidden="true" />}
                 </a>
               </li>
             );
@@ -119,13 +120,24 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme, onOpenTerm
           </Magnetic>
           )}
 
-          {/* Contact Direct CTA */}
+          {/* Contact Direct CTA - Sole contact action with moving indicator */}
           <Magnetic className="nav-cta-wrap">
             <a
               href="#contact"
-              className="nav-cta"
+              className={`nav-cta ${activeSection === 'contact' ? 'active' : ''}`}
               onClick={(e) => handleNavClick('contact', e)}
+              title={language === 'ar' ? 'تواصل معي مباشرة' : 'Contact me directly'}
             >
+              {activeSection === 'contact' && (
+                <motion.span
+                  layoutId={`nav-pill-${language}`}
+                  className="nav-cta-active-glow"
+                  transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                />
+              )}
+              {activeSection === 'contact' && (
+                <span className="nav-active-dot cta-active-dot" aria-hidden="true" />
+              )}
               <span>{t.nav.contactBtn}</span>
               <Send size={14} className="cta-plane" />
             </a>
