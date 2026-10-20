@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion, useSpring } from 'motion/react';
-import { ArrowDown, Code2, UserCheck, Terminal, RefreshCw, Box, FileDown } from "lucide-react";
+import { ArrowDown, Code2, UserCheck, Terminal, RefreshCw, Box, FileDown, ExternalLink } from "lucide-react";
 import { useLanguage } from '../context/LanguageContext';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { Magnetic } from './Magnetic';
@@ -116,6 +116,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
               <a href="#about" className="btn-secondary">
                 <span>{t.hero.aboutBtn}</span>
                 <Code2 size={16} />
+              </a>
+            </motion.div>
+
+            {/* Subtle, Understated Live FlowCV Real-Time Resume Indicator */}
+            <motion.div className="hero-live-resume-bar" variants={riseInBlur}>
+              <a
+                href="https://flowcv.com/resume/hkc8vsmpl7i7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="live-resume-chip"
+                title={isAr ? 'عرض السيرة الذاتية التفاعلية المحدثة لحظياً على FlowCV' : 'View live real-time interactive resume on FlowCV'}
+              >
+                <span className="live-status-indicator">
+                  <span className="live-status-ping" />
+                  <span className="live-status-dot" />
+                </span>
+                <span className="live-resume-text">
+                  {isAr ? 'نسخة تفاعلية محدثة لحظياً (Real-Time)' : 'Live Interactive Resume (Real-Time)'}
+                </span>
+                <span className="live-provider-badge">FlowCV</span>
+                <ExternalLink size={12} className="live-ext-icon" />
               </a>
             </motion.div>
 

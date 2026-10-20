@@ -1826,3 +1826,127 @@ body.light-mode .dock-terminal-btn:hover {
   background: #ffffff !important;
   box-shadow: 0 0 8px #ffffff, 0 0 14px var(--accent-cyan) !important;
 }
+
+/* --- SUBTLE REAL-TIME FLOWCV LIVE RESUME CHIP --- */
+.hero-live-resume-bar {
+  margin-top: 1.15rem;
+  display: flex;
+  align-items: center;
+}
+
+.live-resume-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.live-resume-chip:hover {
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #f1f5f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);
+}
+
+.live-status-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+}
+
+.live-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  display: inline-block;
+}
+
+.live-status-dot.mini {
+  width: 6px;
+  height: 6px;
+  box-shadow: 0 0 5px #10b981;
+}
+
+.live-status-ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #10b981;
+  opacity: 0.75;
+  animation: livePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes livePing {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.live-provider-badge {
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.live-ext-icon {
+  opacity: 0.5;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.live-resume-chip:hover .live-ext-icon {
+  opacity: 1;
+  transform: translate(1px, -1px);
+  color: #38bdf8;
+}
+
+body.light-mode .live-resume-chip {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: #64748b;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .live-resume-chip:hover {
+  background: #ffffff;
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #0f172a;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+}
+
+/* Footer Live CV Link */
+.footer-live-cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.footer-live-cv-link:hover {
+  color: #38bdf8;
+}

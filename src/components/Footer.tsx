@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Terminal } from 'lucide-react';
+import { ArrowUp, Terminal, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
@@ -25,7 +25,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerminal }) => {
           <a href="#home">{t.nav.home}</a>
           <a href="#projects">{t.nav.projects}</a>
           <a href="#about">{t.nav.about}</a>
-          <a href="https://github.com/Ma16q" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a
+            href="https://flowcv.com/resume/hkc8vsmpl7i7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-live-cv-link"
+            title={isAr ? 'السيرة الذاتية المحدثة لحظياً (FlowCV)' : 'Live Resume (Real-Time on FlowCV)'}
+          >
+            <span className="live-status-dot mini" />
+            <span>{isAr ? 'السيرة الذاتية (Live)' : 'Live Resume'}</span>
+            <ExternalLink size={11} />
+          </a>
+          <a href="https://github.com/Ma16q"  target="_blank" rel="noopener noreferrer">GitHub</a>
           {onOpenTerminal && (
             <button
               type="button"
