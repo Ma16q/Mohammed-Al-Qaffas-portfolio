@@ -296,7 +296,7 @@ export const experienceData: ExperienceItem[] = [
     periodAr: 'دور قيادي وإبداعي',
     description: 'Oversaw visual content and publications for events, collaborated with team members to improve community presence.',
     descriptionAr: 'أشرفتُ على المحتوى البصري والمنشورات الخاصة بالفعاليات، وتعاونتُ مع أعضاء الفريق لتعزيز الحضور المجتمعي.',
-    tags: ['Google Technologies', 'Web Dev', 'Mobile Development', 'Developer Community']
+    tags: ['Leadership', 'Content Publishing', 'Google Technologies', 'Developer Community']
   },
   {
     id: 'hackathon',
