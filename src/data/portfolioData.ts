@@ -27,7 +27,7 @@ export const projectsData: Project[] = [
       { text: 'Learning Platform', textAr: 'منصة تعليمية وتدريبية', color: 'cyan' }
     ],
     summary: 'Full-featured interactive EdTech training platform & learning marketplace built with React 19, TypeScript, Tailwind CSS 4, and Recharts. Features dynamic course catalogues with deep filtering, student learning analytics dashboards, multi-role auth, and complete enrollment & payment checkout flows.',
-    summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 و TypeScript وتيلويند 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
+    summaryAr: 'منصة تدريبية وتعليمية تفاعلية متكاملة تهدف إلى تمكين الكفاءات وتطوير المهارات التقنية وسد الفجوة مع سوق العمل. مبنية بأحدث معمارية React 19 و TypeScript و Tailwind CSS 4، وتتضمن لوحة تحكم بيانية تفاعلية (Recharts)، كتالوج دورات متقدم، وبوابات دفع وتسجيل متكاملة.',
     image: '/assets/images/project_capsule_platform.png',
     imageDark: '/assets/images/project_capsule_platform_dark.png',
     links: [
@@ -96,7 +96,7 @@ export const projectsData: Project[] = [
       { text: 'Resend API', textAr: 'خدمة البريد Resend', color: 'default' }
     ],
     summary: 'Production digital game keys e-commerce storefront (ghos.shop) featuring multi-mode authentication with 2FA, dual-email account security verification, timed 6-digit password resets, and session-persistent carts.',
-    summaryAr: 'متجر إلكتروني حي ومتكامل لبطاقات ومفاتيح الألعاب الرقمية (ghos.shop) يتميز بنظام مصادقة ثنائية (2FA)، حماية الحسابات بالتحقق المزدوج من البريد، ورموز استعادة مؤقتة، وسلة مشتريات ذكية تنقل الجلسات تلقائياً.',
+    summaryAr: 'متجر إلكتروني حي ومتكامل لبطاقات ومفاتيح الألعاب الرقمية (ghos.shop) يتميز بنظام مصادقة ثنائية (2FA)، حماية الحسابات بالتحقق المزدوج من البريد، ورموز استعادة مؤقتة، وسلة مشتريات ذكية تنقل الجلسات تلقائيا.',
     image: '/assets/images/project_ghos_storefront.png',
     links: [
       { label: 'View on GitHub', labelAr: 'مستودع GitHub', url: 'https://github.com/Ma16q/ghos', type: 'launch' }
@@ -113,7 +113,7 @@ export const projectsData: Project[] = [
       'نظام متجر إلكتروني منشور في بيئة الإنتاج لخدمة اللاعبين والمنتجات الرقمية ومفاتيح الألعاب',
       'نظام مصادقة ثنائية 2FA عبر البريد الإلكتروني مع رموز استعادة مؤقتة مكونة من 6 أرقام',
       'حماية أمنية متقدمة بالتحقق المزدوج من البريدين القديم والجديد عند تعديل الحساب لمنع الاختراق',
-      'سلة مشتريات ذكية تحفظ جلسات الزوار وتدمجها تلقائياً عند تسجيل الدخول',
+      'سلة مشتريات ذكية تحفظ جلسات الزوار وتدمجها تلقائيا عند تسجيل الدخول',
       'لوحة تحكم إدارية وتجارية متقدمة بنظام الصلاحيات المتعددة (RBAC) للمستخدمين والتجار والمسؤولين'
     ]
   },
@@ -132,7 +132,7 @@ export const projectsData: Project[] = [
       { text: 'Google Play', textAr: 'قوقل بلاي', color: 'green' }
     ],
     summary: 'Published Android app on Google Play — Comprehensive Islamic Sunnah habits & daily manners tracker categorized by daily routines with custom reading themes. Built natively with Android Studio & Java.',
-    summaryAr: 'تطبيق أندرويد منشور رسمياً على متجر Google Play — دليل شامل لإحياء سنن وآداب ومستحبات النبي ﷺ اليومية، مصنفة ومنظمة لتناسب الروتين اليومي للمسلم بواجهات مريحة وقراءة ليلية.',
+    summaryAr: 'تطبيق أندرويد منشور رسميا على متجر Google Play — دليل شامل لإحياء سنن وآداب ومستحبات النبي ﷺ اليومية، مصنفة ومنظمة لتناسب الروتين اليومي للمسلم بواجهات مريحة وقراءة ليلية.',
     links: [
       { label: 'View on Google Play', labelAr: 'عرض على Google Play', url: 'https://play.google.com/store/apps/details?id=com.mustahabbat.sunan', type: 'google-play' }
     ],
@@ -144,10 +144,10 @@ export const projectsData: Project[] = [
       'Native Android performance with zero latency and lightweight APK size'
     ],
     highlightsAr: [
-      'منشور رسمياً على متجر Google Play مع مستخدمين نشطين وتقييمات ممتازة',
+      'منشور رسميا على متجر Google Play مع مستخدمين نشطين وتقييمات ممتازة',
       'فهرس منظم وشامل للسنن والمستحبات النبوية مقسمة حسب الأوقات والأنشطة اليومية',
       'أنماط قراءة مريحة مع إمكانية تكبير الخط ودعم كامل للوضع الليلي المريح للعين',
-      'أداء أصيل Native Java يضمن سرعة واستجابة فورية وحجماً تطبيقياً خفيفاً جداً'
+      'أداء أصيل Native Java يضمن سرعة واستجابة فورية وحجما تطبيقيا خفيفا جدا'
     ]
   },
   {
@@ -165,7 +165,7 @@ export const projectsData: Project[] = [
       { text: 'Google Play', textAr: 'قوقل بلاي', color: 'green' }
     ],
     summary: 'Published Android app on Google Play — Lightweight digital tasbih & dhikr counter simulated as a portable tally ring device with haptic vibration feedback and persistent count state.',
-    summaryAr: 'تطبيق أندرويد منشور رسمياً على متجر Google Play — محاكاة ذكية لخاتم التسبيح الإلكتروني على الهاتف بحجم خفيف جداً، مع اهتزاز لمسي وحفظ تلقائي للإحصائيات والأذكار اليومية.',
+    summaryAr: 'تطبيق أندرويد منشور رسميا على متجر Google Play — محاكاة ذكية لخاتم التسبيح الإلكتروني على الهاتف بحجم خفيف جدا، مع اهتزاز لمسي وحفظ تلقائي للإحصائيات والأذكار اليومية.',
     links: [
       { label: 'View on Google Play', labelAr: 'عرض على Google Play', url: 'https://play.google.com/store/apps/details?id=com.musbihati', type: 'google-play' }
     ],
@@ -177,7 +177,7 @@ export const projectsData: Project[] = [
       'Lightweight package footprint and immediate responsive performance'
     ],
     highlightsAr: [
-      'منشور رسمياً على متجر Google Play بحجم خفيف جداً وأداء فائق السرعة',
+      'منشور رسميا على متجر Google Play بحجم خفيف جدا وأداء فائق السرعة',
       'محاكاة واقعية لخاتم التسبيح مع استجابة اهتزازية لمسية Haptic عند كل تسبيحة',
       'حفظ دائم لمجموع التسبيحات حتى بعد إعادة تشغيل الهاتف عبر SharedPreferences',
       'أذكار يومية مرتبة وسلسة تناسب البرنامج اليومي مع إمكانية تصفير أو مواصلة العداد'
@@ -250,7 +250,7 @@ export const skillsData: Skill[] = [
   { name: 'Node.js', nameAr: 'نود جي إس (Node.js)', category: 'languages' },
   { name: 'React 19', nameAr: 'رياكت 19', category: 'frontend' },
   { name: 'TypeScript', nameAr: 'تايب سكريبت', category: 'frontend' },
-  { name: 'Tailwind CSS v4', nameAr: 'تيلويند CSS', category: 'frontend' },
+  { name: 'Tailwind CSS v4', nameAr: 'Tailwind CSS', category: 'frontend' },
   { name: 'JavaScript (ES6+)', nameAr: 'جافاسكريبت', category: 'frontend' },
   { name: 'HTML5 & Modern CSS', nameAr: 'HTML5 وتقنيات CSS الحديثة', category: 'frontend' },
   { name: 'Android Studio', nameAr: 'أندرويد ستوديو', category: 'mobile' },
@@ -288,14 +288,14 @@ export const experienceData: ExperienceItem[] = [
   },
   {
     id: 'gdg-campus',
-    role: 'Google Developer Groups on Campus (GDG) Member',
-    roleAr: 'عضو مجتمع مطوري جوجل الجامعي (GDG on Campus)',
-    organization: 'GDG at IAU',
+    role: 'Head of Design & Publishing Committee in Google Developer Groups (GDG)',
+    roleAr: 'قائد لجنة التصميم والنشر بنادي قوقل (GDG)',
+    organization: 'Google Developer Groups (GDG) at IAU',
     organizationAr: 'مجتمع مطوري قوقل - جامعة الإمام عبد الرحمن بن فيصل',
-    period: 'Active Tech Community Member',
-    periodAr: 'عضو ومشارك تقني نشط',
-    description: 'Active participant in Google technologies workshops, modern developer tooling sessions, and collaborative hackathons.',
-    descriptionAr: 'المشاركة الفعالة في ورش العمل والفعاليات التقنية المتخصصة بأحدث تقنيات قوقل والحوسبة السحابية وأدوات التطوير الحديثة.',
+    period: 'Leadership & Creative Role',
+    periodAr: 'دور قيادي وإبداعي',
+    description: 'Oversaw visual content and publications for events, collaborated with team members to improve community presence.',
+    descriptionAr: 'أشرفتُ على المحتوى البصري والمنشورات الخاصة بالفعاليات، وتعاونتُ مع أعضاء الفريق لتعزيز الحضور المجتمعي.',
     tags: ['Google Technologies', 'Web Dev', 'Mobile Development', 'Developer Community']
   },
   {
