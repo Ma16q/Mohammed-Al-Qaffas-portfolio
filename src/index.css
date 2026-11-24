@@ -499,14 +499,19 @@ body {
   transition: opacity 0.25s ease;
 }
 
+.card-face.face-real img {
+  transform: scale(1.22);
+  transform-origin: center 25%;
+}
+
 .floating-glass-tag {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  bottom: 1.15rem;
+  inset-inline-end: 1.15rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(9, 14, 26, 0.88);
+  background: rgba(9, 14, 26, 0.85);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.35rem 0.85rem;
@@ -521,7 +526,7 @@ body {
 
 .card-face.face-real .real-tag {
   color: #34d399;
-  border-color: rgba(52, 211, 153, 0.3);
+  border-color: rgba(52, 211, 153, 0.35);
 }
 
 /* Avatar Showcase Controls (Flip + 3D Style Picker) */
@@ -1843,6 +1848,13 @@ textarea.form-control {
     right: 0.55rem;
     bottom: 0.55rem;
     border-radius: 20px;
+  }
+
+  .floating-glass-tag {
+    bottom: 0.85rem;
+    inset-inline-end: 0.85rem;
+    font-size: 0.7rem;
+    padding: 0.28rem 0.65rem;
   }
 
   .hero-content {
