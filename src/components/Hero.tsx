@@ -133,7 +133,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                   <span className="live-status-dot" />
                 </span>
                 <span className="live-resume-text">
-                  {isAr ? 'نسخة تفاعلية محدثة لحظياً (Real-Time)' : 'Live Interactive Resume (Real-Time)'}
+                  {isAr ? 'السيرة الذاتية محدثة لحظياً (Real-Time)' : 'Live Interactive Resume (Real-Time)'}
                 </span>
                 <span className="live-provider-badge">FlowCV</span>
                 <ExternalLink size={12} className="live-ext-icon" />
